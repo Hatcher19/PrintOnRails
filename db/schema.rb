@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503190907) do
+ActiveRecord::Schema.define(:version => 20130507133924) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -32,9 +32,13 @@ ActiveRecord::Schema.define(:version => 20130503190907) do
     t.string   "street"
     t.string   "city"
     t.string   "state"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "customer_id"
+    t.string   "zip"
   end
+
+  add_index "addresses", ["customer_id"], :name => "index_addresses_on_customer_id"
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -60,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20130503190907) do
     t.string   "phone"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "company"
   end
 
 end

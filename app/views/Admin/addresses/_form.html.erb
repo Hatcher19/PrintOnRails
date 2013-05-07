@@ -1,0 +1,13 @@
+<%=
+form.has_many :addresses do |address| 
+address.inputs "Address" do 
+  
+    address.inputs :class => "" do 
+      address.input :street 
+      address.input :city 
+      address.input :state
+      address.input :zip
+    end 
+  end 
+end 
+%>

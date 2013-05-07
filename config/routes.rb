@@ -2,7 +2,14 @@ PrintOnRails::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-root :to => "home#index"
+  root :to => "home#index"
+
+  devise_scope :admin_user do
+    get '/logout', :to => 'active_admin/devise/sessions#destroy', :as => "destroy_admin_user_session"
+    get '/login', :to => 'active_admin/devise/sessions#new', :as => "new_admin_user_session"
+    post '/login', :to => 'active_admin/devise/sessions#create', :as => "create_admin_user_session"
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
