@@ -8,9 +8,13 @@ ActiveAdmin.register Customer do
   filter :phone, label: "by Phone Number"
 
   index do
-    column :name
+    column "Name" do |customer|
+      link_to customer.name, admin_customer_path(customer)
+    end
     column :company
-    column :email
+    column :email, :sortable => :email do |customer|
+      link_to customer.email, "mailto:#{customer.email}"
+    end
     column :phone
   end
 	  

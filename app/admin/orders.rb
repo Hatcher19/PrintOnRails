@@ -7,8 +7,10 @@ ActiveAdmin.register Order do
   filter :end_date, label: "Due Date"
 
 	index do
-    column :name
-    column :customer_id
+		column "Name" do |order|
+      link_to order.name, admin_order_path(order)
+    end
+    column(:customer, :sortable => :customer_id) 
     column :end_date
   end
 
