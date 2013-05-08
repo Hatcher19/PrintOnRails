@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507223947) do
+ActiveRecord::Schema.define(:version => 20130508000014) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -77,6 +77,9 @@ ActiveRecord::Schema.define(:version => 20130507223947) do
     t.string   "color_sleeve"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "customer_id"
   end
+
+  add_index "orders", ["customer_id"], :name => "index_orders_on_customer_id"
 
 end
