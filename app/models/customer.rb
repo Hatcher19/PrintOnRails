@@ -3,5 +3,4 @@ class Customer < ActiveRecord::Base
   has_many :addresses
   has_many :orders, :dependent => :nullify
   accepts_nested_attributes_for :addresses, :allow_destroy => true
-
 end

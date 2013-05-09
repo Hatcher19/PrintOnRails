@@ -2,12 +2,14 @@ ActiveAdmin.register Order do
 	
 	filter :name, label: "Order Name"
 	filter :order_category, label: "Order Category"
+	filter :order_type, label: "Order Type"
 	filter :customer, :collection => proc { Customer.all }
   filter :start_date, label: "Start Date"
   filter :end_date, label: "Due Date"
 
 	index do
 		column :order_category
+		column :order_type
 		column "Name" do |order|
       link_to order.name, admin_order_path(order)
     end
@@ -21,6 +23,7 @@ ActiveAdmin.register Order do
 	      attributes_table_for resource do
 	        row :name
 	        row :order_category
+	        row :order_type
 	        row :start_date
 	        row :end_date
 	        row :color_front

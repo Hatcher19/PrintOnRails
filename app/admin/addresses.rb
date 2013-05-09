@@ -1,6 +1,6 @@
 ActiveAdmin.register Address do
   belongs_to :customer, finder: :find_by_url!
-  actions :index, :new, :create
+  actions :index, :new, :create, :show
 
   index do 
     column :street
