@@ -32,6 +32,7 @@ ActiveAdmin.register Order do
 	        row :order_priority
 	        row :start_date
 	        row :end_date
+	        row :print_location
 	        row :color_front
 	        row :color_back
 	        row :color_sleeve
