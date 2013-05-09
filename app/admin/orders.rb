@@ -4,6 +4,7 @@ ActiveAdmin.register Order do
 	filter :order_category, label: "Order Category"
 	filter :order_type, label: "Order Type"
 	filter :order_status, label: "Order Status"
+	filter :order_priority, label: "Order Priority"
 	filter :customer, :collection => proc { Customer.all }
   filter :start_date, label: "Start Date"
   filter :end_date, label: "Due Date"
@@ -12,6 +13,7 @@ ActiveAdmin.register Order do
 		column :order_category
 		column :order_type
 		column :order_status
+		column :order_priority
 		column "Name" do |order|
       link_to order.name, admin_order_path(order)
     end
@@ -27,6 +29,7 @@ ActiveAdmin.register Order do
 	        row :order_category
 	        row :order_type
 	        row :order_status
+	        row :order_priority
 	        row :start_date
 	        row :end_date
 	        row :color_front

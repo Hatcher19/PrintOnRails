@@ -1,4 +1,4 @@
-class OrderStatus < ActiveRecord::Base
+class OrderPriority < ActiveRecord::Base
   attr_accessible :name
   has_many :orders
 end

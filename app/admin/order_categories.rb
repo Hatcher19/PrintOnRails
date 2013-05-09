@@ -1,6 +1,6 @@
 ActiveAdmin.register OrderCategory do
 
-	menu :label => "Order Categories", :parent => "Administration"
+	menu :label => "Order Category", :parent => "Administration"
   filter :name
 
   
