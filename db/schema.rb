@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130511010629) do
+ActiveRecord::Schema.define(:version => 20130511194535) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(:version => 20130511010629) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "avatar"
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "phone"
@@ -96,28 +95,8 @@ ActiveRecord::Schema.define(:version => 20130511010629) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "orders", :force => true do |t|
-    t.date     "start_date"
-    t.date     "end_date"
-    t.string   "name"
-    t.text     "whiteboard"
-    t.string   "color_front"
-    t.string   "color_back"
-    t.string   "color_sleeve"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.integer  "customer_id"
-    t.integer  "order_category_id"
-    t.integer  "order_type_id"
-    t.integer  "order_status_id"
-    t.integer  "order_priority_id"
-    t.integer  "print_location_id"
-  end
-
-  add_index "orders", ["customer_id"], :name => "index_orders_on_customer_id"
-  add_index "orders", ["order_category_id"], :name => "index_orders_on_order_category_id"
-  add_index "orders", ["order_priority_id"], :name => "index_orders_on_order_priority_id"
-  add_index "orders", ["print_location_id"], :name => "index_orders_on_print_location_id"
+# Could not dump table "orders" because of following StandardError
+#   Unknown type 'strong' for column 'proof_front'
 
   create_table "print_locations", :force => true do |t|
     t.string   "name"

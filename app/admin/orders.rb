@@ -10,17 +10,22 @@ ActiveAdmin.register Order do
   filter :end_date, label: "Due Date"
 
 	index do
+		column "Proof" do |order|
+			image_tag order.proof_url(:proof).to_s
+		end
 		column "Name" do |order|
       link_to order.name, admin_order_path(order)
     end
     column(:customer, :sortable => :customer_id)
 		column "Category", :order_category
-		column :order_type
+		column "Order Type", :order_type
 		column "Status", :order_status
 		column "Priority", :order_priority 
     column "Due Date", :end_date
     default_actions
   end
+  
+
 
   show :title => :name do
     
@@ -37,6 +42,12 @@ ActiveAdmin.register Order do
 	        row :color_front
 	        row :color_back
 	        row :color_sleeve
+	        row(:artwork) do
+	        	image_tag order.artwork_url(:thumb).to_s
+	        end
+	        row(:proof) do
+	        	image_tag order.proof_url(:thumb).to_s
+	        end
 	      end
 	  end
 	end
