@@ -1,5 +1,29 @@
-<%= 
-@address.street.each |street|
-  content_tag(address.street)
-  
-%>
+<div class="panel">
+    <h3>Address</h3>
+    <div class="panel_contents">
+      <div id="attributes_table_employee_1" class="attributes_table">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tbody>
+          <tr>
+            <th>Street</th>
+  						<td>
+								@address.each |address.street|
+								<%= address.street %>(address.street)
+							</td>
+          </tr>
+          <tr>
+            <th>City</th>
+            
+          </tr>
+          <tr>
+            <th>State</th>
+            
+          </tr>
+          <tr>
+            <th>Zip</th>
+            
+          </tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>

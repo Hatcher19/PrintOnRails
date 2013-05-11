@@ -1,0 +1,17 @@
+<%=
+active_admin_form_for @admin_user, html: { multipart: true } do |f| 
+	f.inputs "User Information" do
+		f.input :first_name
+		f.input :last_name 
+		f.input :email 
+		f.input :phone
+	end 
+	if f.object.new_record? 
+		f.inputs "Password" do 
+			f.input :password, :required => true
+			f.input :password_confirmation, :label => "Password Confirmation", :required => true 
+		end
+	end 
+	f.buttons 
+end 
+%>

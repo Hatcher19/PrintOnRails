@@ -10,15 +10,16 @@ ActiveAdmin.register Order do
   filter :end_date, label: "Due Date"
 
 	index do
-		column :order_category
-		column :order_type
-		column :order_status
-		column :order_priority
 		column "Name" do |order|
       link_to order.name, admin_order_path(order)
     end
-    column(:customer, :sortable => :customer_id) 
-    column :end_date
+    column(:customer, :sortable => :customer_id)
+		column "Category", :order_category
+		column :order_type
+		column "Status", :order_status
+		column "Priority", :order_priority 
+    column "Due Date", :end_date
+    default_actions
   end
 
   show :title => :name do

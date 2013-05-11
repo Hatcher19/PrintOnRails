@@ -4,6 +4,7 @@ gem 'rails', '3.2.13'
 gem 'jquery-rails'
 gem 'activeadmin', :git => 'git://github.com/macfanatic/active_admin.git', branch: 'stable_batch_actions'
 gem "haml", "~> 4.0.2"
+gem 'carrierwave'
 
 
 group :production do

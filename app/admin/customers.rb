@@ -1,6 +1,6 @@
 ActiveAdmin.register Customer do
 	# Menu item
-  menu :label => "Customers", :parent => "Administration"
+  menu :label => "Customers"
 
   filter :name, label: "by Name"
   filter :company, label: "by Company"
@@ -16,6 +16,7 @@ ActiveAdmin.register Customer do
       link_to customer.email, "mailto:#{customer.email}"
     end
     column :phone
+    default_actions
   end
 	  
 	form :partial => "form"
@@ -30,6 +31,6 @@ ActiveAdmin.register Customer do
 	        row :phone
 	      end
 	  end
-	  text_node(render :partial => "admin/addresses/show", :locals => { :addresses => resource.addresses })
+	  text_node(render :partial => "admin/addresses/show", :locals => { :address => resource.address })
 	end
 end
