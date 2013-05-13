@@ -1,5 +1,5 @@
 <%=
-semantic_form_for @order, :builder => ActiveAdmin::FormBuilder do |f|
+semantic_form_for @order, :html => {:multipart => true} :builder => ActiveAdmin::FormBuilder do |f|
 	f.input "Order Information" do
 		f.input :customer_id
 		f.input :order_type_id
@@ -8,6 +8,8 @@ semantic_form_for @order, :builder => ActiveAdmin::FormBuilder do |f|
 		f.input :order_priority_id
 		f.input :start_date
 		f.input :end_date
+		f.input :artwork
+		f.input :proof
 		f.input :name 
 		f.input :color_front
 		f.input :color_back

@@ -5,6 +5,7 @@ gem 'jquery-rails'
 gem 'activeadmin', :git => 'git://github.com/macfanatic/active_admin.git', branch: 'stable_batch_actions'
 gem "haml", "~> 4.0.2"
 gem 'carrierwave'
+gem 'rmagick'
 
 
 group :production do
