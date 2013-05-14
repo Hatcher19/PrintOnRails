@@ -1,20 +1,23 @@
 <%=
-semantic_form_for @order, :html => {:multipart => true} :builder => ActiveAdmin::FormBuilder do |f|
-	f.input "Order Information" do
-		f.input :customer_id
-		f.input :order_type_id
-		f.input :order_status_id
-		f.input :order_category_id
-		f.input :order_priority_id
-		f.input :start_date
-		f.input :end_date
-		f.input :artwork
-		f.input :proof
-		f.input :name 
-		f.input :color_front
-		f.input :color_back
-		f.input :color_sleeve
-		f.input :whiteboard
-	end
-end
+	semantic_form_for [:admin, @order], :builder => ActiveAdmin::FormBuilder do |f| 
+		  f.inputs "Order Information" do 
+		    f.input :customer_id
+				f.input :order_type_id
+				f.input :order_status_id
+				f.input :order_category_id
+				f.input :order_priority_id
+				f.input :print_location_id
+				f.input :start_date
+				f.input :end_date
+				f.input :artwork
+				f.input :proof
+				f.input :name 
+				f.input :color_front
+				f.input :color_back
+				f.input :color_sleeve
+				f.input :whiteboard
+			end 
+			render :partial => "admin/line_items/form", :locals => { :form => f } 
+			  f.buttons 
+		end
 %>

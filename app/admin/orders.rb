@@ -26,6 +26,7 @@ ActiveAdmin.register Order do
   end
   
 
+  form :partial => "form"
 
   show :title => :name do
     
@@ -50,5 +51,6 @@ ActiveAdmin.register Order do
 	        end
 	      end
 	  end
+	  text_node(render :partial => "admin/line_items/show", :locals => { :line_item => resource.line_item })
 	end
 end
