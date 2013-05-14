@@ -1,23 +1,23 @@
 <%=
 	semantic_form_for [:admin, @order], :builder => ActiveAdmin::FormBuilder do |f| 
 		  f.inputs "Order Information" do 
-		    f.input :customer_id
-				f.input :order_type_id
-				f.input :order_status_id
-				f.input :order_category_id
-				f.input :order_priority_id
-				f.input :print_location_id
-				f.input :start_date
-				f.input :end_date
-				f.input :artwork
-				f.input :proof
-				f.input :name 
-				f.input :color_front
-				f.input :color_back
-				f.input :color_sleeve
-				f.input :whiteboard
+		    f.input :customer_id, as: :select, hint: "You need to create a customer before filling out the order form."
+		    f.input :order_category_id, label: "Category", as: :select, hint: "IE: Screen Printing, Embroidery, etc."
+				f.input :order_type_id, label: "Type", as: :select, hint: "IE: New, Re-oreder, etc."
+				f.input :order_status_id, label: "Status", as: :select, hint: "IE: New, art, screens, etc."
+				f.input :order_priority_id, label: "Priority", as: :select, hint: "IE: 2-day Rush, 3-day Rush, standard, etc."
+				f.input :start_date, hint: "Usually, this is the day you enter the order, but you could put a future date."
+				f.input :end_date, label: "Due ate", hint: "Put the date in which your order is due."
+				f.input :name, hint: "This is the name of the order." 
+				render :partial => "admin/line_items/form", :locals => { :form => f }
+				f.input :print_location_id, as: :select, hint: "Select the location of the print. This should be set up by the admin specific to your companies needs."
+				f.input :color_front, hint: "List the colors to be printed on the front."
+				f.input :color_back, hint: "List the colors to be printed on the back."
+				f.input :color_sleeve, label: "Color side", hint: "List the colors to be printed on the side."
+				f.input :artwork, hint: "Upload the artwork for this order"
+				f.input :proof, hint: "This is for art department use only!"
+				f.input :whiteboard, hint: "The whiteboard is for Everyone to use and see all the way down the production line."
 			end 
-			render :partial => "admin/line_items/form", :locals => { :form => f } 
 			  f.buttons 
 		end
 %>
