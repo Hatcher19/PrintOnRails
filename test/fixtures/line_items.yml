@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  quantity: 1
+  style: MyString
+  color: MyString
+  s: 1
+  m: 1
+  l: 1
+  xl: 1
+
+two:
+  quantity: 1
+  style: MyString
+  color: MyString
+  s: 1
+  m: 1
+  l: 1
+  xl: 1

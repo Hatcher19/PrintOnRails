@@ -26,7 +26,10 @@ ActiveAdmin.register Order do
   end
   
 
+<<<<<<< HEAD
+=======
   form :partial => "form"
+>>>>>>> HEAD@{1}
 
   show :title => :name do
     
