@@ -31,6 +31,9 @@ ActiveAdmin.register Customer do
 	        row :phone
 	      end
 	  end
-	  text_node(render :partial => "admin/addresses/show", :locals => { :address => resource.address })
+    
+    resource.addresses.each do |a|
+	   text_node(render :partial => "admin/addresses/show", :locals => { :address => a })
+    end
 	end
 end
