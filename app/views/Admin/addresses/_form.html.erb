@@ -1,8 +1,8 @@
 <%=
 form.has_many :addresses do |address| 
-address.inputs "Address" do 
-  
+address.inputs "Address" do
     address.inputs :class => "" do 
+      address.input :address_name, label: "Address Type", hint: "IE: Billing, Shipping, X Franchise, Y Franchise, etc."
       address.input :street 
       address.input :city 
       address.input :state

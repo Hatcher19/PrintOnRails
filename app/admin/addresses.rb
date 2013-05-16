@@ -13,6 +13,7 @@ ActiveAdmin.register Address do
     
     panel "address Details" do
       attributes_table_for resource do
+        row :address_name
         row :street
         row :city
         row :state

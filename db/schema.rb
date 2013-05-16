@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514141913) do
+ActiveRecord::Schema.define(:version => 20130516141728) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -32,10 +32,11 @@ ActiveRecord::Schema.define(:version => 20130514141913) do
     t.string   "street"
     t.string   "city"
     t.string   "state"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "customer_id"
     t.string   "zip"
+    t.string   "address_name"
   end
 
   add_index "addresses", ["customer_id"], :name => "index_addresses_on_customer_id"
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130514141913) do
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "phone"
+    t.string   "role"
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -81,6 +83,15 @@ ActiveRecord::Schema.define(:version => 20130514141913) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "order_id"
+    t.integer  "yxs"
+    t.integer  "ys"
+    t.integer  "ym"
+    t.integer  "yl"
+    t.integer  "yxl"
+    t.integer  "xs"
+    t.integer  "xxl"
+    t.integer  "xxxl"
+    t.integer  "xxxxl"
   end
 
   create_table "order_categories", :force => true do |t|
@@ -93,7 +104,10 @@ ActiveRecord::Schema.define(:version => 20130514141913) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "weight"
   end
+
+  add_index "order_priorities", ["weight"], :name => "index_order_priorities_on_weight"
 
   create_table "order_statuses", :force => true do |t|
     t.string   "name"

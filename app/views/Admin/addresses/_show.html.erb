@@ -1,29 +1,31 @@
 <div class="panel">
-    <h3>Address</h3>
+  <h3>Address</h3>
     <div class="panel_contents">
       <div id="attributes_table_employee_1" class="attributes_table">
         <table cellspacing="0" cellpadding="0" border="0">
           <tbody>
-          <tr>
-            <th>Street</th>
-  						<td>
-								
-								<%= address.street %>
-							</td>
-          </tr>
-          <tr>
-            <th>City</th>
-            
-          </tr>
-          <tr>
-            <th>State</th>
-            
-          </tr>
-          <tr>
-            <th>Zip</th>
-            
-          </tr>
-        </tbody></table>
-      </div>
+            <tr>
+              <th>Address Type</th>
+                  <td><%= address.address_name %></td>
+            </tr>
+            <tr>
+              <th>Street</th>
+                  <td><%= address.street %></td>
+            </tr>
+            <tr>
+              <th>City</th>
+                <td><%= address.city %></td>
+            </tr>
+            <tr>
+              <th>State</th>
+                <td><%= address.state %></td>
+            </tr>
+            <tr>
+              <th>Zip</th>
+                <td><%= address.zip %></td>
+            </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
