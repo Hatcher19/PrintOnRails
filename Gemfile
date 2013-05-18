@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'jquery-rails'
 # Active admin
-gem 'activeadmin', :git => 'git://github.com/macfanatic/active_admin.git', branch: 'stable_batch_actions'
+gem "activeadmin", :git => "git://github.com/gregbell/active_admin.git"
 gem 'meta_search', '>= 1.1.0.pre'
 gem "haml", "~> 4.0.2"
 #Images
