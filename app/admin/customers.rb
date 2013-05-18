@@ -1,6 +1,6 @@
 ActiveAdmin.register Customer do
 	# Menu item
-  menu :label => "Customers"
+  menu :label => "Customers", :parent => "Sales"
 
   filter :name, label: "by Name"
   filter :company, label: "by Company"

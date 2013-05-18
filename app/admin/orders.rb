@@ -1,4 +1,5 @@
 ActiveAdmin.register Order do
+	menu :label => "All Orders", :parent => "Sales", :priority => 2
 	
 	filter :name, label: "Order Name"
 	filter :order_category, label: "Order Category"
@@ -18,7 +19,7 @@ ActiveAdmin.register Order do
     end
     column(:customer, :sortable => :customer_id)
 		column "Category", :order_category
-		column "Order Type", :order_type
+		column "Type", :order_type
 		column "Status", :order_status
 		column "Priority", :order_priority 
     column "Due Date", :end_date

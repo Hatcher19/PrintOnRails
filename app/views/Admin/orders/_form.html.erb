@@ -6,8 +6,8 @@
 				f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, hint: "IE: New, Re-oreder, etc."
 				f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, hint: "IE: New, art, screens, etc."
 				f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, hint: "IE: 2-day Rush, 3-day Rush, standard, etc."
-				f.input :start_date, hint: "Usually, this is the day you enter the order, but you could put a future date."
-				f.input :end_date, label: "Due ate", hint: "Put the date in which your order is due."
+				f.input :start_date, label: "Start Date", as: :datepicker, hint: "Usually, this is the day you enter the order, but you could put a future date."
+				f.input :end_date, label: "Due date", as: :datepicker, hint: "Put the date in which your order is due."
 				f.input :name, hint: "This is the name of the order." 
 				render :partial => "admin/line_items/form", :locals => { :form => f }
 				f.input :print_location_id, as: :select, :collection => PrintLocation.all, as: :select, hint: "Select the location of the print. This should be set up by the admin specific to your companies needs."

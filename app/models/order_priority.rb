@@ -1,4 +1,7 @@
 class OrderPriority < ActiveRecord::Base
-  attr_accessible :name
-  has_many :orders
+
+	WEIGHTS = %w(low normal high immediate)
+	
+  attr_accessible :name, :weight
+  has_many :orders  
 end
