@@ -5,16 +5,20 @@ ActiveAdmin.register AdminUser do
  	filter :last_name
   filter :email
   filter :created_at
+  filter :role, as: :select, :collection => AdminUser::ROLES, :member_label => :humanize 
 
   index do
     column :first_name
     column :last_name
-    column :email
+    column :email, :sortable => :email do |admin_user|
+      link_to admin_user.email, "mailto:#{admin_user.email}"
+    end
     column :phone
-    column :last_sign_in_at
-    column :created_at
+    column :role
     default_actions
   end
+
+  form :partial => "form"
 
   sidebar :login_info, only: [:show, :edit] do
     attributes_table_for resource do

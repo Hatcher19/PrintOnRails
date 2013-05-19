@@ -6,6 +6,8 @@ gem 'jquery-rails'
 gem "activeadmin", :git => "git://github.com/gregbell/active_admin.git"
 gem 'meta_search', '>= 1.1.0.pre'
 gem "haml", "~> 4.0.2"
+#authorization
+gem "cancan"
 #Images
 gem 'carrierwave'
 gem 'rmagick'
