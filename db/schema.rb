@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519204216) do
+ActiveRecord::Schema.define(:version => 20130520152540) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -150,9 +150,13 @@ ActiveRecord::Schema.define(:version => 20130519204216) do
     t.integer  "print_location_id"
     t.string   "artwork"
     t.string   "proof"
+    t.integer  "number"
+    t.integer  "assignee_id"
   end
 
+  add_index "orders", ["assignee_id"], :name => "index_orders_on_assignee_id"
   add_index "orders", ["customer_id"], :name => "index_orders_on_customer_id"
+  add_index "orders", ["number"], :name => "index_orders_on_number"
   add_index "orders", ["order_category_id"], :name => "index_orders_on_order_category_id"
   add_index "orders", ["order_priority_id"], :name => "index_orders_on_order_priority_id"
   add_index "orders", ["print_location_id"], :name => "index_orders_on_print_location_id"

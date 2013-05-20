@@ -1,6 +1,7 @@
 <%=
 	semantic_form_for [:admin, @order], :builder => ActiveAdmin::FormBuilder do |f| 
 		  f.inputs "Order Information" do 
+		  	f.input :assignee_id, as: :select, :collection => AdminUser.all, label: "Taken By", hint: "Often, this is you name."
 		    f.input :customer_id, as: :select, :collection => Customer.all, hint: "You need to create a customer before filling out the order form."
 		    f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, hint: "IE: Screen Printing, Embroidery, etc."
 				f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, hint: "IE: New, Re-oreder, etc."

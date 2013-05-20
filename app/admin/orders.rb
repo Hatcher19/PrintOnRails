@@ -9,11 +9,16 @@ ActiveAdmin.register Order do
 	filter :order_type, label: "Order Type"
 	filter :order_status, label: "Order Status"
 	filter :order_priority, label: "Order Priority"
-	filter :customer, :collection => proc { Customer.all }
+	filter :customer, label: "Customer"
   filter :start_date, label: "Start Date"
   filter :end_date, label: "Due Date"
+  filter :id, label: "Order ID#"
+  filter :assignee, :collection => proc { AdminUser.all }
 
 	index do 
+		column "ID" do |order|
+			link_to order.id, admin_order_path(order)
+		end
 		column "Proof" do |order|
 			image_tag order.proof_url(:proof).to_s
 		end
@@ -22,7 +27,6 @@ ActiveAdmin.register Order do
     end
     column(:customer, :sortable => :customer_id)
 		column "Category", :order_category
-		column "Type", :order_type
 		column "Status", :order_status
 		column "Priority", :order_priority 
     column "Due Date", :end_date
@@ -36,6 +40,8 @@ ActiveAdmin.register Order do
     
     panel "Order Details" do
       attributes_table_for resource do
+      	row :id
+      	row :assignee_id
         row :name
         row :order_category
         row :order_type
