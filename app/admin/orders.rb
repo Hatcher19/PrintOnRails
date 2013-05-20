@@ -1,4 +1,7 @@
 ActiveAdmin.register Order do
+	controller.authorize_resource
+
+
 	menu :label => "All Orders", :parent => "Sales", :priority => 2
 	
 	filter :name, label: "Order Name"

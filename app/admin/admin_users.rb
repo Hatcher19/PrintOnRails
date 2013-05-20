@@ -1,4 +1,5 @@
 ActiveAdmin.register AdminUser do
+  controller.authorize_resource
   menu :label => "Users", :parent => "Administration"
 
  	filter :first_name

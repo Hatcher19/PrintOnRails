@@ -1,4 +1,5 @@
 ActiveAdmin.register OrderPriority do
+	controller.authorize_resource
 	menu :label => "Order Priority", :parent => "Administration"
 	filter :name
 	filter :weight, :as => :select
