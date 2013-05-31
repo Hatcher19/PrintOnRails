@@ -1,4 +1,7 @@
 class Address < ActiveRecord::Base
-	attr_accessible :street, :city, :state, :zip, :customer_id, :address_name
+
+	TYPES = %w(billing shipping)
+
+	attr_accessible :street, :city, :state, :zip, :customer_id, :address_name, :address_type
   belongs_to :customer
 end

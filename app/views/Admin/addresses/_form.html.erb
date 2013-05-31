@@ -2,7 +2,8 @@
 form.has_many :addresses do |address| 
 address.inputs "Address" do
     address.inputs :class => "" do 
-      address.input :address_name, label: "Address Type", hint: "IE: Billing, Shipping, X Franchise, Y Franchise, etc."
+    	address.input :type, :collection => Address::TYPES, :member_label => :humanize, label: "Address Type", hint: "IE: Billing, Shipping"
+      address.input :address_name, label: "Address Name", hint: "Examples: Franchise A, Franchise B" 
       address.input :street 
       address.input :city 
       address.input :state

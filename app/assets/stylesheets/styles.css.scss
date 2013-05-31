@@ -1,3 +1,171 @@
+$navbarBackgroundHighlight: #444;
+$navbarBackground: #444;
+$navbarLinkColor: #999;
+$navbarLinkColorHover: #ff8000;
+$navbarLinkColorActive: #ff8000;
+$navbarHeight: 30px;
+$linkColorHover: #ff8000;
 @import 'bootstrap';
+body{
+	.container{
+		width: 100%;
+	}
+    padding-top: 34px;
+}
 
 @import 'bootstrap-responsive';
+	div#warning {
+		color: #fff;
+		background-color: #ff8000;
+		padding-top: 20px;
+	}
+
+	.navbar-inner{
+	    @include box-shadow(none !important);
+	    border: 0;
+	}
+	div.nav.pull-left{
+		padding-top: 10px;
+	}
+
+	ul.nav.pull-right{
+		padding-top: 10px;
+	}
+
+	div.row.signup{
+		width: auto;
+		background-color: #E3E3E3;
+	}
+	div.signup {
+		position: auto;
+	}
+
+
+	div.feature {
+		position: auto;
+		
+	}
+
+	div.icon-screenshot {
+		font-size: 40px;
+	}
+
+	div.icon-cloud {
+		font-size: 40px;
+	}
+
+	div.icon-envelope-alt {
+		font-size: 40px;
+	}
+
+	div.icon-wrench {
+		font-size: 40px;
+		}
+
+	a.btn.btn-primary {
+		text-decoration: none;
+		color: #ffffff;
+	}
+	
+	div.features-two {
+		background-color: #444;
+		height: 50px;
+		padding-top: 20px;
+		color: #ff8000;
+		font-size:18px;
+	}
+	div.center.h2.em {
+		color: #ff8000;
+	}
+
+	div.row.videos {
+		background-color: #ff8000;
+		padding-bottom: 30px;
+	}
+
+	div.footer{
+		position: auto;
+		background-color: #E3E3E3;
+	}
+	div.row.masthead{
+		background-color: #444;
+		color: #ff8000;
+			a:link{ 
+				text-decoration: none;
+		}
+
+	}
+
+	div.pull-left{
+		padding-left: 5%;
+		padding-top: 10px;
+	}
+
+	div.pull-right{
+		padding-right: 5%;
+		padding-top: 10px;
+	}
+
+	 ul#quick {
+	 list-style-type: none;
+	 a:link{
+	 	text-decoration: none;
+	 }
+	 }
+
+	 ul#touch {
+	 list-style-type: none;
+	 a:link{
+	 	text-decoration: none;
+	 }
+	 }
+
+	 ul#support {
+	 list-style-type: none;
+	 a:link{
+	 	text-decoration: none;
+	 }
+	 }
+
+	 ul#por {
+	 list-style-type: none;
+	 a:link{
+	 	text-decoration: none;
+	 }
+	 }
+
+	 ul#social {
+	 list-style-type: none;
+	 a:link{
+	 	text-decoration: none;
+	 }
+	 }
+
+	 div.icon-facebook-sign {
+		font-size: 20px;
+	}
+
+	div.icon-twitter-sign {
+		font-size: 20px;
+	}
+
+	center#beta {
+		background-color: #444;
+		color: #ff8000;
+		padding-bottom: 0px;
+		border-top-right-radius: 5px;	
+		-moz-border-radius-topright: 5px;
+		border-top-left-radius: 5px;	
+		-moz-border-radius-topleft: 5px;
+	}
+
+	center#free {
+		background-color: #ff8000;
+		color: #444;
+		padding-top: 0px;	
+	}
+
+	div.row.plans {
+		padding-left: 10%;
+	}
+  

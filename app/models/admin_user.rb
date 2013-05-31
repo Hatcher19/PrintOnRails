@@ -12,6 +12,8 @@ class AdminUser < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :phone, :role
   # attr_accessible :title, :body
 
+   has_many :orders, :dependent => :destroy
+
   def role?(permission)
     self.role == permission.to_s.downcase
   end
@@ -32,9 +34,7 @@ class AdminUser < ActiveRecord::Base
     role? :art
   end
 
-    def shipping?
+  def shipping?
     role? :shipping
   end
-
-  
 end

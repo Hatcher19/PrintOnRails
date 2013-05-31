@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520152540) do
+ActiveRecord::Schema.define(:version => 20130529151646) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20130520152540) do
     t.integer  "customer_id"
     t.string   "zip"
     t.string   "address_name"
+    t.boolean  "address_type"
+    t.string   "type"
   end
 
   add_index "addresses", ["customer_id"], :name => "index_addresses_on_customer_id"
@@ -152,8 +154,10 @@ ActiveRecord::Schema.define(:version => 20130520152540) do
     t.string   "proof"
     t.integer  "number"
     t.integer  "assignee_id"
+    t.integer  "admin_user_id"
   end
 
+  add_index "orders", ["admin_user_id"], :name => "index_orders_on_admin_user_id"
   add_index "orders", ["assignee_id"], :name => "index_orders_on_assignee_id"
   add_index "orders", ["customer_id"], :name => "index_orders_on_customer_id"
   add_index "orders", ["number"], :name => "index_orders_on_number"

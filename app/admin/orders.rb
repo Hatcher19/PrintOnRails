@@ -1,4 +1,4 @@
-ActiveAdmin.register Order do
+ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	controller.authorize_resource
 
 
@@ -13,7 +13,6 @@ ActiveAdmin.register Order do
   filter :start_date, label: "Start Date"
   filter :end_date, label: "Due Date"
   filter :id, label: "Order ID#"
-  filter :assignee, :collection => proc { AdminUser.all }
 
 	index do 
 		column "ID" do |order|
@@ -41,7 +40,6 @@ ActiveAdmin.register Order do
     panel "Order Details" do
       attributes_table_for resource do
       	row :id
-      	row :assignee_id
         row :name
         row :order_category
         row :order_type
