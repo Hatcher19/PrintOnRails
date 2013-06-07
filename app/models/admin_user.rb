@@ -30,6 +30,10 @@ class AdminUser < ActiveRecord::Base
     role? :production
   end
 
+  def broker?
+    role? :broker
+  end
+
     def art?
     role? :art
   end

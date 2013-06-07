@@ -5,21 +5,19 @@ class Ability
 
         return if user.nil? #non logged in user can use this.
 
-        if user.admin?
+         if user.admin?
             can :manage, :all
         end
 
         if user.sales?
-            can :create, [Order, Customer]
-            can :read, :all
-            can :update, [Order, Customer]
-            cannot :destroy, :all
+            can :manage, :all
+            cannot :create, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
         end
 
-        if user.production?
-            can :create, [Order, Customer]
-            can :read, :all
-            can :update, [Order, Customer]
+        if user.broker?
+            can [:index, :create, :read, :update, :new, :edit], [Order, Customer], :admin_user_id => user.id
+            can :read, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
+            cannot :index, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
             cannot :destroy, :all
         end
 
@@ -30,11 +28,16 @@ class Ability
             cannot :destroy, :all
         end
 
+
         if user.shipping?
-            cannot :create, :all
             can :read, :all
             can :update, Order
             cannot :destroy, :all
+        end
+
+        if user.production?
+            can [:create, :update], [Order, Customer]
+            can :read, :all
         end
     end
 end

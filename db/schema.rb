@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529151646) do
+ActiveRecord::Schema.define(:version => 20130602054554) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -32,15 +32,16 @@ ActiveRecord::Schema.define(:version => 20130529151646) do
     t.string   "street"
     t.string   "city"
     t.string   "state"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "customer_id"
     t.string   "zip"
     t.string   "address_name"
-    t.boolean  "address_type"
-    t.string   "type"
+    t.boolean  "same_as_billing"
+    t.string   "address_type"
   end
 
+  add_index "addresses", ["address_type"], :name => "index_addresses_on_address_type"
   add_index "addresses", ["customer_id"], :name => "index_addresses_on_customer_id"
 
   create_table "admin_users", :force => true do |t|
@@ -108,30 +109,36 @@ ActiveRecord::Schema.define(:version => 20130529151646) do
 
   create_table "order_categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "description"
   end
 
   create_table "order_priorities", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "weight"
+    t.text     "description"
+    t.string   "priority"
   end
 
+  add_index "order_priorities", ["priority"], :name => "index_order_priorities_on_priority"
   add_index "order_priorities", ["weight"], :name => "index_order_priorities_on_weight"
 
   create_table "order_statuses", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "description"
   end
 
   create_table "order_types", :force => true do |t|
     t.string   "name"
-    t.boolean  "type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "description"
+    t.boolean  "order_type"
   end
 
   create_table "orders", :force => true do |t|
@@ -167,8 +174,9 @@ ActiveRecord::Schema.define(:version => 20130529151646) do
 
   create_table "print_locations", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "description"
   end
 
 end

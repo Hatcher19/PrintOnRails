@@ -13,3 +13,5 @@ doc/
 .project
 .DS_Store
 .idea
+public/uploads/order/artwork
+public/uploads/order/proof

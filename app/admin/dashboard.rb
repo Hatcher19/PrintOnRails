@@ -1,5 +1,8 @@
 ActiveAdmin::Dashboards.build do
-
+  
+  section "Recent Orders", :priority => 1 do
+    
+  end
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
   # return the content which you would like to display.

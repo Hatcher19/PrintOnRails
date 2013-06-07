@@ -1,5 +1,7 @@
 ActiveAdmin.register Customer do
   controller.authorize_resource
+
+  
 	# Menu item
   menu :label => "Customers", :parent => "Sales"
 
