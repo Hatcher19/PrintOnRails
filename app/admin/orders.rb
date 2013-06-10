@@ -44,7 +44,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   end
   
 
-  form :partial => "form"
+  form :partial => "form.html.erb"
 
   show :title => :name do
     
