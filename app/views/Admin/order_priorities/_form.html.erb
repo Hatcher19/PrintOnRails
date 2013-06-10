@@ -2,8 +2,8 @@
 active_admin_form_for [:admin, @order_priority], html: { multipart: true } do |f| 
 	f.inputs "Priority Details" do
 		f.input :name
-		f.input :priority, :collection => OrderPriority::PRIORITY, :member_label => :titleize
-		f.input :description
+        f.input :weight, :as => :select, :collection => OrderPriority::WEIGHTS, :member_label => :titleize		
+        f.input :description
 	end 
 	f.buttons 
 end 

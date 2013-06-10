@@ -1,14 +1,24 @@
 ActiveAdmin.register Customer do
   controller.authorize_resource
 
-  
+  scope_to :current_manager, :association_method => :customers
+
 	# Menu item
-  menu :label => "Customers", :parent => "Sales"
+  menu :label => "Customers"
 
   filter :name, label: "by Name"
+  filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.last_name, u.id] } }
   filter :company, label: "by Company"
   filter :email, label: "by Email"
   filter :phone, label: "by Phone Number"
+
+  controller do
+    def current_manager
+      unless can? :create, :all
+        current_user
+      end
+    end
+  end
 
   index do
     column "Name" do |customer|
@@ -29,6 +39,7 @@ ActiveAdmin.register Customer do
     panel "Customer Details" do
 	      attributes_table_for resource do
 	        row :name
+          row :admin_user
 	        row :company
 	        row :email
 	        row :phone

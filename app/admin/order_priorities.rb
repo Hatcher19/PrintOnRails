@@ -3,7 +3,7 @@ ActiveAdmin.register OrderPriority do
 	menu :label => "Order Priority", :parent => "Administration"
 	index do
   	column :name
-    column :priority 
+    column("Priority", :sortable => :weight) { |priority| status_tag(priority.weight, color_for_weight(priority.weight)) }
   	default_actions
   end
 

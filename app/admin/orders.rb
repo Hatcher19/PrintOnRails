@@ -3,7 +3,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 
 	scope_to :current_manager, :association_method => :orders
 	
-	menu :label => "All Orders", :parent => "Sales", :priority => 2
+	menu :label => "Orders"
 	
 	filter :name, label: "Order Name"
 	filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.last_name, u.id] } }
@@ -17,8 +17,10 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   filter :id, label: "Order ID#"
 
   controller do
+  	#https://github.com/gregbell/active_admin/issues/732
+  	#scope index if not admin or sales.
   	def current_manager
-      unless can? :create, :all
+      if current_user.broker?
         current_user
       end
 		end
@@ -44,7 +46,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   end
   
 
-  form :partial => "form.html.erb"
+  form :partial => "form"
 
   show :title => :name do
     

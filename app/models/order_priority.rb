@@ -1,7 +1,7 @@
 class OrderPriority < ActiveRecord::Base
 
-	PRIORITY = %w(lowest low mid high highest)
+	WEIGHTS = %w(lowest low mid high highest)
 	
-  attr_accessible :name, :priority, :description
+  attr_accessible :name, :weight, :description
   has_many :orders  
 end

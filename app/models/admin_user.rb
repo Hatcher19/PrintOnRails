@@ -13,6 +13,7 @@ class AdminUser < ActiveRecord::Base
   # attr_accessible :title, :body
 
    has_many :orders, :dependent => :destroy
+   has_many :customers, :dependent => :destroy
 
   def role?(permission)
     self.role == permission.to_s.downcase
