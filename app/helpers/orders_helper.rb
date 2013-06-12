@@ -5,16 +5,12 @@ module OrdersHelper
 
   def color_for_weight(weight)
     case weight
-    when 'lowest'
-    	:grey
-     when 'low'
-      :blue
-    when 'mid'
-      :yellow
-    when 'high'
-      :orange
-    when 'highest'
-      :red
+      when 'high'
+      	:red
+      when 'medium'
+        :orange
+      when 'low'
+        :green
     end
   end
 end
