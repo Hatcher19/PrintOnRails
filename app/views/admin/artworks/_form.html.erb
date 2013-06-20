@@ -1,0 +1,6 @@
+<%=
+form.has_many :artworks do |artwork|  
+  artwork.input :file, :hint => artwork.template.image_tag(artwork.object.file.url) 
+  artwork.input :location
+end 
+%>

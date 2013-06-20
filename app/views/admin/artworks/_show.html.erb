@@ -1,0 +1,23 @@
+<div class="panel">
+  <h3>Artwork</h3>
+    <div class="panel_contents">
+      <div id="attributes_table_employee_1" class="attributes_table">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tbody>
+            <tr>
+              <td>
+                <h3>File</h3>
+              </td>
+              <td>
+                <h3>File</h3>
+              </td>
+            </tr>
+            <tr>
+              <td><%= link_to 'Artwork', artwork.file_url.to_s, class: "btn btn-primary", download: 'Artwork' %></td>
+              <td><%= artwork.location %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

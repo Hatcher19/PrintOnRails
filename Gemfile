@@ -10,12 +10,20 @@ gem "haml", "~> 4.0.2"
 gem "cancan"
 #Images
 gem 'carrierwave'
+	#image background processing
+gem 'carrierwave_direct'
 gem 'rmagick'
+gem 'fog'
+#for secret information to not show up in my git
+gem 'figaro'
 
 gem 'settingslogic'
 
 # Validation helpers
 gem 'date_validator'
+
+#pushes db from local to production
+gem 'taps'
 
 
 

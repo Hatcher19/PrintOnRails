@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  artwork: MyString
+  order_id: 1
+
+two:
+  artwork: MyString
+  order_id: 1

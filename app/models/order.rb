@@ -1,10 +1,12 @@
 class Order < ActiveRecord::Base
-  attr_accessible :color_back, :color_front, :color_sleeve, :end_date, :name, :start_date, :whiteboard, :customer_id, :order_category_id, :order_type_id, :order_status_id, :order_priority_id, :print_location_id, :artwork, :proof, :line_items_attributes, :assignee_id, :admin_user
+  attr_accessible :color_back, :color_front, :color_sleeve, :end_date, :name, 
+  :start_date, :whiteboard, :customer_id, :order_category_id, :order_type_id, 
+  :order_status_id, :order_priority_id, :print_location_id, :artwork, :proof, 
+  :line_items_attributes, :assignee_id, :admin_user, :artworks_attributes
   
-  mount_uploader :artwork, ArtworkUploader
   mount_uploader :proof, ProofUploader
 
-
+  has_many :artworks
   has_many :line_items
   belongs_to :customer
   belongs_to :order_category
@@ -13,7 +15,8 @@ class Order < ActiveRecord::Base
   belongs_to :order_priority
   belongs_to :print_location
   belongs_to :admin_user
-  accepts_nested_attributes_for :line_items, :allow_destroy => true  
+  accepts_nested_attributes_for :line_items, :allow_destroy => true
+  accepts_nested_attributes_for :artworks, :allow_destroy => true  
 
   def default_values
     if new_record?

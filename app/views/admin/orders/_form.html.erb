@@ -10,17 +10,26 @@
 				f.input :end_date, label: "Due date", as: :datepicker, hint: "Put the date in which your order is due."
 				f.input :name, label: "Order Name", hint: "This is the name of the order" 
 			end
+
 			f.inputs "Line Items" do 
 				render :partial => "admin/line_items/form", :locals => { :form => f }
 			end
+
 			f.inputs "Printing Details" do
 				f.input :print_location, :as => :check_boxes, hint: "Select the location of the print. This should be set up by the admin specific to your printing needs."
 				f.input :color_front, hint: "List the colors to be printed on the front."
 				f.input :color_back, hint: "List the colors to be printed on the back."
 				f.input :color_sleeve, label: "Color side", hint: "List the colors to be printed on the side."
-				f.input :artwork, hint: "Upload the artwork for this order"
-				f.input :proof, hint: "This is for art department use only!"
 			end 
+			
+			f.inputs "Artwork Upload" do 
+				render :partial => "admin/artworks/form", :locals => { :form => f }
+			end
+
+			f.inputs "Proof (Artist use only!)" do
+			 f.input :proof, :hint => image_tag(order.proof.url) 
+			end
+			
 			  f.buttons 
 		end
 %>

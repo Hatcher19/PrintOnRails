@@ -66,15 +66,15 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	  resource.line_items.each do |a|
 	   	text_node(render :partial => "admin/line_items/show", :locals => { :line_item => a })
     end
+    resource.artworks.each do |a|
+			text_node(render :partial => "admin/artworks/show", :locals => { :artwork => a })
+    end
     panel "Art Details" do
     	attributes_table_for resource do
 	        row :print_location
 	        row :color_front
 	        row :color_back
 	        row :color_sleeve
-	        row(:artwork) do
-	        	image_tag order.artwork_url(:thumb).to_s
-	        end
 	        row(:proof) do
 	        	image_tag order.proof_url(:thumb).to_s
 	        end
