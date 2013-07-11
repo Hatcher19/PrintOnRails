@@ -7,7 +7,6 @@ gem 'activeadmin', :git => 'git://github.com/macfanatic/active_admin.git', branc
 gem 'meta_search', '>= 1.1.0.pre'
 gem "haml", "~> 4.0.2"
 #authorization
-gem "cancan"
 #Images
 gem 'carrierwave'
 	#image background processing

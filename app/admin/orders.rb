@@ -1,7 +1,4 @@
 ActiveAdmin.register Order, :sort_order => "end_date_asc" do
-	controller.authorize_resource :except => :index
-
-	scope_to :current_manager, :association_method => :orders
 	
 	menu :label => "Orders"
 	
@@ -12,19 +9,9 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	filter :order_status, label: "Status"
 	filter :order_priority, label: "Priority"
 	filter :customer, label: "Customer"
-  filter :start_date, label: "Start Date"
-  filter :end_date, label: "Due Date"
-  filter :id, label: "Order ID#"
-
-  controller do
-  	#https://github.com/gregbell/active_admin/issues/732
-  	#scope index if not admin or sales.
-  	def current_manager
-      if current_user.broker?
-        current_user
-      end
-		end
-  end
+  	filter :start_date, label: "Start Date"
+  	filter :end_date, label: "Due Date"
+  	filter :id, label: "Order ID#"
 
 	index do 
 		selectable_column
@@ -35,15 +22,15 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 			image_tag order.proof_url(:proof).to_s
 		end
 		column "Name", :sortable => :name do |order|
-      link_to order.name, admin_order_path(order)
-    end
-    column(:customer, :sortable => :customer_id)
-    column("Category", :order_category, :sortable => :order_category_id) 
+	  		link_to order.name, admin_order_path(order)
+    	end
+    	column(:customer, :sortable => :customer_id)
+    	column("Category", :order_category, :sortable => :order_category_id) 
 		column("Status", :order_status, :sortable => :order_status_id)
 		column("Priority", :order_priority, :sortable => :order_priority_id)
-    column("Due Date", :end_date, :sortable => :end_date)
-    default_actions
-  end
+    	column("Due Date", :end_date, :sortable => :end_date)
+    	default_actions
+  	end
   
 
   form :partial => "form"

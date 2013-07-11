@@ -1,5 +1,4 @@
 ActiveAdmin.register OrderPriority do
-	controller.authorize_resource
 	menu :label => "Order Priority", :parent => "Administration"
 	index do
   	column :name
