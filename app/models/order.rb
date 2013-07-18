@@ -16,7 +16,16 @@ class Order < ActiveRecord::Base
   belongs_to :print_location
   belongs_to :admin_user
   accepts_nested_attributes_for :line_items, :allow_destroy => true
-  accepts_nested_attributes_for :artworks, :allow_destroy => true  
+  accepts_nested_attributes_for :artworks, :allow_destroy => true
+
+  validates :name, :presence => true 
+  validates :order_category, :presence => true 
+  validates :customer, :presence => true   
+  validates :order_type, :presence => true 
+  validates :order_status, :presence => true 
+  validates :order_priority, :presence => true 
+  validates :start_date, :presence => true 
+  validates :end_date, :presence => true 
 
   def default_values
     if new_record?

@@ -1,5 +1,6 @@
 ActiveAdmin::Dashboards.build do
   
+  
   section "Recent Orders", :priority => 1 do
     
   end

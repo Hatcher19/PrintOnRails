@@ -192,6 +192,7 @@ GEM
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     uuidtools (2.1.4)
+    validates_email_format_of (1.5.3)
     warden (1.2.1)
       rack (>= 1.0)
 
@@ -219,3 +220,4 @@ DEPENDENCIES
   sqlite3
   taps
   uglifier (>= 1.0.3)
+  validates_email_format_of

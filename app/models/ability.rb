@@ -19,7 +19,7 @@ class Ability
         if user.broker?
             can [:index, :create, :read, :update, :new, :edit], [Order, Customer], :admin_user_id => user.id
             can :read, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
-            cannot :index, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
+            cannot :index, [AdminUser]
             cannot :destroy, :all
         end
 

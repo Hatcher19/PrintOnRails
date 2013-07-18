@@ -13,8 +13,17 @@ class AdminUser < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :phone, :role
   # attr_accessible :title, :body
 
-   has_many :orders, :dependent => :destroy
-   has_many :customers, :dependent => :destroy
+  has_many :orders, :dependent => :destroy
+  has_many :customers, :dependent => :destroy
+
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
+  validates :email, :presence => true
+  validates :password, :presence => true
+  validates :password_confirmation, :presence => true
+  validates :phone, :presence => true, format: { with: /\d{7,10}/, message: "not a valid phone number" }
+  validates :email, email_format: { message: "Doesn't look like an email address" }
+  validates :role, :presence => true
 
   def role?(permission)
     self.role == permission.to_s.downcase

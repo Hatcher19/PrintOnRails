@@ -21,6 +21,7 @@ gem 'settingslogic'
 
 # Validation helpers
 gem 'date_validator'
+gem 'validates_email_format_of'
 
 #pushes db from local to production
 gem 'taps'

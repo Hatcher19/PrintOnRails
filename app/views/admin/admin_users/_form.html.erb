@@ -4,7 +4,7 @@ active_admin_form_for [:admin, @admin_user], html: { multipart: true } do |f|
 		f.input :first_name
 		f.input :last_name 
 		f.input :email 
-		f.input :phone
+		f.input :phone, hint: "7 or 10 digit format (No extra characters)"
 		f.input :role, :collection => AdminUser::ROLES, :member_label => :humanize
 	end 
 	if f.object.new_record? 
