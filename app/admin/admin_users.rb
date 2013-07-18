@@ -1,10 +1,13 @@
 ActiveAdmin.register AdminUser do
+  controller.authorize_resource
   menu :label => "Users", :parent => "Administration"
 
  	filter :first_name
  	filter :last_name
   filter :email
   filter :created_at 
+  filter :role, as: :select, :collection => AdminUser::ROLES, :member_label => :humanize 
+
 
   index do
     selectable_column

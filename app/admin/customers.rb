@@ -1,4 +1,7 @@
 ActiveAdmin.register Customer do
+  controller.authorize_resource
+
+  scope_to :current_manager, :association_method => :customers
 
 	# Menu item
   menu :label => "Customers"
@@ -8,6 +11,14 @@ ActiveAdmin.register Customer do
   filter :company, label: "by Company"
   filter :email, label: "by Email"
   filter :phone, label: "by Phone Number"
+
+  controller do
+    def current_manager
+      unless can? :create, :all
+        current_user
+      end
+    end
+  end
 
   index do
     selectable_column

@@ -1,16 +1,16 @@
 <%=
 	semantic_form_for [:admin, resource], :builder => ActiveAdmin::FormBuilder do |f| 
-		  f.inputs "Order Information" do 
+		f.inputs "Order Information" do 
 		  	f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 		    f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id) , hint: "You need to create a customer before filling out the order form."
 		    f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, hint: "IE: Screen Printing, Embroidery, etc."
-				f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, hint: "IE: New, Re-oreder, etc."
-				f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, hint: "IE: New, art, screens, etc."
-				f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, hint: "IE: 2-day Rush, 3-day Rush, standard, etc."
-				f.input :start_date, label: "Start Date", as: :datepicker, hint: "Usually, this is the day you enter the order, but you could put a future date."
-				f.input :end_date, label: "Due date", as: :datepicker, hint: "Put the date in which your order is due."
-				f.input :name, label: "Order Name", hint: "This is the name of the order" 
-			end
+			f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, hint: "IE: New, Re-oreder, etc."
+			f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, hint: "IE: New, art, screens, etc."
+			f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, hint: "IE: 2-day Rush, 3-day Rush, standard, etc."
+			f.input :start_date, label: "Start Date", as: :datepicker, hint: "Usually, this is the day you enter the order, but you could put a future date."
+			f.input :end_date, label: "Due date", as: :datepicker, hint: "Put the date in which your order is due."
+			f.input :name, label: "Order Name", hint: "This is the name of the order" 
+		end
 
 			f.inputs "Line Items" do 
 				render :partial => "admin/line_items/form", :locals => { :form => f }

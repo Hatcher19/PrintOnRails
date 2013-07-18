@@ -1,5 +1,8 @@
 class AdminUser < ActiveRecord::Base
 
+  ROLES = %w(admin sales broker production art shipping)
+
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -12,4 +15,32 @@ class AdminUser < ActiveRecord::Base
 
    has_many :orders, :dependent => :destroy
    has_many :customers, :dependent => :destroy
+
+  def role?(permission)
+    self.role == permission.to_s.downcase
+  end
+
+  def admin?
+    role? :admin
+  end
+
+  def broker?
+    role? :broker
+  end
+
+  def sales?
+    role? :sales
+  end
+
+  def production?
+    role? :production
+  end
+
+  def art?
+    role? :art
+  end
+  
+  def shipping?
+    role? :shipping
+  end
 end
