@@ -1,6 +1,6 @@
 ActiveAdmin.register OrderCategory do
   controller.authorize_resource
-	menu :label => "Order Category", :parent => "Administration"
+	menu :label => "Order Category", :parent => "Administration", :if => proc{ can?(:destroy, OrderCategory) }, :priority => 2
   index do
   	column :name
   	default_actions

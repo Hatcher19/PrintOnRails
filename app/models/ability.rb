@@ -10,9 +10,10 @@ class Ability
         end
 
         if user.sales?
-            can :create, [Order, Customer]
+            can :create, :all
             can :read, :all
-            can :update, [Order, Customer]
+            can :edit, :all
+            cannot :create, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
             cannot :destroy, :all
         end
 
@@ -31,9 +32,8 @@ class Ability
         end
 
         if user.art?
-            cannot :create, :all
-            can :read, :all
-            can :update, Order
+            can :manage, :all
+            cannot :create, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
             cannot :destroy, :all
         end
 

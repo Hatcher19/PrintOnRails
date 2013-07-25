@@ -1,12 +1,12 @@
 ActiveAdmin.register AdminUser do
   controller.authorize_resource
-  menu :label => "Users", :parent => "Administration"
+  menu :label => "Users", :parent => "Administration", :if => proc{ can?(:destroy, AdminUser) }, :priority => 6
 
  	filter :first_name
  	filter :last_name
   filter :email
   filter :created_at 
-  filter :role, as: :select, :collection => AdminUser::ROLES, :member_label => :humanize 
+  filter :role, as: :select, :collection => AdminUser::ROLES
 
 
   index do

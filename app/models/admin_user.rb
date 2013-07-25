@@ -1,6 +1,6 @@
 class AdminUser < ActiveRecord::Base
 
-  ROLES = %w(admin sales broker production art shipping)
+  ROLES = %w(Admin Sales Broker Production Art Shipping/Receiving)
 
 
   # Include default devise modules. Others available are:
@@ -21,7 +21,7 @@ class AdminUser < ActiveRecord::Base
   validates :email, :presence => true
   validates :password, :presence => true
   validates :password_confirmation, :presence => true
-  validates :phone, :presence => true, format: { with: /\d{7,10}/, message: "not a valid phone number" }
+  validates :phone, :presence => true
   validates :email, email_format: { message: "Doesn't look like an email address" }
   validates :role, :presence => true
 

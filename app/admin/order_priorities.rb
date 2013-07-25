@@ -1,6 +1,6 @@
 ActiveAdmin.register OrderPriority do
   controller.authorize_resource
-	menu :label => "Order Priority", :parent => "Administration"
+	menu :label => "Order Priority", :parent => "Administration", :if => proc{ can?(:destroy, OrderPriority) }, :priority => 3
 	index do
   	column :name
     column("Priority", :sortable => :weight) { |priority| status_tag(priority.weight, color_for_weight(priority.weight)) }

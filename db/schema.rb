@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713212154) do
+ActiveRecord::Schema.define(:version => 20130722171036) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20130713212154) do
     t.datetime "updated_at", :null => false
     t.string   "location"
     t.string   "file"
+    t.string   "color"
   end
 
   add_index "artworks", ["file"], :name => "index_artworks_on_file"
@@ -167,7 +168,6 @@ ActiveRecord::Schema.define(:version => 20130713212154) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.text     "description"
-    t.boolean  "order_type"
   end
 
   create_table "orders", :force => true do |t|

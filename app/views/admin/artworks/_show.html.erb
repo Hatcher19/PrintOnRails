@@ -5,19 +5,17 @@
         <table cellspacing="0" cellpadding="0" border="0">
           <tbody>
             <tr>
-              <td>
-                <h3>File</h3>
-              </td>
-              <td>
-                <h3>Location</h3>
-              </td>
+              <th>Download</th>
+              <th>Location</th>
+              <th>Ink Color(s)</th>
             </tr>
             <tr>
-              <td><%= link_to 'Artwork', artwork.file_url.to_s, class: "btn btn-primary", download: 'Artwork' %></td>
-              <td><%= artwork.location %></td>
+            	<td><%= link_to 'Artwork', artwork.file_url.to_s, class: "btn btn-primary", download: 'Artwork' %></td>
+            	<td><%= artwork.location %></td>
+            	<td><%= artwork.color %></td>
             </tr>
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
