@@ -8,7 +8,6 @@ gem 'meta_search', '>= 1.1.0.pre'
 gem "haml", "~> 4.0.2"
 #authorization
 gem 'cancan'
-gem 'devise-basecamper'
 #Images
 gem 'carrierwave'
 	#image background processing
