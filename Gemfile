@@ -8,6 +8,7 @@ gem 'meta_search', '>= 1.1.0.pre'
 gem "haml", "~> 4.0.2"
 #authorization
 gem 'cancan'
+gem 'devise-basecamper'
 #Images
 gem 'carrierwave'
 	#image background processing
@@ -37,8 +38,8 @@ group :development, :test do
 end
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+	gem 'sass-rails',   '~> 3.2.3'
+	gem 'coffee-rails', '~> 3.2.1'
 	gem 'uglifier', '>= 1.0.3'
 	gem 'bootstrap-sass', '~> 2.2.2.0'
 end

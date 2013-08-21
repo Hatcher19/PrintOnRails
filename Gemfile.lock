@@ -75,6 +75,9 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    devise-basecamper (0.2.2)
+      devise (~> 2.2.0)
+      orm_adapter (~> 0.1)
     erubis (2.7.0)
     excon (0.23.0)
     execjs (1.4.0)
@@ -207,6 +210,7 @@ DEPENDENCIES
   carrierwave_direct
   coffee-rails (~> 3.2.1)
   date_validator
+  devise-basecamper
   figaro
   fog
   haml (~> 4.0.2)
