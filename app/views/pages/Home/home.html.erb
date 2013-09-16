@@ -1,112 +1,60 @@
-<div class="center">
-  <div class="hero center">
-    <div class="row">
-      <div class="span12 center">
-        <center><h2><span>Order Management</span> for the<br><span>Screen Printing</span> and <span>Embroidery Industry</span></h2><center>
-        <br>
-        <br>
-        <div>
-          <p>
-            <a href="https://twitter.com/PrintOnRails" target="_blank">@Follow us</a> 
-            on Twitter for updates or
-          </p>
-        <p>Sign Up for the release of Print on Rails</p>
-        <br>
-        <div class="btn btn-primary">Sign Up</div>
-        <%= link_to 'Sign Up', '/register', :class => 'btn btn-primary' %>
-        
+<%= render 'layouts/nav' %>
+<div class="row one">
+  <div class="container">
+      <center><h1><span>Screen Printing & Embroidery</span><br>Management Software</h1>
+      </center>
+      <div class="span4">
+        <center><p><%= link_to 'Beta', '/register', :class => 'btn btn-primary' %></p></center>
       </div>
-    </div>
+      <div class="span7">
+        <center><iframe width="560" height="315" src="//www.youtube.com/embed/es6iwTjMLhQ" frameborder="0" allowfullscreen></iframe></center>
+      </div>
   </div>
 </div>
-<div class="row preview">
-    <center>
-      <div id="myCarousel" class="carousel slide">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-          <!-- Carousel items -->
-        <div class="carousel-inner">
-            <div class="active item">
-              <div class="container">
-              <%= image_tag 'index.png' %>
-              <div class="carousel-caption">
-                      <h1>Order Index</h1>
-                      <p class="lead">This is the heart of the app. The orders index is where all work orders entered by sales people can be viewed. Notice the filters panel on the right. Using filters, you can easily find a specific order or group of orders.</p>
-                  </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="container">
-                <%= image_tag 'customer.png' %>
-                    <div class="carousel-caption">
-                        <h1>Customer Bank</h1>
-                        <p class="lead">The customer bank is a great place to keep your customers information handy. Features include:<br> 1. Click to email acoss all devices.<br>2. Click to call on mobile. <br>Both are handy for situations that require the customers input.</p>
-                    </div>
-              </div>
-          </div>
-            <div class="item">
-              <div class="container">
-                <%= image_tag 'role.png' %></div>
-                  <div class="carousel-caption">
-                    <h1>Role Based</h1>
-                    <p class="lead">Print on Rails has many different roles that are applied to users by the admin. These roles are perfectly built for any screen printing and embroidery shop.<br>
-                      1. Admin<br>
-                      2. Sales<br>
-                      3. Production Manager<br>
-                      4. Broker(outside sales)<br>
-                      5. Art Department<br>
-                      6. Shipping/ Receiving</p>
-                  </div>
-              </div>
-            </div>
-            <!-- Carousel nav -->
-          <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-          <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-        </div>
-      </div>
-    </center>
-</div>
-<div class="row feature">
+<div class="row two">
   <center>
-    <center><h1><em>Print on Rails</em> makes <em>Order Management easy</em></h1>
-    <div class="feature">
-        <div class="span3 selling">
-          <center>
-            <div class="icon-screenshot"></div>
-            <h3>Simple & Focused</h3>
-          </center>
-            <p class="sold"><em>Print on Rails</em> is designed to allow your screen print or embroidery shop to focus on printing. This software was designed to minimize mistakes throughout the production process of garment printing. Minimizing mistakes starts with the simplicity of <em>Print on Rails<em></p>
-        </div>
-        <div class="span3 selling">
-          <center>
-            <div class="icon-cloud"></div>
-            <h3>Cloud Based</h3>
-          </center>
-            <p class="sold"><em>Print on Rails</em> is a cloud based software. What does that mean for you? 24 hours a day, 7 days a week your software is accessible and in any location provided there is an internet connection.</p>
-        </div>
-        <div class="span3 selling">
-          <center>
-            <div class="icon-envelope-alt"></div>
-            <h3>Contact Us</h3>
-          </center>
-            <p class="sold">You may choose to <a href="mailto:info@printonrails.com">Email Us</a> or contact us via our social networks. </p>
-             <ul id="social" >
-              <div class="icon-twitter-sign"></div><a href=""> Twitter</a>
-            </ul>
-        </div>
-        <div class="span3 selling">
-          <center>
-            <div class="icon-wrench"></div>
-            <h3>Configurable</h3>
-          </center>
-            <p class="sold"><em>Print on Rails</em> was designed as flexible as possible. This is the most customizable software on the market for managing orders in the screen printing and embroidery industry. You can customize categories, priorities, statuses, and types according to the needs of your business.</p>
-        </div>
+    <div class="span3 selling">
+      <center>
+        <div class="icon-screenshot"></div>
+        <h3>Simple & Focused</h3>
+      </center>
+        <p class="sold"><em>Print on Rails</em> is designed to allow your screen print or embroidery shop to focus on printing. This software was designed to minimize mistakes throughout the production process of garment printing. Minimizing mistakes starts with the simplicity of <em>Print on Rails<em></p>
+    </div>
+    <div class="span3 selling">
+      <center>
+        <div class="icon-cloud"></div>
+        <h3>Cloud Based</h3>
+      </center>
+        <p class="sold"><em>Print on Rails</em> is a cloud based software. What does that mean for you? 24 hours a day, 7 days a week your software is accessible and in any location provided there is an internet connection.</p>
+    </div>
+    <!--
+    <div class="span3 selling">
+      <center>
+        <div class="icon-envelope-alt"></div>
+        <h3>Contact Us</h3>
+      </center>
+        <p class="sold">You may choose to <a href="mailto:info@printonrails.com">Email Us</a> or contact us via our social networks. </p>
+         <ul id="social" >
+          <div class="icon-twitter-sign"></div><a href=""> Twitter</a>
+        </ul>
+    </div>
+  -->
+    <div class="span3 selling">
+      <center>
+        <div class="icon-wrench"></div>
+        <h3>Configurable</h3>
+      </center>
+        <p class="sold"><em>Print on Rails</em> was designed as flexible as possible. This is the most customizable software on the market for managing orders in the screen printing and embroidery industry. You can customize categories, priorities, statuses, and types according to the needs of your business.</p>
+    </div>
+    <div class="span3 selling">
+      <center>
+        <div><%= image_tag 'multidevice.png' %></div>
+        <h3>Configurable</h3>
+      </center>
+        <p class="sold"><em>Print on Rails</em> was designed as flexible as possible. This is the most customizable software on the market for managing orders in the screen printing and embroidery industry. You can customize categories, priorities, statuses, and types according to the needs of your business.</p>
     </div>
   </center>
 </div>
 </center>
-<br>
+<%= render 'layouts/footer' %>
 <br>
