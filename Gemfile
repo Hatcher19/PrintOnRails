@@ -26,6 +26,9 @@ gem 'validates_email_format_of'
 #pushes db from local to production
 gem 'taps'
 
+#goes with better_errors gem
+gem "binding_of_caller"
+
 
 
 group :production do
@@ -34,6 +37,7 @@ end
 
 group :development, :test do
 	gem 'sqlite3'
+	gem "better_errors"
 end
 
 group :assets do
