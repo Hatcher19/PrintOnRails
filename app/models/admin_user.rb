@@ -11,19 +11,17 @@ class AdminUser < ActiveRecord::Base
          :registerable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :phone, :role
+  attr_accessible :email, :password, :password_confirmation, 
+  :remember_me, :first_name, :last_name, :role, :admin_user_id
   # attr_accessible :title, :body
 
   has_many :orders, :dependent => :destroy
   has_many :customers, :dependent => :destroy
   belongs_to :account
 
-  validates :first_name, :presence => true
-  validates :last_name, :presence => true
   validates :email, :presence => true
   validates :password, :presence => true
   validates :password_confirmation, :presence => true
-  validates :phone, :presence => true
   validates :email, email_format: { message: "Doesn't look like an email address" }
   validates :role, :presence => true
 
