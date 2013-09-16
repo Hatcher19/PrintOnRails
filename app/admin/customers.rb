@@ -4,7 +4,7 @@ ActiveAdmin.register Customer do
   scope_to :current_manager, :association_method => :customers
 
 	# Menu item
-  menu :label => "Customers"
+  menu :label => "Customers", :if => proc{ can?(:create, Customer) }
 
   filter :name, label: "by Name"
   filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.last_name, u.id] } }
