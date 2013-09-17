@@ -1,30 +1,71 @@
 <%=
 	semantic_form_for [:admin, resource], :builder => ActiveAdmin::FormBuilder do |f| 
-		f.inputs "Order Information" do 
-		  	f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
-		  	f.input :name, label: "Order Name"
-		    f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :wrapper_html => { :class => 'row' }
-		    f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, :wrapper_html => { :class => 'row' }
-			f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, :wrapper_html => { :class => 'row' }
-			f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
-			f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, :wrapper_html => { :class => 'row' }
-			f.input :end_date, label: "Due date", as: :datepicker, :wrapper_html => { :class => 'row' }
+		if current_admin_user.admin?
+			f.inputs "Order Information" do 
+					f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
+					f.input :name, label: "Order Name"
+					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :wrapper_html => { :class => 'row' }
+					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :end_date, label: "Due date", as: :datepicker, :wrapper_html => { :class => 'row' }
+				end
+			elsif current_admin_user.sales?
+				f.inputs "Order Information" do 
+					f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
+					f.input :name, label: "Order Name"
+					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :wrapper_html => { :class => 'row' }
+					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :end_date, label: "Due date", as: :datepicker, :wrapper_html => { :class => 'row' }
+				end
+			elsif current_admin_user.broker?
+				f.inputs "Order Information" do 
+					f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
+					f.input :name, label: "Order Name"
+					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :wrapper_html => { :class => 'row' }
+					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :end_date, label: "Due date", as: :datepicker, :wrapper_html => { :class => 'row' }
+				end
+			elsif current_admin_user.production?
+				f.inputs "Order Information" do 
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :end_date, label: "Due date", as: :datepicker, :wrapper_html => { :class => 'row' }
+				end
+			elsif current_admin_user.shipping?
+				f.inputs "Order Information" do 
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
+				end
+			elsif current_admin_user.art?
+				f.inputs "Order Information" do 
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
+				end
 		end
 
-			f.inputs "Line Items" do 
-				render :partial => "admin/line_items/form", :locals => { :form => f }
-			end
-			
+		f.inputs "Line Items" do 
+			render :partial => "admin/line_items/form", :locals => { :form => f }
+		end
+
+		if can? :create, Order do
 			f.inputs "Artwork Upload" do 
 				render :partial => "admin/artworks/form", :locals => { :form => f }
 			end
-
-			if current_admin_user.art?
-				f.inputs "Proof" do
-					f.input :proof, :hint => image_tag(order.proof.url)
-				end 
-			end
-			
-			  f.buttons 
 		end
+	end
+
+		if current_admin_user.art?
+			f.inputs "Proof" do
+				f.input :proof, :hint => image_tag(order.proof.url)
+			end 
+		end
+		
+		  f.buttons 
+end
 %>
