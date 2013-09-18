@@ -30,7 +30,18 @@ ActiveAdmin.register Customer do
       link_to customer.email, "mailto:#{customer.email}"
     end
     column :phone
-    default_actions
+    if can? :destroy, Customer 
+        column 'Edit' do |customer|
+          link_to(image_tag('edit.png'), edit_admin_customer_path(customer))
+        end
+        column 'Delete' do |customer|
+          link_to(image_tag('delete.png'), admin_customer_path(customer), :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'), :class => "member_link")
+        end
+      elsif can? :edit, Customer
+        column 'Edit' do |customer|
+          link_to(image_tag('edit.png'), edit_admin_customer_path(customer))
+        end
+      end
   end
 	  
 	form :partial => "form"
