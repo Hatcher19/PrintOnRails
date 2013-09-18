@@ -17,23 +17,16 @@ class Ability
             cannot :destroy, :all
         end
 
-        if user.broker?
-            can [:index, :create, :read, :update, :new, :edit], [Order, Customer], :admin_user_id => user.id
-            can :read, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
-            cannot :index, [AdminUser]
-            cannot :destroy, :all
-        end
-
         if user.production?
-            can :create, [Order, Customer]
-            can :read, :all
-            can :update, [Order, Customer]
-            cannot :destroy, :all
+            can :manage, :all
+            cannot :create, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser, Customer]
+            cannot :update, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser, Customer]
+            cannot :destroy, [Order, Customer, OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
         end
 
         if user.art?
             can :manage, :all
-            cannot :create, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
+            cannot :create, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser, Order, Customer]
             cannot :destroy, :all
         end
 
@@ -41,6 +34,13 @@ class Ability
             cannot :create, :all
             can :read, :all
             can :update, Order
+            cannot :destroy, :all
+        end
+
+        if user.broker?
+            can [:index, :create, :read, :update, :new, :edit], [Order, Customer], :admin_user_id => user.id
+            can :read, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
+            cannot :index, [AdminUser]
             cannot :destroy, :all
         end
     end

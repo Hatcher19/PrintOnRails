@@ -35,12 +35,23 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
       column "Name", :sortable => :name do |order|
         link_to order.name, admin_order_path(order)
       end
-      #column(:customer, :sortable => :customer_id)
+      column(:customer, :sortable => :customer_id)
       column("Category", :order_category, :sortable => :order_category_id) 
       column("Status", :order_status, :sortable => :order_status_id)
       column("Priority", :order_priority, :sortable => :order_priority_id)
       column("Due Date", :end_date, :sortable => :end_date)
-    default_actions
+        if can? :destroy, Order 
+          column 'Edit' do |order|
+            link_to(image_tag('edit.png'), edit_admin_order_path(order))
+          end
+          column 'Delete' do |order|
+            link_to(image_tag('delete.png'), admin_order_path(order), :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'), :class => "member_link")
+          end
+        elsif can? :edit, Order
+          column 'Edit' do |order|
+            link_to(image_tag('edit.png'), edit_admin_order_path(order))
+          end
+        end
   end
   
   form :partial => "form"
