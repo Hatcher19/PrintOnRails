@@ -7,7 +7,9 @@
 		    f.input :email
 		    f.input :phone, hint: "7 or 10 digits"
 			end 
-			render :partial => "admin/addresses/form", :locals => { :form => f } 
+			f.inputs "Line Items" do 
+				render :partial => "admin/addresses/form", :locals => { :form => f }
+			end 
 			  f.buttons 
 		end
 %>

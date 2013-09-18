@@ -53,12 +53,9 @@
 			render :partial => "admin/line_items/form", :locals => { :form => f }
 		end
 
-		if can? :create, Order do
-			f.inputs "Artwork Upload" do 
+		f.inputs "Artwork Upload" do 
 				render :partial => "admin/artworks/form", :locals => { :form => f }
 			end
-		end
-	end
 
 		if current_admin_user.art?
 			f.inputs "Proof" do

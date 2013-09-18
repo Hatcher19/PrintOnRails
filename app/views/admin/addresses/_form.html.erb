@@ -1,15 +1,11 @@
 <%=
-form.has_many :addresses do |address| 
-address.inputs "Address" do
-    address.inputs :class => "" do 
-    	address.input :address_type, :collection => Address::ADD
-      address.input :address_name, label: "Address Name", hint: "Examples: Franchise A, Franchise B" 
-      address.input :street 
-      address.input :city 
-      address.input :state
-      address.input :zip
-      address.input :same_as_billing, label: "Shipping same as billing?"
-    end 
-  end 
+form.has_many :addresses, :wrapper_html=> { :class => 'panel' } do |address|  
+  address.input :address_type, :collection => Address::ADD
+  address.input :address_name, label: "Address Name", hint: "Examples: Franchise A, Franchise B" 
+  address.input :street 
+  address.input :city 
+  address.input :state
+  address.input :zip
+  address.input :same_as_billing, label: "Shipping same as billing?"
 end 
 %>
