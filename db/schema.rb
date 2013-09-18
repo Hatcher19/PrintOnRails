@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130821001153) do
+ActiveRecord::Schema.define(:version => 20130918223635) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20130821001153) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "subdomain"
+    t.string   "company"
   end
 
   create_table "active_admin_comments", :force => true do |t|
@@ -198,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20130821001153) do
     t.integer  "number"
     t.integer  "assignee_id"
     t.integer  "admin_user_id"
+    t.boolean  "ship"
   end
 
   add_index "orders", ["admin_user_id"], :name => "index_orders_on_admin_user_id"

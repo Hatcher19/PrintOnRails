@@ -12,6 +12,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   filter :order_status, label: "Status"
   filter :order_priority, label: "Priority"
   filter :customer, label: "Customer"
+  filter :ship, as: :select, label: "Is Order Shipping?"
   filter :start_date, label: "Start Date"
   filter :end_date, label: "Due Date"
   filter :id, label: "Order ID#"
@@ -87,6 +88,13 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
         end
       end
     end
+
+    panel "Shipping Details" do
+        attributes_table_for resource do
+          row :ship
+        end
+    end
+
     resource.artworks.each do |a|
         text_node(render :partial => "admin/artworks/show", :locals => { :artwork => a })
     end
