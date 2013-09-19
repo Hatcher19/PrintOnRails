@@ -27,7 +27,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 
   index do 
     selectable_column
-      column "ID", :sortable => :id do |order|
+      column "#", :sortable => :id do |order|
         link_to order.id, admin_order_path(order)
       end
       column "Proof" do |order|
@@ -37,26 +37,25 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
         link_to order.name, admin_order_path(order)
       end
       column(:customer, :sortable => :customer_id)
-      column "Shipping" do |order|
+      column "Ship?" do |order|
         if order.ship == true 
-          image_tag 'check.png'
+          image_tag 'ship.png'
         elsif order.ship == false 
-          image_tag 'x.png'
         end
       end
       column("Category", :order_category, :sortable => :order_category_id) 
       column("Status", :order_status, :sortable => :order_status_id)
       column("Priority", :order_priority, :sortable => :order_priority_id)
-      column("Due Date", :end_date, :sortable => :end_date)
+      column("Due", :end_date, :format => :short, :sortable => :end_date)
       if can? :destroy, Order 
-        column 'Edit' do |order|
+        column '' do |order|
           link_to(image_tag('edit.png'), edit_admin_order_path(order))
         end
-        column 'Delete' do |order|
+        column '' do |order|
           link_to(image_tag('delete.png'), admin_order_path(order), :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'), :class => "member_link")
         end
       elsif can? :edit, Order
-        column 'Edit' do |order|
+        column '' do |order|
           link_to(image_tag('edit.png'), edit_admin_order_path(order))
         end
       end
