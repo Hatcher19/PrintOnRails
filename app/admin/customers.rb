@@ -49,17 +49,21 @@ ActiveAdmin.register Customer do
   show :title => :name do
     
     panel "Customer Details" do
-	      attributes_table_for resource do
-	        row :name
+        attributes_table_for resource do
+          row :name
           row :admin_user
-	        row :company
-	        row :email
-	        row :phone
-	      end
-	  end
+          row :company
+          row :email
+          row :phone
+        end
+    end
     
     resource.addresses.each do |a|
 	   text_node(render :partial => "admin/addresses/show", :locals => { :address => a })
     end
+
+    #panel "Previous Orders" do 
+    # Table of previous orders would be nice here.
+    #end
 	end
 end

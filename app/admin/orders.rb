@@ -26,18 +26,21 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   end
 
   index do 
-    selectable_column
-      column "#", :sortable => :id do |order|
+      column "ID", :sortable => :id do |order|
         link_to order.id, admin_order_path(order)
       end
       column "Proof" do |order|
-        image_tag order.proof_url(:proof).to_s
+        if order.proof.present?
+          image_tag order.proof_url(:proof).to_s
+        else
+          image_tag 'x.png'
+        end
       end
       column "Name", :sortable => :name do |order|
         link_to order.name, admin_order_path(order)
       end
       column(:customer, :sortable => :customer_id)
-      column "Ship?" do |order|
+      column "Ship" do |order|
         if order.ship == true 
           image_tag 'ship.png'
         elsif order.ship == false 
