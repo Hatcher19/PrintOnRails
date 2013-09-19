@@ -65,5 +65,7 @@ ActiveAdmin.register Customer do
     #panel "Previous Orders" do 
     # Table of previous orders would be nice here.
     #end
+
+    active_admin_comments
 	end
 end

@@ -58,10 +58,14 @@
 				render :partial => "admin/artworks/form", :locals => { :form => f }
 			end
 
-		if current_admin_user.art?
+		if current_admin_user.admin?
 			f.inputs "Proof" do
 				f.input :proof, :hint => image_tag(order.proof.url)
 			end 
+		else current_admin_user.art?
+			f.inputs "Proof" do
+				f.input :proof, :hint => image_tag(order.proof.url)
+			end
 		end
 		
 		  f.buttons 
