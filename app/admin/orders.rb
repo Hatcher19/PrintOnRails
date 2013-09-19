@@ -37,6 +37,13 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
         link_to order.name, admin_order_path(order)
       end
       column(:customer, :sortable => :customer_id)
+      column "Shipping" do |order|
+        if order.ship == true 
+          image_tag 'check.png'
+        elsif order.ship == false 
+          image_tag 'x.png'
+        end
+      end
       column("Category", :order_category, :sortable => :order_category_id) 
       column("Status", :order_status, :sortable => :order_status_id)
       column("Priority", :order_priority, :sortable => :order_priority_id)
