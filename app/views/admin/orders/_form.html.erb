@@ -4,51 +4,51 @@
 			f.inputs "Order Information" do 
 					f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 					f.input :name, label: "Order Name"
-					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :wrapper_html => { :class => 'row' }
+					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :hint => (link_to "or Create New Customer", new_admin_customer_path)
 					f.input :ship, as: :radio
-					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :end_date, label: "Due date", as: :datepicker, :wrapper_html => { :class => 'row' }
+					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select
+					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select
+					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select
+					f.input :end_date, label: "Due date", as: :datepicker
 				end
 			elsif current_admin_user.sales?
 				f.inputs "Order Information" do 
 					f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 					f.input :name, label: "Order Name"
-					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :wrapper_html => { :class => 'row' }
+					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :hint => (link_to "or Create New Customer", new_admin_customer_path)
 					f.input :ship, as: :radio
-					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :end_date, label: "Due date", as: :datepicker, :wrapper_html => { :class => 'row' }
+					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select
+					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select
+					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select
+					f.input :end_date, label: "Due date", as: :datepicker
 				end
 			elsif current_admin_user.broker?
 				f.inputs "Order Information" do 
 					f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 					f.input :name, label: "Order Name"
-					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :wrapper_html => { :class => 'row' }
+					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :hint => (link_to "or Create New Customer", new_admin_customer_path)
 					f.input :ship, as: :radio
-					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :end_date, label: "Due date", as: :datepicker, :wrapper_html => { :class => 'row' }
+					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select
+					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select
+					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select
+					f.input :end_date, label: "Due date", as: :datepicker
 				end
 			elsif current_admin_user.production?
 				f.inputs "Order Information" do 
-					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select, :wrapper_html => { :class => 'row' }
-					f.input :end_date, label: "Due date", as: :datepicker, :wrapper_html => { :class => 'row' }
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select
+					f.input :order_priority_id, as: :select, :collection => OrderPriority.all, label: "Priority", as: :select
+					f.input :end_date, label: "Due date", as: :datepicker
 				end
 			elsif current_admin_user.shipping?
 				f.inputs "Order Information" do 
-					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select
 				end
 			elsif current_admin_user.art?
 				f.inputs "Order Information" do 
-					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
+					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select
 				end
 		end
 
