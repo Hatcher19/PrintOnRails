@@ -3,6 +3,9 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 
   scope_to :current_manager, :association_method => :orders
 
+  scope(:all, default: true) { |orders| orders }
+  scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
+
   menu :label => "Orders"
 
   filter :name, label: "Order Name"

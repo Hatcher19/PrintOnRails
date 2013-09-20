@@ -17,6 +17,7 @@
 					f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 					f.input :name, label: "Order Name"
 					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :wrapper_html => { :class => 'row' }
+					f.input :ship, as: :radio
 					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, :wrapper_html => { :class => 'row' }
 					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, :wrapper_html => { :class => 'row' }
 					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
@@ -28,6 +29,7 @@
 					f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 					f.input :name, label: "Order Name"
 					f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :wrapper_html => { :class => 'row' }
+					f.input :ship, as: :radio
 					f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select, :wrapper_html => { :class => 'row' }
 					f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select, :wrapper_html => { :class => 'row' }
 					f.input :order_status_id, as: :select, :collection => OrderStatus.all, label: "Status", as: :select, :wrapper_html => { :class => 'row' }
