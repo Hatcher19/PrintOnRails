@@ -5,6 +5,8 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 
   scope(:all, default: true) { |orders| orders }
   scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
+  scope(:due_today) { |orders| orders.where(:end_date => Date.today ) }
+
 
   menu :label => "Orders"
 
@@ -43,15 +45,8 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
           image_tag 'ship.png' if order.ship 
       end
       column("Due", :end_date, :format => :short, :sortable => :end_date)
-      if can? :destroy, Order 
-        column '' do |order|
-          link_to(image_tag('edit.png'), edit_admin_order_path(order))
-        end
-        column '' do |order|
-          link_to(image_tag('delete.png'), admin_order_path(order), :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'), :class => "member_link")
-        end
-      elsif can? :edit, Order
-        column '' do |order|
+      if can? :edit, Order
+        column 'Edit' do |order|
           link_to(image_tag('edit.png'), edit_admin_order_path(order))
         end
       end
