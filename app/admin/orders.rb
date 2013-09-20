@@ -32,13 +32,6 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
       column "ID", :sortable => :id do |order|
         link_to order.id, admin_order_path(order)
       end
-      column "Proof" do |order|
-        if order.proof.present?
-          image_tag order.proof_url(:proof).to_s
-        else
-          image_tag 'x.png'
-        end
-      end
       column "Name", :sortable => :name do |order|
         link_to order.name, admin_order_path(order)
       end
