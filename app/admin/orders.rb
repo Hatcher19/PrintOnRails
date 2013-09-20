@@ -36,15 +36,12 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
         link_to order.name, admin_order_path(order)
       end
       column(:customer, :sortable => :customer_id)
-      column "Ship" do |order|
-        if order.ship == true 
-          image_tag 'ship.png'
-        elsif order.ship == false 
-        end
-      end
       column("Category", :order_category, :sortable => :order_category_id) 
       column("Status", :order_status, :sortable => :order_status_id)
       column("Priority", :order_priority, :sortable => :order_priority_id)
+      column "Ship" do |order| 
+          image_tag 'ship.png' if order.ship 
+      end
       column("Due", :end_date, :format => :short, :sortable => :end_date)
       if can? :destroy, Order 
         column '' do |order|
