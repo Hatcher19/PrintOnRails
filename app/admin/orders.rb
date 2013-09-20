@@ -6,6 +6,8 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   scope(:all, default: true) { |orders| orders }
   scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
   scope(:due_today) { |orders| orders.where(:end_date => Date.today ) }
+  scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
+  
 
 
   menu :label => "Orders"
