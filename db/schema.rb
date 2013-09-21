@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921142832) do
+ActiveRecord::Schema.define(:version => 20130921150457) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -173,13 +173,8 @@ ActiveRecord::Schema.define(:version => 20130921142832) do
   end
 
   create_table "orders", :force => true do |t|
-    t.date     "start_date"
     t.date     "end_date"
     t.string   "name"
-    t.text     "whiteboard"
-    t.string   "color_front"
-    t.string   "color_back"
-    t.string   "color_sleeve"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "customer_id"
@@ -188,18 +183,12 @@ ActiveRecord::Schema.define(:version => 20130921142832) do
     t.integer  "order_status_id"
     t.integer  "order_priority_id"
     t.integer  "print_location_id"
-    t.string   "artwork"
-    t.string   "proof"
-    t.integer  "number"
-    t.integer  "assignee_id"
     t.integer  "admin_user_id"
     t.boolean  "ship"
   end
 
   add_index "orders", ["admin_user_id"], :name => "index_orders_on_admin_user_id"
-  add_index "orders", ["assignee_id"], :name => "index_orders_on_assignee_id"
   add_index "orders", ["customer_id"], :name => "index_orders_on_customer_id"
-  add_index "orders", ["number"], :name => "index_orders_on_number"
   add_index "orders", ["order_category_id"], :name => "index_orders_on_order_category_id"
   add_index "orders", ["order_priority_id"], :name => "index_orders_on_order_priority_id"
   add_index "orders", ["print_location_id"], :name => "index_orders_on_print_location_id"

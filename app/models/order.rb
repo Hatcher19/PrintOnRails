@@ -1,8 +1,7 @@
 class Order < ActiveRecord::Base
-  attr_accessible :color_back, :color_front, :color_sleeve, :end_date, :name, 
-  :start_date, :whiteboard, :customer_id, :order_category_id, :order_type_id, 
-  :order_status_id, :order_priority_id, :print_location_id, :artwork, :proof, 
-  :line_items_attributes, :assignee_id, :admin_user_id, :ship, :artworks_attributes
+  attr_accessible :end_date, :name, :customer_id, :order_category_id, :order_type_id, 
+  :order_status_id, :order_priority_id, :print_location_id, 
+  :line_items_attributes, :admin_user_id, :ship, :artworks_attributes
   
   mount_uploader :proof, ProofUploader
 
