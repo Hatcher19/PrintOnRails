@@ -1,9 +1,8 @@
 ActiveAdmin.register AdminUser do
   controller.authorize_resource
-  menu :label => "Users", :parent => "Administration", :if => proc{ can?(:destroy, AdminUser) }, :priority => 6
+  menu :label => "Users", :parent => "Administration", :if => proc{ can?(:create, AdminUser) }, :priority => 6
 
- 	filter :first_name
- 	filter :last_name
+ 	filter :full_name
   filter :email
   filter :created_at 
   filter :role, as: :select, :collection => AdminUser::ROLES
@@ -11,8 +10,7 @@ ActiveAdmin.register AdminUser do
 
   index do
     selectable_column
-    column :first_name
-    column :last_name
+    column :full_name
     column :email, :sortable => :email do |admin_user|
       link_to admin_user.email, "mailto:#{admin_user.email}"
     end
