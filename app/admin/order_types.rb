@@ -10,7 +10,6 @@ menu :label => "Order Type", :parent => "Administration", :if => proc{ can?(:des
     panel "Order Type Details" do
       attributes_table_for resource do
       row :name
-      row :description
       end
     end
   end

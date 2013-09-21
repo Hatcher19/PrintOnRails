@@ -15,7 +15,6 @@ ActiveAdmin.register OrderPriority do
       attributes_table_for resource do
       	row :name
       	row :weight
-      	row :description
       end
     end
   end

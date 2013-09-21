@@ -11,7 +11,6 @@ ActiveAdmin.register OrderCategory do
     panel "Status Details" do
       attributes_table_for resource do
       	row :name
-      	row :description
       end
     end
   end
