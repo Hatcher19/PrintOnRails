@@ -4,6 +4,9 @@ ActiveAdmin.register OrderStatus do
 
   index do
   	column :name
+    column 'Open Status', :sortable => :active do |status|
+      status_tag status.active? ? "Active" : "Closed", status.active? ? :green : :red
+    end
   	default_actions
   end
 
@@ -12,7 +15,9 @@ ActiveAdmin.register OrderStatus do
     panel "Status Details" do
       attributes_table_for resource do
       	row :name
-      	row :description
+      	row 'Open Status' do |status|
+          status_tag status.active? ? "Active" : "Closed", status.active? ? :green : :red
+        end
       end
     end
   end

@@ -1,7 +1,9 @@
 <%=
-semantic_form_for @order_status, :builder => ActiveAdmin::FormBuilder do |f|
-	f.input "Order Status" do
-		f.input :name
-	end
+active_admin_form_for(resource) do |f|
+	f.inputs "Ticket Status" do
+    f.input :name
+    f.input :active
+  end
+	f.buttons
 end
 %>
