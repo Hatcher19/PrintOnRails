@@ -101,12 +101,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   	resource.line_items.each do |a|
 	   	text_node(render :partial => "admin/line_items/show", :locals => { :line_item => a })
     end 
-
-    attributes_table do
-        row :proof do
-          image_tag(order.proof.url)
-        end
-    end
+    
 	  active_admin_comments
 	end
 end
