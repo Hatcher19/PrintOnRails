@@ -1,7 +1,6 @@
 ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   controller.authorize_resource :except => :index
 
-  scope_to :current_manager, :association_method => :orders
 
   scope(:all, default: true) { |orders| orders }
   scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
@@ -24,13 +23,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   filter :end_date, label: "Due Date"
   filter :id, label: "Order ID#"
 
-  controller do
-    def current_manager
-      unless can? :read, :all
-        current_user
-      end
-    end
-  end
+  
 
   index do 
       column "ID", :sortable => :id do |order|
@@ -47,11 +40,10 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
           image_tag 'ship.png' if order.ship 
       end
       column("Due", :end_date, :format => :short, :sortable => :end_date)
-      if can? :edit, Order
+      
         column 'Edit' do |order|
           link_to(image_tag('edit.png'), edit_admin_order_path(order))
         end
-      end
   end
   
   form :partial => "form"

@@ -1,6 +1,6 @@
 class AdminUser < ActiveRecord::Base
 
-  ROLES = %w(Admin Sales Broker Production Art Shipping/Receiving)
+  ROLES = %w(admin broker office warehouse)
 
 
   # Include default devise modules. Others available are:
@@ -13,11 +13,11 @@ class AdminUser < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, 
   :remember_me, :role, :admin_user_id, :full_name, :phone
-  # attr_accessible :title, :body
 
   has_many :orders, :dependent => :destroy
   has_many :customers, :dependent => :destroy
   belongs_to :account
+
 
   validates :full_name, :presence => true
   validates :email, :presence => true
@@ -30,6 +30,10 @@ class AdminUser < ActiveRecord::Base
     self.role == permission.to_s.downcase
   end
 
+  def super_admin?
+    role? :super_admin
+  end
+
   def admin?
     role? :admin
   end
@@ -38,19 +42,11 @@ class AdminUser < ActiveRecord::Base
     role? :broker
   end
 
-  def sales?
-    role? :sales
+  def office?
+    role? :office
   end
 
-  def production?
-    role? :production
-  end
-
-  def art?
-    role? :art
-  end
-  
-  def shipping?
-    role? :shipping
+  def warehouse?
+    role? :warehouse
   end
 end

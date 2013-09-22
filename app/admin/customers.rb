@@ -1,24 +1,14 @@
 ActiveAdmin.register Customer do
-  controller.authorize_resource
-
-  scope_to :current_manager, :association_method => :customers
+  controller.authorize_resource :except => :index
 
 	# Menu item
-  menu :label => "Customers", :if => proc{ can?(:create, Customer) }
+  menu :label => "Customers"
 
   filter :name, label: "by Name"
-  filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.last_name, u.id] } }
+  filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.full_name, u.id] } }
   filter :company, label: "by Company"
   filter :email, label: "by Email"
   filter :phone, label: "by Phone Number"
-
-  controller do
-    def current_manager
-      unless can? :create, :all
-        current_user
-      end
-    end
-  end
 
   index do
     selectable_column
@@ -37,7 +27,7 @@ ActiveAdmin.register Customer do
         column 'Delete' do |customer|
           link_to(image_tag('delete.png'), admin_customer_path(customer), :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'), :class => "member_link")
         end
-      elsif can? :edit, Customer
+      elsif 
         column 'Edit' do |customer|
           link_to(image_tag('edit.png'), edit_admin_customer_path(customer))
         end
