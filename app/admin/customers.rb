@@ -4,6 +4,9 @@ ActiveAdmin.register Customer do
 	# Menu item
   menu :label => "Customers"
 
+  scope(:all, default: true) { |customers| customers }
+  scope(:mine) { |customers| customers.where(:admin_user_id => current_admin_user.id ) }
+
   filter :name, label: "by Name"
   filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.full_name, u.id] } }
   filter :company, label: "by Company"
