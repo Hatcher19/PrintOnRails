@@ -2,7 +2,8 @@ ActiveAdmin.register Customer do
   controller.authorize_resource :except => :index
 
 	# Menu item
-  menu :label => "Customers"
+  menu :label => "Customers", :if => proc{ can?(:create, Customer) }
+
 
   scope(:all, default: true) { |customers| customers }
   scope(:mine) { |customers| customers.where(:admin_user_id => current_admin_user.id ) }
@@ -10,7 +11,7 @@ ActiveAdmin.register Customer do
 
   controller do
     def current_manager
-      unless can? :create, :all
+      unless can? :read, :all
         current_user
       end
     end
