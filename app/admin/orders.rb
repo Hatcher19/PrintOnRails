@@ -1,13 +1,19 @@
 ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   controller.authorize_resource :except => :index
 
-
   scope(:all, default: true) { |orders| orders }
   scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
   scope(:due_today) { |orders| orders.where(:end_date => Date.today ) }
   scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
-  
+  scope_to :current_manager, :association_method => :orders
 
+    controller do
+      def current_manager
+        unless can? :read, :all
+          current_user
+        end
+      end
+    end
 
   menu :label => "Orders"
 
@@ -40,10 +46,9 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
           image_tag 'ship.png' if order.ship 
       end
       column("Due", :end_date, :format => :short, :sortable => :end_date)
-      
-        column 'Edit' do |order|
-          link_to(image_tag('edit.png'), edit_admin_order_path(order))
-        end
+      column 'Edit' do |order|
+        link_to(image_tag('edit.png'), edit_admin_order_path(order))
+      end
   end
   
   form :partial => "form"
@@ -97,8 +102,3 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	  active_admin_comments
 	end
 end
-
-
-
-
-

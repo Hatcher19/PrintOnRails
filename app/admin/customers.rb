@@ -6,6 +6,16 @@ ActiveAdmin.register Customer do
 
   scope(:all, default: true) { |customers| customers }
   scope(:mine) { |customers| customers.where(:admin_user_id => current_admin_user.id ) }
+  scope_to :current_manager, :association_method => :customers
+
+  controller do
+    def current_manager
+      unless can? :create, :all
+        current_user
+      end
+    end
+  end
+
 
   filter :name, label: "by Name"
   filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.full_name, u.id] } }
