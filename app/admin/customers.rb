@@ -5,8 +5,7 @@ ActiveAdmin.register Customer do
   menu :label => "Customers", :if => proc{ can?(:create, Customer) }
 
 
-  scope(:all, default: true) { |customers| customers }
-  scope(:mine) { |customers| customers.where(:admin_user_id => current_admin_user.id ) }
+  scope(:mine, default: true) { |customers| customers.where(:admin_user_id => current_admin_user.id ) }
   scope_to :current_manager, :association_method => :customers
 
   controller do
