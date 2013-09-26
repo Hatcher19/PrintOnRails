@@ -28,6 +28,7 @@ class Ability
           can [:index, :create, :read, :update, :new, :edit], [Order, Customer], :admin_user_id => user.id
           can :read, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser]
           cannot :index, [AdminUser] #DO NOT DELETE! I use this to distinguish can? throughout app. 
+          cannot :read, AdminUser
           cannot :destroy, :all
         end
       end

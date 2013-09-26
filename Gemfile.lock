@@ -135,6 +135,9 @@ GEM
     net-ssh (2.6.7)
     nokogiri (1.5.10)
     orm_adapter (0.4.0)
+    paper_trail (2.7.2)
+      activerecord (~> 3.0)
+      railties (~> 3.0)
     pg (0.15.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -221,6 +224,7 @@ DEPENDENCIES
   haml (~> 4.0.2)
   jquery-rails
   meta_search (>= 1.1.0.pre)
+  paper_trail
   pg
   rails (= 3.2.13)
   rmagick

@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
       redirect_to dashboard_path, :alert => exception.message
     end
   end
+#
+  def user_for_paper_trail
+    admin_user_signed_in? ? current_admin_user : 'Unknown user'
+  end
  
 	
   protect_from_forgery

@@ -28,6 +28,8 @@ gem 'taps'
 
 #goes with better_errors gem
 gem "binding_of_caller"
+#auditing
+gem 'paper_trail'
 
 
 

@@ -41,10 +41,10 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
       column(:customer, :sortable => :customer_id)
       column("Category", :order_category, :sortable => :order_category_id) 
       column("Status", :order_status, :sortable => :order_status_id)
-      column("Priority", :order_priority, :sortable => :order_priority_id)
-      column "Ship" do |order| 
-          image_tag 'ship.png' if order.ship 
-      end
+      #column("Priority", :order_priority, :sortable => :order_priority_id)
+      #column "Ship" do |order| 
+      #    image_tag 'ship.png' if order.ship 
+      #end
       column("Due", :end_date, :format => :short, :sortable => :end_date)
       column 'Edit' do |order|
         link_to(image_tag('edit.png'), edit_admin_order_path(order))
