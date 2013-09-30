@@ -61,19 +61,19 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
             th { 'Customer' }
             td { link_to resource.customer.name, admin_customer_path(resource.customer) }
             th { 'Category' }
-            td { link_to resource.order_category.name, admin_order_category_path(resource.order_category) }
+            td {  resource.order_category.name }
           end
           tr do
             th { 'User' }
             td { link_to resource.admin_user.email, admin_admin_user_path(resource.admin_user) }
             th { 'Status' }
-            td { link_to resource.order_status.name, admin_order_status_path(resource.order_status) }
+            td { resource.order_status.name }
           end
           tr do
             th { 'Start Date' }
-            td { link_to order.created_at.to_s.humanize }
+            td { link_to order.created_at.to_s.titleize }
             th { 'Type' }
-            td { link_to resource.order_type.name, admin_order_type_path(resource.order_type) }
+            td { resource.order_type.name }
           end
           tr do
             th { 'Due Date' }
