@@ -78,8 +78,8 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
           tr do
             th { 'Due Date' }
             td { link_to order.end_date }
-            th { 'Priority'}
-            td { link_to resource.order_priority.name, admin_order_priority_path(resource.order_priority) }
+            #th { 'Priority'}
+            #td { link_to resource.order_priority.name, admin_order_priority_path(resource.order_priority) }
           end
         end
       end
@@ -98,6 +98,9 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   	resource.line_items.each do |a|
 	   	text_node(render :partial => "admin/line_items/show", :locals => { :line_item => a })
     end 
+    #panel "History" do
+    #  render :partial => "admin/orders/history"
+    #end
     
 	  active_admin_comments
 	end
