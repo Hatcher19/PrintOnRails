@@ -51,18 +51,6 @@ ActiveAdmin.register Customer do
 	form :partial => "form"
 
   show :title => :name do
-    panel "Customer Details" do
-      attributes_table_for resource do
-        row :name
-        row :admin_user
-        row :company
-        row :email
-        row :phone
-      end
-    end
-    resource.addresses.each do |a|
-     text_node(render :partial => "admin/addresses/show", :locals => { :address => a })
-    end
     panel "Order History" do
       table_for(customer.orders) do
         column("ID", :sortable => :id) {|order| link_to "##{order.id}", admin_order_path(order) }
@@ -70,6 +58,19 @@ ActiveAdmin.register Customer do
         column("Due Date", :sortable => :end_date) {|order| "#{order.end_date}" }
       end
     end
+    resource.addresses.each do |a|
+     text_node(render :partial => "admin/addresses/show", :locals => { :address => a })
+    end
     active_admin_comments
-	end
+  end
+  sidebar "Customer Details", :only => :show do
+    attributes_table_for customer do
+      row :name
+      row :company
+      row :email
+      row :phone
+      row :admin_user
+      row :created_at
+    end
+  end
 end
