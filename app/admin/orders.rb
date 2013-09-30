@@ -71,13 +71,13 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
           end
           tr do
             th { 'Start Date' }
-            td { link_to order.created_at.to_s.titleize }
+            td { link_to order.created_at.to_s :long }
             th { 'Type' }
             td { resource.order_type.name }
           end
           tr do
             th { 'Due Date' }
-            td { link_to order.end_date }
+            td { link_to order.end_date.to_s :long }
             #th { 'Priority'}
             #td { link_to resource.order_priority.name, admin_order_priority_path(resource.order_priority) }
           end
