@@ -1,6 +1,6 @@
 ActiveAdmin::Dashboards.build do
 # app/admin/dashboard.rb
-	section "Orders to be Approved", :priority => 1 do
+	section "Orders to be Approved (Needs Work******)", :priority => 1 do
 		table_for OrderStatus.order do
 			column "ID" do |order|  link_to order.id end
 			column "Date Created" do |order| order.created_at.to_s :long end

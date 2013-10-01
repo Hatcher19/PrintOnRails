@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925223724) do
+ActiveRecord::Schema.define(:version => 20131001021044) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(:version => 20130925223724) do
     t.integer  "print_location_id"
     t.integer  "admin_user_id"
     t.boolean  "ship"
+    t.integer  "product_status_id"
   end
 
   add_index "orders", ["admin_user_id"], :name => "index_orders_on_admin_user_id"
@@ -190,11 +191,19 @@ ActiveRecord::Schema.define(:version => 20130925223724) do
   add_index "orders", ["order_category_id"], :name => "index_orders_on_order_category_id"
   add_index "orders", ["order_priority_id"], :name => "index_orders_on_order_priority_id"
   add_index "orders", ["print_location_id"], :name => "index_orders_on_print_location_id"
+  add_index "orders", ["product_status_id"], :name => "index_orders_on_product_status_id"
 
   create_table "print_locations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "product_statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.boolean  "active"
   end
 
   create_table "sizes", :force => true do |t|

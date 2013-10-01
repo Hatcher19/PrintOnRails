@@ -22,6 +22,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   filter :order_category, label: "Category"
   filter :order_type, label: "Type"
   filter :order_status, label: "Status"
+  filter :product_status, label: "Product Status"
   filter :order_priority, label: "Priority"
   filter :customer, label: "Customer"
   filter :ship, as: :select, label: "Is Order Shipping?"
@@ -36,11 +37,11 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
         link_to order.id, admin_order_path(order)
       end
       column "Name", :sortable => :name do |order|
-        link_to order.name, admin_order_path(order)
+        order.name
       end
-      column(:customer, :sortable => :customer_id)
       column("Category", :order_category, :sortable => :order_category_id) 
       column("Status", :order_status, :sortable => :order_status_id)
+      column("Product Status", :product_status, :sortable => :product_status_id)
       #column("Priority", :order_priority, :sortable => :order_priority_id)
       #column "Ship" do |order| 
       #    image_tag 'ship.png' if order.ship 
@@ -78,6 +79,8 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
           tr do
             th { 'Due Date' }
             td { link_to order.end_date.to_s :long }
+            th { 'Product Status'}
+            td { resource.product_status.name }
             #th { 'Priority'}
             #td { link_to resource.order_priority.name, admin_order_priority_path(resource.order_priority) }
           end
