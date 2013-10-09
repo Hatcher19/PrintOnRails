@@ -1,0 +1,14 @@
+<%= form_for(@account) do |f| %>
+
+  <div class="form-inline">
+    <%= f.text_field :company, :placeholder => "Company Name", class: 'span3' %>
+	    <%= f.fields_for :devise do |builder| %>
+			  <%= render 'devise/registrations/new', :f => builder %>
+			<% end %>
+    <%= f.submit 'Submit', class: 'btn-submit btn-primary'%>
+
+  </div>
+  <div class="flash-notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>

@@ -28,6 +28,8 @@ gem 'taps'
 
 #auditing
 gem 'paper_trail'
+gem 'inherited_resources'
+
 
 
 

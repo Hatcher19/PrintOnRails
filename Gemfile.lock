@@ -213,6 +213,7 @@ DEPENDENCIES
   figaro
   fog
   haml (~> 4.0.2)
+  inherited_resources
   jquery-rails
   meta_search (>= 1.1.0.pre)
   paper_trail

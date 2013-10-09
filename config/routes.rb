@@ -1,11 +1,11 @@
-PrintOnRails::Application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config 
-  get "pages/home/home"
+PrintOnRails::Application.routes.draw do 
+  root :to => "pages#home"
+  get "pages/home"
+  resources :accounts, :only => [:new, :create]
 
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-  root :to => "pages#home/home"
 
   devise_scope :admin_user do
     get '/logout', :to => 'active_admin/devise/sessions#destroy', :as => "destroy_admin_user_session"

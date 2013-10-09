@@ -12,14 +12,16 @@ class AdminUser < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, 
-  :remember_me, :role, :admin_user_id, :full_name, :phone, :account_id
+  :remember_me, :role, :admin_user_id, :first, :last, :company, :phone, :account_id
 
   has_many :orders, :dependent => :destroy
   has_many :customers, :dependent => :destroy
   belongs_to :account
 
 
-  validates :full_name, :presence => true
+  validates :first, :presence => true
+  validates :last, :presence => true
+  validates :company, :presence => true
   validates :email, :presence => true
   validates :password, :presence => true
   validates :password_confirmation, :presence => true

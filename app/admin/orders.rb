@@ -18,7 +18,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   menu :label => "Orders"
 
   filter :name, label: "Order Name"
-  filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.all.map{|u| [u.full_name] } }
+  filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.all.map{|u| [u.last] } }
   filter :order_category, label: "Category"
   filter :order_type, label: "Type"
   filter :order_status, label: "Status"
