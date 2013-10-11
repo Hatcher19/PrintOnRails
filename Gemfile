@@ -10,7 +10,7 @@ gem "haml", "~> 4.0.2"
 gem 'cancan'
 #Images
 gem 'carrierwave'
-	#image background processing
+#image background processing
 gem 'carrierwave_direct'
 gem 'rmagick'
 gem 'fog'
@@ -29,6 +29,7 @@ gem 'taps'
 #auditing
 gem 'paper_trail'
 gem 'inherited_resources'
+gem 'formtastic'
 
 
 

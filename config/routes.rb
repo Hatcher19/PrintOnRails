@@ -1,7 +1,7 @@
 PrintOnRails::Application.routes.draw do 
   root :to => "pages#home"
   get "pages/home"
-  resources :accounts, :only => [:new, :create]
+  resources :accounts
 
   ActiveAdmin.routes(self)
 

@@ -212,6 +212,7 @@ DEPENDENCIES
   date_validator
   figaro
   fog
+  formtastic
   haml (~> 4.0.2)
   inherited_resources
   jquery-rails
