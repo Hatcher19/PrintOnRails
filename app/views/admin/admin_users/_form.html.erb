@@ -1,6 +1,7 @@
 <%=
 form.has_many :admin_users do |admin_user|  
-	admin_user.input :full_name 
+	admin_user.input :first
+	admin_user.input :last
 	admin_user.input :email 
 	admin_user.input :phone
 	admin_user.input :role, :collection => AdminUser::ROLES, :member_label => :humanize

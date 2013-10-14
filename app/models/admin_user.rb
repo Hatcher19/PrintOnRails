@@ -9,8 +9,6 @@ class AdminUser < ActiveRecord::Base
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable,
          :registerable
-
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, 
   :remember_me, :role, :admin_user_id, :first, :last, :company, :phone, :account_id
 
@@ -21,7 +19,6 @@ class AdminUser < ActiveRecord::Base
 
   validates :first, :presence => true
   validates :last, :presence => true
-  validates :company, :presence => true
   validates :email, :presence => true
   validates :password, :presence => true
   validates :password_confirmation, :presence => true
