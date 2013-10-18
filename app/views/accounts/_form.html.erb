@@ -2,9 +2,12 @@
 
   <div class="form-inline">
     <%= f.text_field :company, :placeholder => "Company Name", class: 'span3' %>
-	    <%= fields_for :admin_users do |builder| %>
-			  <%= render 'admin_users/form', :f => builder %>
-			<% end %>
+    <%= text_field_tag :first %>
+    <%= text_field_tag :last %>
+    <%= text_field_tag :email %>
+    <%= text_field_tag :role %>
+    <%= text_field_tag :password %>
+    <%= text_field_tag :password_confirmation %>
     <%= f.submit 'Submit', class: 'btn-submit btn-primary'%>
 
   </div>
