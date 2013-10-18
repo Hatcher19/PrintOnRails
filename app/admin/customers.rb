@@ -19,7 +19,7 @@ ActiveAdmin.register Customer do
 
 
   filter :name, label: "by Name"
-  filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.full_name, u.id] } }
+  filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.last, u.id] } }
   filter :company, label: "by Company"
   filter :email, label: "by Email"
   filter :phone, label: "by Phone Number"

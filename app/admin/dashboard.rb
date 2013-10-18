@@ -1,12 +1,11 @@
 ActiveAdmin::Dashboards.build do
-# app/admin/dashboard.rb
 	section "Orders to be Approved (Needs Work******)", :priority => 1 do
 		table_for OrderStatus.order do
 			column "ID" do |order|  link_to order.id end
 			column "Date Created" do |order| order.created_at.to_s :long end
 			column "Order Status" do |order_status| order_status.name end
-			end
 		end
+	end
 
 	section "Recently Edited Orders", :priority => 2 do
 	  table_for Version.order('id desc').limit(50) do # Use PaperTrail::Version if this throws an error

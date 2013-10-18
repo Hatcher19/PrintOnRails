@@ -1,13 +1,26 @@
-<div>
-  <%= f.email_field :email, :placeholder => " Email", class: 'span3', :autofocus => true %>
+<%= form_for(@account) do |f| %>
 
-  <%= f.text_field :first, :placeholder => "First Name", class: 'span3' %>
+  <div class="form-inline">
+    <%= f.text_field :company, :placeholder => "Company Name", class: 'span3' %>
+	    <%= fields_for :admin_users do |builder| %>
+				<div>
+				  <%= f.email_field :email, :placeholder => " Email", class: 'span3', :autofocus => true %>
 
-  <%= f.text_field :last, :placeholder => "Last Name", class: 'span3' %>
+				  <%= f.text_field :first, :placeholder => "First Name", class: 'span3' %>
 
-  <%= f.hidden_field :role, value: 'admin' %>
+				  <%= f.text_field :last, :placeholder => "Last Name", class: 'span3' %>
 
-  <%= f.password_field :password, :placeholder => "Password", class: 'span3' %>
+				  <%= f.hidden_field :role, value: 'admin' %>
 
-  <%= f.password_field :password_confirmation, :placeholder => "Password Confirmation", class: 'span3' %>
-</div>
+				  <%= f.password_field :password, :placeholder => "Password", class: 'span3' %>
+
+				  <%= f.password_field :password_confirmation, :placeholder => "Password Confirmation", class: 'span3' %>
+				</div>
+			<% end %>
+    <%= f.submit 'Submit', class: 'btn-submit btn-primary'%>
+
+  </div>
+  <div class="flash-notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
