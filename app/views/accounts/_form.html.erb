@@ -1,13 +1,29 @@
 <%= form_for(@account) do |f| %>
 
   <div class="form-inline">
-    <%= f.text_field :company, :placeholder => "Company Name", class: 'span3' %>
-	    <%= fields_for :admin_users do |builder| %>
-			  <%= render 'admin_users/form', :f => builder %>
-			<% end %>
+    <div>
+      <%= f.text_field :company, :placeholder => 'Company' %>
+    </div>
+    <div>
+      <%= text_field_tag :first, nil, :placeholder => 'First Name' %>
+    </div>
+    <div>
+      <%= text_field_tag :last, nil, :placeholder => 'Last Name' %>
+    </div>
+    <div>
+      <%= text_field_tag :email, nil, :placeholder => 'Email' %>
+    </div>
+    <div>
+      <%= text_field_tag :password, nil, :placeholder => 'Password' %>
+    </div>
+    <div>
+      <%= text_field_tag :password_confirmation, nil, :placeholder => 'Password Confirmation' %>
+    </div>
+    <%= hidden_field_tag :role, 'admin' %>
     <%= f.submit 'Submit', class: 'btn-submit btn-primary'%>
 
   </div>
+
   <div class="flash-notice">
     <%= flash[:notice] %>
   </div>
