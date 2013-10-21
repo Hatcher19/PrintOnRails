@@ -1,30 +1,31 @@
-<%= form_for(@account) do |f| %>
-
-  <div class="form-inline">
-    <div>
-      <%= f.text_field :company, :placeholder => 'Company' %>
-    </div>
-    <div>
-      <%= text_field_tag :first, nil, :placeholder => 'First Name' %>
-    </div>
-    <div>
-      <%= text_field_tag :last, nil, :placeholder => 'Last Name' %>
-    </div>
-    <div>
-      <%= text_field_tag :email, nil, :placeholder => 'Email' %>
-    </div>
-    <div>
-      <%= text_field_tag :password, nil, :placeholder => 'Password' %>
-    </div>
-    <div>
-      <%= text_field_tag :password_confirmation, nil, :placeholder => 'Password Confirmation' %>
-    </div>
-    <%= hidden_field_tag :role, 'admin' %>
-    <%= f.submit 'Submit', class: 'btn-submit btn-primary'%>
-
+<%= render 'layouts/nav' %>
+  <div class="span5">
+    <%= form_for(@account) do |f| %>
+      <div class="account-form">
+        <center><h1>Print on Rails<br>Sign Up</h1></center>
+        <center><h4>Free 30 day trial!</h4></center>
+        <div>
+          <center><%= f.text_field :company, :placeholder => 'Company' %></center>
+        </div>
+        <div>
+          <center><%= text_field_tag :first, nil, :placeholder => 'First Name' %></center>
+          <center><%= text_field_tag :last, nil, :placeholder => 'Last Name' %></center>
+        </div>
+        <div>
+          <center><%= text_field_tag :email, nil, :placeholder => 'Email' %></center>
+        </div>
+        <div>
+          <center><%= text_field_tag :password, nil, :placeholder => 'Password' %></center>
+        </div>
+        <div>
+          <center><%= text_field_tag :password_confirmation, nil, :placeholder => 'Password Confirmation' %></center>
+        </div>
+          <%= hidden_field_tag :role, 'account_admin' %>
+        <div>
+        </div>
+          <%= f.submit 'Create Account', :class => 'btn' %>
+      <div class="flash-notice">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="flash-notice">
-    <%= flash[:notice] %>
-  </div>
-<% end %>

@@ -5,9 +5,20 @@ class Ability
 
     return if user.nil? #non logged in user can use this.
 
+    if user.super_admin?
+      can :manage, :all
+    end
+
+    if user.account_admin?
+      can :manage, :all
+      cannot :destroy, [Customer, Order, AdminUser]
+    end
+
+
     if user.admin? 
       can :manage, :all
-      cannot :destroy, [Customer, Order, AdminUser, Account]
+      cannot :manage, Account
+      cannot :destroy, [Customer, Order, AdminUser]
     end
 
     if user.office?

@@ -33,6 +33,10 @@ class AdminUser < ActiveRecord::Base
     role? :super_admin
   end
 
+  def account_admin?
+    role? :account_admin
+  end
+
   def admin?
     role? :admin
   end

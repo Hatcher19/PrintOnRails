@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     begin
       redirect_to :back, :alert => exception.message
     rescue ActionController::RedirectBackError
-      redirect_to dashboard_path, :alert => exception.message
+      redirect_to admin_dashboard_path, :alert => exception.message
     end
   end
 #
