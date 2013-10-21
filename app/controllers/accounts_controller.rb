@@ -18,6 +18,6 @@ class AccountsController < InheritedResources::Base
 
     sign_in(user)
 
-    redirect_to admin_account_path(@account)
+    redirect_to admin_dashboard_path(@account)
   end
 end

@@ -11,7 +11,7 @@ class Ability
 
     if user.account_admin?
       can :manage, :all
-      cannot :destroy, [Customer, Order, AdminUser]
+      cannot :destroy, [Customer, Order, AdminUser, Account]
     end
 
 
