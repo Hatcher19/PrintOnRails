@@ -1,4 +1,5 @@
 ActiveAdmin.register Customer do
+  scope_to :account
   controller.authorize_resource :except => :index
 
 	# Menu item
@@ -10,6 +11,10 @@ ActiveAdmin.register Customer do
   scope_to :current_manager, :association_method => :customers
 
   controller do
+    def account
+      current_admin_user.account
+    end
+
     def current_manager
       unless can? :read, :all
         current_user
