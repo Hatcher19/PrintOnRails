@@ -1,6 +1,6 @@
 ActiveAdmin.register PrintLocation do
   controller.authorize_resource
-  menu :label => "Print Location", :parent => "Administration", :if => proc{ can?(:create, PrintLocation) }, :priority => 6
+  menu :label => "Print Location", :parent => "Settings", :if => proc{ can?(:create, PrintLocation) }, :priority => 6
   index do
   	column :name
   	default_actions
@@ -11,7 +11,6 @@ ActiveAdmin.register PrintLocation do
     panel "Print Location" do
       attributes_table_for resource do
       	row :name
-      	row :description
       end
     end
   end

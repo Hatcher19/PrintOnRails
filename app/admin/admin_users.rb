@@ -1,6 +1,7 @@
 ActiveAdmin.register AdminUser do
+  scope_to :account
   controller.authorize_resource
-  menu :label => "Users", :parent => "Administration", :if => proc{ can?(:create, AdminUser) }, :priority => 6
+  menu :label => "Users", :parent => "Settings", :if => proc{ can?(:create, AdminUser) }, :priority => 6
 
  	filter :first
   filter :last
@@ -8,14 +9,19 @@ ActiveAdmin.register AdminUser do
   filter :created_at 
   filter :role, as: :select, :collection => AdminUser::ROLES
 
+  controller do
+    def account
+      current_admin_user.account
+    end
+  end
+
 
   index do
-    selectable_column
+    column :first
     column :last
-    column :email, :sortable => :email do |admin_user|
-      link_to admin_user.email, "mailto:#{admin_user.email}"
-    end
-    column :role
+    column :phone
+    column :email, :sortable => :email do |admin_user| link_to admin_user.email, "mailto:#{admin_user.email}" end
+    column :role do |admin_user| admin_user.role.humanize end
     default_actions
   end
 

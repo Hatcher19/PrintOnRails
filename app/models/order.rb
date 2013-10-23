@@ -19,7 +19,6 @@ class Order < ActiveRecord::Base
   belongs_to :order_type
   belongs_to :order_status
   belongs_to :product_status
-  belongs_to :order_priority
   belongs_to :print_locations
   belongs_to :admin_user
   accepts_nested_attributes_for :line_items, :allow_destroy => true
@@ -33,7 +32,6 @@ class Order < ActiveRecord::Base
   validates :order_type, :presence => true 
   validates :order_status, :presence => true
   validates :product_status, :presence => true 
-  validates :order_priority, :presence => true
   validates :end_date, :presence => true
   validates :ship, :inclusion => {:in => [true, false]} 
 
