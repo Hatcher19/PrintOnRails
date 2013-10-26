@@ -1,6 +1,6 @@
 ActiveAdmin.register ProductStatus do
 	controller.authorize_resource
-  menu :label => "Product Status", :parent => "Settings", :if => proc{ can?(:create, ProductStatus) }, :priority => 6
+  menu :label => "Product Status", :parent => "Settings", :if => proc{ can?(:destroy, Account) }, :priority => 6
 
   index do
   	column :name

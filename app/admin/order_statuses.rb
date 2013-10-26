@@ -1,6 +1,6 @@
 ActiveAdmin.register OrderStatus do
   controller.authorize_resource
-  menu :label => "Order Status", :parent => "Settings", :if => proc{ can?(:create, OrderStatus) }, :priority => 4
+  menu :label => "Order Status", :parent => "Settings", :if => proc{ can?(:destroy, Account) }, :priority => 4
 
   index do
   	column :name

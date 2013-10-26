@@ -10,21 +10,21 @@ class Ability
     end
 
     if user.account_admin?
+      #can :manage, Order, :account_id => user.order.account.id #scopes to account 
       can :manage, :all
       cannot :destroy, [Customer, Order, AdminUser, Account]
     end
 
-
     if user.admin? 
       can :manage, :all
       cannot :manage, Account
-      cannot :destroy, [Customer, Order, AdminUser]
+      cannot :destroy, [Customer, Order, AdminUser, Account]
     end
 
     if user.office?
       can :manage, [Customer, Order]
       can :read, :all
-      cannot :create, [OrderCategory, OrderPriority, OrderStatus, OrderType, ProductStatus]
+      cannot :create, [OrderCategory, OrderPriority, OrderStatus, OrderType, ProductStatus, Account]
       cannot :destroy, :all
     end
 
@@ -36,10 +36,9 @@ class Ability
     end
 
     if user.broker?
-      can [:index, :create, :read, :update, :new, :edit], [Order, Customer], :admin_user_id => user.id
-      can :read, [OrderCategory, OrderType, OrderStatus, OrderPriority, PrintLocation, AdminUser, ProductStatus]
-      cannot :index, [AdminUser] #DO NOT DELETE! I use this to distinguish can? throughout app. 
-      cannot :read, AdminUser
+      can :manage, [Order, Customer] 
+      cannot :read, Account
+      cannot :create, Account
       cannot :destroy, :all
     end
   end
