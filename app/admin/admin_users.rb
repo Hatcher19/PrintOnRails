@@ -27,12 +27,32 @@ ActiveAdmin.register AdminUser do
 
   form :partial => "form"
 
-  sidebar :login_info, only: :show do
+  show do
+    panel "Order History" do
+      table_for(admin_user.orders) do
+        column("ID", :sortable => :id) {|order| link_to "##{order.id}", admin_order_path(order) }
+        column("Order Name", :sortable => :name) {|order| "#{order.name}" }
+        column("Due Date", :sortable => :end_date) {|order| "#{order.end_date}" }
+      end
+    end
+  end
+
+  sidebar :User_info, only: :show do
+    attributes_table_for resource do
+      row :first
+      row :last
+      row :email
+      row :phone
+      row :role do |admin_user| admin_user.role.humanize end
+    end
+  end
+
+  sidebar :login_stats, only: :show do
     attributes_table_for resource do
       row :sign_in_count
       row :current_sign_in_ip
       row :last_sign_in_ip
-      row :created_at
+      row :created_at 
       row :updated_at 
     end   
   end
