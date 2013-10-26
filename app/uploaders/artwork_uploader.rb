@@ -23,6 +23,6 @@ class ArtworkUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(jpg jpeg gif png ai eps psd)
+    %w(jpg jpeg gif png ai eps psd pdf)
   end
 end
