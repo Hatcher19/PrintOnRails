@@ -1,47 +1,29 @@
 source 'https://rubygems.org'
-
 gem 'rails', '3.2.13'
 gem 'jquery-rails'
-# Active admin
-gem 'activeadmin', :git => 'git://github.com/macfanatic/active_admin.git', branch: 'stable_batch_actions'
+gem 'activeadmin', :git => 'git://github.com/macfanatic/active_admin.git', branch: 'stable_batch_actions' # Active admin
 gem 'meta_search', '>= 1.1.0.pre'
 gem "haml", "~> 4.0.2"
-#authorization
-gem 'cancan'
-#Images
-gem 'carrierwave'
-#image background processing
-gem 'carrierwave_direct'
-gem 'rmagick'
-gem 'fog'
-#for secret information to not show up in my git
-gem 'figaro'
-
+gem 'cancan' #authorization
+gem 'carrierwave' #Images
+gem 'carrierwave_direct' #image background processing
+gem 'rmagick' #images
+gem 'fog' #images
+gem 'figaro' #for secret information to not show up in my git
 gem 'settingslogic'
-
-# Validation helpers
-gem 'date_validator'
-gem 'validates_email_format_of'
-
-#pushes db from local to production
-gem 'taps'
-
-#auditing
-gem 'paper_trail'
-gem 'inherited_resources'
+gem 'date_validator' # Validation helpers
+gem 'validates_email_format_of' # Validation helpers
+gem 'taps' #pushes db from local to production
+gem 'paper_trail' #auditing
+gem 'inherited_resources' 
 gem 'formtastic'
-
-
-
-
+gem "best_in_place" #in place editing, esp. for order index
 group :production do
 	gem 'pg'
 end
-
 group :development, :test do
 	gem 'sqlite3'
 end
-
 group :assets do
 	gem 'sass-rails',   '~> 3.2.3'
 	gem 'coffee-rails', '~> 3.2.1'

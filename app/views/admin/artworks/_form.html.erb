@@ -1,7 +1,7 @@
 <%=
 form.has_many :artworks do |artwork|  
   artwork.input :file, :hint => artwork.template.image_tag(artwork.object.file.url)
-  artwork.input :location, :collection => Artwork::LOCATIONS
+  artwork.input :location, :collection => PrintLocation.all
   artwork.input :color
   artwork.input :_destroy, :as=>:boolean, :required => false, :label=>'Remove'
 end 
