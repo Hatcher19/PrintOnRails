@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery
+  require 'active_admin_views_pages_base.rb' # Override build_footer method in ActiveAdmin::Views::Pages
 
 	def current_user
     current_admin_user
@@ -23,6 +25,4 @@ class ApplicationController < ActionController::Base
   def user_for_paper_trail #auditing
     admin_user_signed_in? ? current_admin_user : 'Unknown user'
   end
- 
-	protect_from_forgery
 end
