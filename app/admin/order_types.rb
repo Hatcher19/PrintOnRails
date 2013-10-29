@@ -2,8 +2,8 @@ ActiveAdmin.register OrderType do
 controller.authorize_resource
 menu :label => "Order Type", :parent => "Settings", :if => proc{ can?(:destroy, Account) }, :priority => 5
   index do
+    column :id
     column :name
-    default_actions
   end
 
   show :title => :name do
