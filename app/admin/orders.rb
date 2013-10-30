@@ -1,19 +1,22 @@
 ActiveAdmin.register Order, :sort_order => "end_date_asc" do
+  scope_to :current_manager, :association_method => :orders
   controller.authorize_resource :except => :index
-
-  scope(:all, default: true) { |orders| orders }
+  
+  scope(:active, default: true)
+  scope :new, :if => proc {can? :create, :admin_user} do |orders| orders.where(:order_status_id => 1 ) end
   scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
   scope(:due_today) { |orders| orders.where(:end_date => Date.today ) }
   scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
-  scope_to :current_manager, :association_method => :orders
+  scope :complete do |orders| orders.where(:order_status_id => 6 ) end
 
-    controller do
-      def current_manager
-        unless can? :read, :all
-          current_user
-        end
+  controller do
+    def current_manager
+      unless can? :read, :all
+        current_user
       end
     end
+  end
+
 
   menu :label => "Orders"
 
@@ -33,65 +36,32 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   
 
   index do 
-      column "ID", :sortable => :id do |order|
-        link_to order.id, admin_order_path(order)
-      end
-      column "Name", :sortable => :name do |order|
-        order.name
-      end
-      column("Category", :order_category, :sortable => :order_category_id) 
-      column("Status", :order_status, :sortable => :order_status_id)
-      column("Product Status", :product_status, :sortable => :product_status_id)
-      #column("Priority", :order_priority, :sortable => :order_priority_id)
-      #column "Ship" do |order| 
-      #    image_tag 'ship.png' if order.ship 
-      #end
-      column("Due", :end_date, :format => :short, :sortable => :end_date)
-      column 'Edit' do |order|
-        link_to(image_tag('edit.png'), edit_admin_order_path(order))
-      end
+    column "ID", :sortable => :id do |order| link_to order.id, admin_order_path(order) end
+    column "Name", :sortable => :name do |order| order.name end
+    column("Category", :order_category, :sortable => :order_category_id)
+    column :status, :sortable => :order_status_id do |resource|
+      best_in_place resource, :order_status_id, :type => :select, :collection => 
+      [[1, "New"], [2, "Approved"], [3, "Art"], [4, "Setup"], [5, "Printing"], 
+      [6, "Complete"], [7, "Hold"], [8, "Cancelled"]] , path: [:admin, resource]
+    end
+    column :product, :sortable => :product_status_id do |resource|
+      best_in_place resource, :product_status_id, :type => :select, :collection => 
+      [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
+    end
+    column("Due", :end_date, :format => :short, :sortable => :end_date)
+    column 'Edit' do |order|
+      link_to(image_tag('edit.png'), edit_admin_order_path(order))
+    end
   end
   
   form :partial => "form"
 
   show :title => :id do
-    panel order.name do
-      div :class => "attributes_table" do
-        table :for => resource do |t|
-          tr do
-            th { 'Customer' }
-            td { link_to resource.customer.name, admin_customer_path(resource.customer) }
-            th { 'Category' }
-            td {  resource.order_category.name }
-          end
-          tr do
-            th { 'User' }
-            td { link_to resource.admin_user.email, admin_admin_user_path(resource.admin_user) }
-            th { 'Status' }
-            td { resource.order_status.name }
-          end
-          tr do
-            th { 'Start Date' }
-            td { link_to order.created_at.to_s :long }
-            th { 'Type' }
-            td { resource.order_type.name }
-          end
-          tr do
-            th { 'Due Date' }
-            td { link_to order.end_date.to_s :long }
-            th { 'Product Status'}
-            td { resource.product_status.name }
-            #th { 'Priority'}
-            #td { link_to resource.order_priority.name, admin_order_priority_path(resource.order_priority) }
-          end
-        end
-      end
-    end
-
+    
     panel "Shipping Details" do
-        attributes_table_for resource do
-          row :ship
-        end
+      attributes_table_for resource do
+        row :ship
+      end
     end
 
     resource.artworks.each do |a|

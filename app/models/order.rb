@@ -21,19 +21,10 @@ class Order < ActiveRecord::Base
   belongs_to :product_status
   belongs_to :print_locations
   belongs_to :admin_user
+  belongs_to :account
   accepts_nested_attributes_for :line_items, :allow_destroy => true
   accepts_nested_attributes_for :artworks, :allow_destroy => true
-
-  
-
-  validates :name, :presence => true 
-  validates :order_category, :presence => true 
-  validates :customer, :presence => true   
-  validates :order_type, :presence => true 
-  validates :order_status, :presence => true
-  validates :product_status, :presence => true 
-  validates :end_date, :presence => true
-  validates :ship, :inclusion => {:in => [true, false]} 
+  scope :active, includes(:order_status).where("order_statuses.active = ?", true)
 
   def default_values
     if new_record?
