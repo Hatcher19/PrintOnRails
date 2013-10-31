@@ -1,15 +1,11 @@
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="#">Print on Rails</a>
-      <ul class="nav">
-        <li class="active white"><a href="#">Features</a></li>
-        <li><a href="#">Features</a></li>
-        <li>
-            <%= link_to 'Sign Up', new_account_path, :class => 'btn btn-small btn-primary' %>
-        </li>
-      </ul>
-      <ul class="pull-right nav">
-        <li><a href="#">Login</a></li>
-      </ul>
+    <div class="brand">
+      <%= link_to 'Print on Rails', root_path %>
+    </div>
+    <%= link_to 'Free Trial', new_account_path, :class => 'btn btn-min btn-warning' %>
+    <div class="pull-right">
+    	<h4><%= mail_to "Info@PrintOnRails.com", 'Email Us' %></h4>
+  	</div>
   </div>
 </div>

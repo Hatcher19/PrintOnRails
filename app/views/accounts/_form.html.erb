@@ -1,11 +1,12 @@
 <%= render 'layouts/nav' %>
+<div class="span4">
+  </div>
   <div class="span5">
     <%= form_for(@account) do |f| %>
       <div class="account-form">
-        <center><h1>Print on Rails<br>Sign Up</h1></center>
-        <center><h4>Free 30 day trial!</h4></center>
+        <center><h1>Free 30 day trial!</h1></center>
         <div>
-          <center><%= f.text_field :company, :placeholder => 'Company' %></center>
+          <center><%= f.text_field :company, :placeholder => 'Company Name' %></center>
         </div>
         <div>
           <center><%= text_field_tag :first, nil, :placeholder => 'First Name' %></center>
@@ -23,9 +24,12 @@
           <%= hidden_field_tag :role, 'account_admin' %>
         <div>
         </div>
-          <%= f.submit 'Create Account', :class => 'btn' %>
+          <center><%= f.submit 'Sign Up', :class => 'btn' %></center>
       <div class="flash-notice">
         <%= flash[:notice] %>
       </div>
     <% end %>
   </div>
+  <br>
+  <br>
+  <%= render 'layouts/footer' %>

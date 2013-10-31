@@ -35,68 +35,8 @@ $navbarBackgroundHighlight: #ffffff;
 }
 .btn.a, a:link, a:visited {
   color: #ffffff;
-  text-decoration: underline;
 }
-.one {
-  font-family: 'Oxygen', sans-serif;
-  font-weight: 700;
-}
-h1 {
-  font-size: 38.5px;
-  margin-top: 7%;
-}
-
-.center {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin-left: 20px;
-}
-.two {
-  background-color: orange;
-  padding-bottom: 40px;
-  padding-right: 0px;
-  padding-top: 40px;
-  padding-right: 0px;
-  position: auto;
-}
-div.icon-screenshot {
-    font-size: 40px;
-    padding-bottom: 10px;
-  }
-
-  div.icon-cloud {
-    font-size: 40px;
-    padding-bottom: 10px;
-  }
-
-  div.icon-envelope-alt {
-    font-size: 40px;
-    padding-bottom: 10px;
-  }
-
-  div.icon-wrench {
-    font-size: 40px;
-    padding-bottom: 10px;
-    }
-.sold {
-  text-align: left;
-}
-div.icon-twitter-sign {
-    font-size: 30px;
-    text-align: left;
-  }
-  p.lead {
-    line-height: 135%;
-  }
-
-
-
 @import 'bootstrap-responsive';
-input, textarea {
-  color: #666 !important;
-  font-size: 16px !important;
-}
-
 a:link {
   text-decoration: none;
 }
