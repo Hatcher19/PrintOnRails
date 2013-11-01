@@ -1,0 +1,46 @@
+<%= render 'layouts/nav' %>
+	<div class="container">
+		<table class="table table-striped">
+			<caption><span class="green">C = Create</span><br><span class="blue2">R = Read</span><br> <span class="red">E = Edit</span></caption>
+			<thead>
+		    <tr>
+		      <th>Role</th>
+		      <th>Orders</th>
+		      <th>Customers</th>
+		      <th>Users</th>
+		      <th>Notes</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>Admin </td>
+		      <td><span class="green">&nbspC&nbsp</span><span class="blue2">&nbspR&nbsp</span><span class="red">&nbspE&nbsp</span></td>
+		      <td><span class="green">&nbspC&nbsp</span><span class="blue2">&nbspR&nbsp</span><span class="red">&nbspE&nbsp</span></td>
+		      <td><span class="green">&nbspC&nbsp</span><span class="blue2">&nbspR&nbsp</span><span class="red">&nbspE&nbsp</span></td>
+		      <td>Admin role has complete access to information created<br> within their account. </td>
+		    </tr>
+		    <tr>
+		      <td>Office </td>
+		      <td><span class="green">&nbspC&nbsp</span><span class="blue2">&nbspR&nbsp</span><span class="red">&nbspE&nbsp</span></td>
+		      <td><span class="green">&nbspC&nbsp</span><span class="blue2">&nbspR&nbsp</span><span class="red">&nbspE&nbsp</span></td>
+		      <td><span class="blue2">&nbspR&nbsp</span></td>
+		      <td>Office role cannot create or edit, otherwise the role has<br> inherits permissions from Admin.</td>
+		    </tr>
+		    <tr>
+		      <td>Shop </td>
+		      <td><span class="blue2">&nbspR&nbsp</span><span class="red">&nbspE&nbsp</span></td>
+		      <td><span class="blue2">&nbspR&nbsp</span></td>
+		      <td><span class="blue2">&nbspR&nbsp</span></td>
+		      <td>This role was designed to read all the orders<br> information and moving it down the assembly line.</td>
+		    </tr>
+		    <tr>
+		      <td>Broker*</td>
+		      <td><span class="green">&nbspC*&nbsp</span><span class="blue2">&nbspR*&nbsp</span><span class="red">&nbspE*&nbsp</span></td>
+		      <td><span class="green">&nbspC*&nbsp</span><span class="blue2">&nbspR*&nbsp</span><span class="red">&nbspE*&nbsp</span></td>
+		      <td><span class="blue2">&nbspR&nbsp</span></td>
+		      <td>*This user is an outside salesperson AKA "broker".<br> Brokers can only ever see their information. Other users<br> information, orders & customers, are none of their<br> business, literally.  </td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+<%= render 'layouts/footer' %>
