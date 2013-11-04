@@ -1,20 +1,28 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+@import url(http://fonts.googleapis.com/css?family=Oxygen:300,400,700);
 .navbar.footer {
 	margin-top: 56px;
 	background-color: #fff;
 	color: #ff8000;
 }
-.one {
-	margin-top: 10%;
+.row-fluid {
+	margin-top: 1%;
+	font-family: 'Oxygen', sans-serif;
 }
-a.mail {
-	color: #0000ff;
+.one {
+	margin-top: 2%;
+	margin-top: 3%;
 }
 .two {
 	margin-top: 2%;
+	background-color: #ff8000;
+	height: 75px;
+	font-family: 'Oxygen', sans-serif;
+}
+.three {
+	margin-bottom: 50%;
 }
 .blue {
 	color: #0000ff;
@@ -41,4 +49,37 @@ a.mail {
 thead th {
 background: #444;
 color: #fff;
+}
+.img-circle {
+	border: 3px dashed orange;
+	background-color: #666;
+}
+a.btn.btn-primary.btn-large {
+	margin: 5px;
+}
+.video {
+	margin-top: 2%;
+	margin-bottom: 3%;
+}
+.business-name {
+	color: #ff8000;
+	font-size: 18px;
+}
+.affix {
+	margin: 40px 0px 0px 0px;
+}
+.sidepanel {
+	background-color: #ddd;
+	padding: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.pull-right {
+	margin-right: 20px;
+}
+.nav-logo {
+	margin-left: 20px;
+	font-size: 30px;
+	font-weight: bold;
 }

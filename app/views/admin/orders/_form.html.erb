@@ -2,7 +2,6 @@
 	semantic_form_for [:admin, resource], :builder => ActiveAdmin::FormBuilder do |f| 
 		f.inputs "Order Information" do
 			if f.object.new_record?
-				f.input :account_id, :as => :hidden, :value => current_admin_user.account.id
 				f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 				f.input :order_status_id, :as => :hidden, :value => 1
 				f.input :name, label: "Order Name"

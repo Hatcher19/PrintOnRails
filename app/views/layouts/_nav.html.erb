@@ -1,11 +1,10 @@
 <div class="navbar navbar-fixed-top">
-  <div class="container">
-    <div class="brand">
-      <%= link_to 'Print on Rails', root_path %>
+	<div class="row-fluid">
+    <div class="pull-left">
+      <%= link_to 'Print on Rails', root_path, :class => "nav-logo" %>
     </div>
-    <%= link_to 'Free Trial', new_account_path, :class => 'btn btn-min btn-warning' %>
     <div class="pull-right">
-    	<h4><%= mail_to "Info@PrintOnRails.com", 'Email Us' %></h4>
-  	</div>
+    	<%= link_to 'Login', admin_dashboard_path %>
+    </div>
   </div>
 </div>

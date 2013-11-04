@@ -1,21 +1,61 @@
 <%= render 'layouts/nav' %>
-<div class="row one">
-  <div class="span1">
-  </div>
-  <div class="span3">
-    <div class="container">
-      <center><h1>Screen Print &amp; Embroidery<br> Order Management Software</h1></center>
-      <center><h3>Our mission is to eliminate the redundancies in your shop.</h3></center>
+<div class="span3">
+  <div data-spy="affix">
+    <div class="sidepanel">
+      <%= mail_to "info@printonrails.com", raw(image_tag("email.png"))%>
+      <%= link_to 'http://www.facebook.com' do %><%= image_tag('fb.png') %><% end %>
+      <%= link_to 'http://www.twitter.com' do %><%= image_tag('twitter.png') %><% end %>
+      <%= link_to '#' do %><%= image_tag('g+.png') %><% end %>
+      <%= link_to 'Sign Up for Beta', new_account_path, :class => 'btn btn-primary' %>
     </div>
   </div>
 </div>
-<div class="row two">
-  <div class="span6">
-  </div>
-  <div class="span1">
-    <div class="container">
-      <%= link_to 'Free Trial', new_account_path, :class => 'btn btn-large btn-primary' %>
+<div class="row-fluid">
+  <div class="one">
+    <div class="span3">
+    </div>
+      <div class="span9">
+        <div class="pull-right">
+          <span class="badge badge-info"><%= "#{@admin_users.count} users"%></span> have completed <span class="badge badge-success"><%= "#{@orders.count} orders" %></span> successfully with <span class="business-name">Print on Rails!</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<div class="row-fluid">
+    <div class="span12">
+      <center>
+        <h1>Shop Management Software</h1>
+        <h4>For screen Printing &amp; Embroidery companies of all sizes</h4>
+        <iframe width="400" height="225" src="//www.youtube.com/embed/9NmwciI4Gcc" frameborder="0" allowfullscreen class="video"></iframe>
+      </center>
+    </div>
+</div>
+<!--
+<div class="row-fluid">
+  <div class="two"
+    <div class="span12">
+      <center>
+        <h2>Pricing</h2>
+      </center>
+    </div>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="three">
+      <div class="span3">
+        <center><%= image_tag 'feature.png', :class => "img-circle" %>
+        <h3>Features</h3></center>
+      </div>
+      <div class="span3">
+        <center><%= image_tag 'fingerprint.png', :class => "img-circle" %>
+        <h3>Security</h3></center>
+      </div>
+      <div class="span3">
+        <center><%= image_tag 'role.png', :class => "img-circle" %>
+        <h3>Role Based</h3></center>
+      </div>
+  </div>
+</div>
+-->
 <%= render 'layouts/footer' %>
