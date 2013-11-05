@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131104234903) do
+ActiveRecord::Schema.define(:version => 20131105002709) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -204,7 +204,6 @@ ActiveRecord::Schema.define(:version => 20131104234903) do
     t.integer  "order_category_id"
     t.integer  "order_type_id"
     t.integer  "order_status_id"
-    t.integer  "print_location_id"
     t.integer  "admin_user_id"
     t.boolean  "ship"
     t.integer  "product_status_id"
@@ -215,7 +214,6 @@ ActiveRecord::Schema.define(:version => 20131104234903) do
   add_index "orders", ["admin_user_id"], :name => "index_orders_on_admin_user_id"
   add_index "orders", ["customer_id"], :name => "index_orders_on_customer_id"
   add_index "orders", ["order_category_id"], :name => "index_orders_on_order_category_id"
-  add_index "orders", ["print_location_id"], :name => "index_orders_on_print_location_id"
   add_index "orders", ["product_status_id"], :name => "index_orders_on_product_status_id"
 
   create_table "print_locations", :force => true do |t|

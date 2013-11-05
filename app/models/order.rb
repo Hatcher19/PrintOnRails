@@ -8,7 +8,7 @@ class Order < ActiveRecord::Base
   end
 
   attr_accessible :end_date, :name, :customer_id, :order_category_id, 
-  :order_type_id, :order_status_id, :order_priority_id, :print_location_id, 
+  :order_type_id, :order_status_id, :order_priority_id, 
   :line_items_attributes, :admin_user_id, :ship, :artworks_attributes, 
   :product_status_id, :account_id
 
@@ -19,7 +19,6 @@ class Order < ActiveRecord::Base
   belongs_to :order_type
   belongs_to :order_status
   belongs_to :product_status
-  belongs_to :print_locations
   belongs_to :admin_user
   belongs_to :account
   accepts_nested_attributes_for :line_items, :allow_destroy => true
