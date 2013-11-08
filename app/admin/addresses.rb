@@ -1,5 +1,5 @@
 ActiveAdmin.register Address do
-  belongs_to :customer, finder: :find_by_url!
+  belongs_to :customer
   actions :index, :new, :create, :show
 
   show :title => :name do

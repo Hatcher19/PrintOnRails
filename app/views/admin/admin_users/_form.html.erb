@@ -1,6 +1,7 @@
 <%=
 active_admin_form_for [:admin, @admin_user], html: { multipart: true } do |f|
 	f.inputs "User Information" do
+		f.input :account_id, :as => :hidden, :value => current_admin_user.account
 		f.input :first
 		f.input :last 
 		f.input :email 

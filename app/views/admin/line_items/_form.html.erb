@@ -1,6 +1,5 @@
 <%=
 form.has_many :line_items, :wrapper_html=> { :class => 'panel' } do |line_item|  
-  line_item.input :quantity, :wrapper_html => { :class => 'field-row' }
   line_item.input :style, :wrapper_html => { :class => 'field-row' }
   line_item.input :color, :wrapper_html => { :class => 'field-row' }
   line_item.input :yxs, label: "YXS", :wrapper_html => { :class => 'field-row' }

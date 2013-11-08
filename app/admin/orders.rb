@@ -1,43 +1,41 @@
 ActiveAdmin.register Order, :sort_order => "end_date_asc" do
-  scope_to :current_manager, :association_method => :orders
-  controller.authorize_resource :except => :index
+  controller.authorize_resource
+  scope_to :user_account
+  menu :label => "Orders"
   
   scope(:active, default: true)
-  scope :new, :if => proc {can? :create, :admin_user} do |orders| orders.where(:order_status_id => 1 ) end
+  scope :new do |orders| orders.where(:order_status_id => 1 ) end
   scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
   scope(:due_today) { |orders| orders.where(:end_date => Date.today ) }
   scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
   scope :complete do |orders| orders.where(:order_status_id => 6 ) end
 
   controller do
-    def current_manager
-      unless can? :read, :all
+    def user_account
+      if current_user.role == "broker"
         current_user
+      else
+        current_user.account
       end
     end
   end
 
-
-  menu :label => "Orders"
-
+  # needs work
+  # filter :account, :collection => proc { Account.all.map{|u| [u.company]}}, :if => proc { can? :destroy, Order }
   filter :name, label: "Order Name"
+  filter :id, label: "Order ID#"
   filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.all.map{|u| [u.last] } }
   filter :order_category, label: "Category"
   filter :order_type, label: "Type"
   filter :order_status, label: "Status"
   filter :product_status, label: "Product Status"
-  filter :order_priority, label: "Priority"
   filter :customer, label: "Customer"
-  filter :ship, as: :select, label: "Is Order Shipping?"
   filter :start_date, label: "Start Date"
   filter :end_date, label: "Due Date"
-  filter :id, label: "Order ID#"
-
-  
 
   index do 
     column "ID", :sortable => :id do |order| link_to order.id, admin_order_path(order) end
-    column "Name", :sortable => :name do |order| order.name end
+    column "Name", :sortable => :name do |order| link_to order.name, admin_order_path(order) end
     column("Category", :order_category, :sortable => :order_category_id)
     column :status, :sortable => :order_status_id do |resource|
       best_in_place resource, :order_status_id, :type => :select, :collection => 
@@ -49,14 +47,21 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
       [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
     end
     column("Due", :end_date, :format => :short, :sortable => :end_date)
-    column 'Edit' do |order|
-      link_to(image_tag('edit.png'), edit_admin_order_path(order))
-    end
+    column 'Edit' do |order| link_to(image_tag('edit.png'), edit_admin_order_path(order)) end
   end
   
   form :partial => "form"
 
   show :title => :id do
+    panel 'Order Information' do
+      attributes_table_for order do
+        row :name
+        row :end_date
+        row :order_category_id
+        row :order_type_id
+        row :admin_user
+      end
+    end
     
     panel "Shipping Details" do
       attributes_table_for resource do
@@ -77,4 +82,17 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     
 	  active_admin_comments
 	end
+  sidebar :status, only: :show do
+    attributes_table_for resource do
+      row :order_status_id
+      row :product_status
+    end
+  end
+  sidebar :customer_information, only: :show do
+    attributes_table_for resource do
+      if order.ship 
+        row :customer_id 
+      end
+    end
+  end
 end

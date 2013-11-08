@@ -1,23 +1,16 @@
-ActiveAdmin.register Customer do
-  scope_to :account
-  controller.authorize_resource :except => :index
-
-	# Menu item
+ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
+  controller.authorize_resource
+  scope_to :user_account
   menu :label => "Customers", :if => proc{ can?(:create, Customer) }
-
-  scope(:all, :if => proc{ can?(:manage, :all) } ) { |customers| customers }
+  scope(:all) { |customers| customers }
   scope(:mine, default: true) { |customers| customers.where(:admin_user_id => current_admin_user.id ) }
 
-  scope_to :current_manager, :association_method => :customers
-
   controller do
-    def account
-      current_admin_user.account
-    end
-
-    def current_manager
-      unless can? :read, :all
+    def user_account
+      if current_user.role == "broker"
         current_user
+      else
+        current_user.account
       end
     end
   end
@@ -59,12 +52,9 @@ ActiveAdmin.register Customer do
     panel "Order History" do
       table_for(customer.orders) do
         column("ID", :sortable => :id) {|order| link_to "##{order.id}", admin_order_path(order) }
-        column("Order Name", :sortable => :name) {|order| "#{order.name}" }
+        column("Order Name", :sortable => :name) {|order| link_to "#{order.name}", admin_order_path(order) }
         column("Due Date", :sortable => :end_date) {|order| "#{order.end_date}" }
       end
-    end
-    resource.addresses.each do |a|
-     text_node(render :partial => "admin/addresses/show", :locals => { :address => a })
     end
     active_admin_comments
   end
@@ -76,6 +66,11 @@ ActiveAdmin.register Customer do
       row :phone
       row :admin_user
       row :created_at
+    end
+  end
+  sidebar "Addresses", :only => :show do
+    resource.addresses.each do |a|
+     text_node(render :partial => "admin/addresses/show", :locals => { :address => a })
     end
   end
 end
