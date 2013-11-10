@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/bernat/best_in_place.git
+  revision: df178520bf9ba405baee9528d5dbb630d6ff760c
+  specs:
+    best_in_place (2.1.0)
+      jquery-rails
+      rails (>= 3.1)
+
+GIT
   remote: git://github.com/macfanatic/active_admin.git
   revision: fa7e4de2d5fa4ea4aaf3c60aa3a497cd31b08d9d
   branch: stable_batch_actions
@@ -47,9 +55,6 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    best_in_place (2.1.0)
-      jquery-rails
-      rails (~> 3.1)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
     bourbon (3.1.6)
@@ -208,7 +213,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   bcrypt-ruby (~> 3.0.0)
-  best_in_place
+  best_in_place!
   bootstrap-sass (~> 2.2.2.0)
   cancan
   carrierwave

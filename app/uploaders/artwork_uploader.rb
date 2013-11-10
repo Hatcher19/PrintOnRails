@@ -19,8 +19,9 @@ class ArtworkUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :artwork do
-    process :resize_to_limit => [100, 100]
+    process :resize_to_limit => [300, 300]
   end
+
 
   def extension_white_list
     %w(jpg jpeg gif png ai eps psd pdf)

@@ -18,7 +18,7 @@ gem 'taps' #pushes db from local to production
 gem 'paper_trail' #auditing
 gem 'inherited_resources' 
 gem 'formtastic'
-gem "best_in_place" #in place editing, esp. for order index
+gem 'best_in_place', github: 'bernat/best_in_place'  #in place editing, esp. for order index
 group :production do
 	gem 'pg'
 end
