@@ -19,9 +19,9 @@ ActiveAdmin.register AdminUser do
   index do
     column :first
     column :last
-    column :phone
+    column :phone_number
     column :email, :sortable => :email do |admin_user| link_to admin_user.email, "mailto:#{admin_user.email}" end
-    column :role do |admin_user| admin_user.role.humanize end
+    column :role do |admin_user| admin_user.role end
     default_actions
   end
 
@@ -42,7 +42,7 @@ ActiveAdmin.register AdminUser do
       row :first
       row :last
       row :email
-      row :phone
+      row :phone_number
       row :role do |admin_user| admin_user.role.humanize end
     end
   end

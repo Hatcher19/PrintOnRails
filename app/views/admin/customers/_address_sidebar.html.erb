@@ -1,0 +1,5 @@
+<%=
+    resource.addresses.each do |a|
+     text_node(render :partial => "admin/addresses/show", :locals => { :address => a })
+    end
+%>

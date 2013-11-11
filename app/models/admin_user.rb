@@ -10,7 +10,7 @@ class AdminUser < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :registerable
   attr_accessible :email, :password, :password_confirmation, 
-  :remember_me, :role, :admin_user_id, :first, :last, :company, :phone, :account_id
+  :remember_me, :role, :admin_user_id, :first, :last, :company, :phone_number, :account_id
 
   has_many :orders, :dependent => :destroy
   has_many :customers, :dependent => :destroy
@@ -20,6 +20,7 @@ class AdminUser < ActiveRecord::Base
   validates :first, :presence => true
   validates :last, :presence => true
   validates :email, :presence => true
+  validates :phone_number, length: {is: 10}, allow_blank: true
   validates :password, :presence => true
   validates :password_confirmation, :presence => true
   validates :email, email_format: { message: "Doesn't look like an email address" }
