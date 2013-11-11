@@ -8,6 +8,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
   scope(:due_today) { |orders| orders.where(:end_date => Date.today ) }
   scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
+  scope :inactive
   scope :complete do |orders| orders.where(:order_status_id => 6 ) end
 
   controller do
@@ -56,43 +57,37 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     panel 'Order Information' do
       attributes_table_for order do
         row :name
-        row :end_date
         row :order_category_id
         row :order_type_id
         row :admin_user
       end
     end
-    
-    panel "Shipping Details" do
-      attributes_table_for resource do
-        row :ship
-      end
-    end
-
+    resource.line_items.each do |a|
+      text_node(render :partial => "admin/line_items/show", :locals => { :line_item => a })
+    end 
     resource.artworks.each do |a|
         text_node(render :partial => "admin/artworks/show", :locals => { :artwork => a })
     end
-
-  	resource.line_items.each do |a|
-	   	text_node(render :partial => "admin/line_items/show", :locals => { :line_item => a })
-    end 
-    #panel "History" do
-    #  render :partial => "admin/orders/history"
-    #end
-    
 	  active_admin_comments
 	end
-  sidebar :status, only: :show do
+  sidebar :status, only: [:show, :edit] do
     attributes_table_for resource do
-      row :order_status_id
-      row :product_status
-    end
-  end
-  sidebar :customer_information, only: :show do
-    attributes_table_for resource do
-      if order.ship 
-        row :customer_id 
+      row :status do |resource|
+        best_in_place resource, :order_status_id, :type => :select, :collection => 
+        [[1, "New"], [2, "Approved"], [3, "Art"], [4, "Setup"], [5, "Printing"], 
+        [6, "Complete"], [7, "Hold"], [8, "Cancelled"]] , path: [:admin, resource]
       end
+      row :product_status do |order|
+      best_in_place order, :product_status_id, :type => :select, :collection => 
+      [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
+    end
     end
   end
+  # sidebar :customer_information, only: :show do
+  #   attributes_table_for resource do
+  #     if order.ship 
+  #       row :customer_id 
+  #     end
+  #   end
+  # end
 end
