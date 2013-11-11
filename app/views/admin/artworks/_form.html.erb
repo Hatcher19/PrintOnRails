@@ -1,8 +1,8 @@
 <%=
 form.has_many :artworks do |artwork|  
-  artwork.input :file, :hint => artwork.template.image_tag(artwork.object.file.url, :height => '100')
-  artwork.input :location, :collection => PrintLocation.all
-  artwork.input :color
-  artwork.input :_destroy, :as=>:boolean, :required => false, :label=>'Remove'
+  artwork.input :file, :hint => artwork.template.image_tag(artwork.object.file.url, :height => '100'), :wrapper_html => { :class => 'field-row' }
+  artwork.input :location, :collection => PrintLocation.all, :wrapper_html => { :class => 'field-row' }
+  artwork.input :color, :wrapper_html => { :class => 'field-row' }
+  artwork.input :_destroy, :as=>:boolean, :required => false, :label=>'Remove', :wrapper_html => { :class => 'field-row' }
 end 
 %>

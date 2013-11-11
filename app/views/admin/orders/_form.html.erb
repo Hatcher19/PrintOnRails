@@ -1,36 +1,24 @@
 <%=
 	semantic_form_for [:admin, resource], :builder => ActiveAdmin::FormBuilder do |f| 
 		f.inputs "Order Information" do
+			f.input :order_status_id, :as => :hidden, :value => 1
+			f.input :name, label: "Order Name"
+			f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :hint => (link_to "New Customer", new_admin_customer_path)
+			f.input :ship, as: :radio
+			f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select
+			f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select
+			f.input :end_date, label: "Due date", as: :datepicker
+			f.input :product_status_id, as: :select, :collection => ProductStatus.all, label: "Product Status"
+			f.inputs "Line Items" do 
+				render :partial => "admin/line_items/form", :locals => { :form => f }
+			end
+
+			f.inputs "Artwork Upload" do 
+				render :partial => "admin/artworks/form", :locals => { :form => f }
+			end
 			if f.object.new_record?
 				f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 				f.input :account_id, :as => :hidden, :value => current_admin_user.account
-				f.input :order_status_id, :as => :hidden, :value => 1
-				f.input :name, label: "Order Name"
-				f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :hint => (link_to "New Customer", new_admin_customer_path)
-				f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select
-				f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select
-				f.input :end_date, label: "Due date", as: :datepicker
-				f.input :product_status_id, as: :select, :collection => ProductStatus.all, label: "Product Status"
-				f.inputs "Line Items" do 
-					render :partial => "admin/line_items/form", :locals => { :form => f }
-				end
-
-				f.inputs "Artwork Upload" do 
-					render :partial => "admin/artworks/form", :locals => { :form => f }
-				end
-			elsif can? :manage, Order #admin and office roles will see this
-				f.input :name, label: "Order Name"
-				f.input :ship, as: :radio
-				f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category", as: :select
-				f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select
-				f.input :end_date, label: "Due date", as: :datepicker
-				f.inputs "Line Items" do 
-					render :partial => "admin/line_items/form", :locals => { :form => f }
-				end
-
-				f.inputs "Artwork Upload" do 
-					render :partial => "admin/artworks/form", :locals => { :form => f }
-				end
 			end
 		end
 		f.buttons 
