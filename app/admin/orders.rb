@@ -8,7 +8,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
   scope(:due_today) { |orders| orders.where(:end_date => Date.today ) }
   scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
-  scope :inactive
+  scope :hold
   scope :complete do |orders| orders.where(:order_status_id => 6 ) end
 
   controller do
@@ -74,22 +74,35 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	end
   sidebar :status, only: [:show, :edit] do
     attributes_table_for resource do
-      row :status do |resource|
-        best_in_place resource, :order_status_id, :type => :select, :collection => 
-        [[1, "New"], [2, "Approved"], [3, "Art"], [4, "Setup"], [5, "Printing"], 
-        [6, "Complete"], [7, "Hold"], [8, "Cancelled"]] , path: [:admin, resource]
+      if current_admin_user.role == "broker"
+        row :status do |resource|
+          best_in_place resource, :order_status_id, :type => :select, :collection => 
+          [[7, "Hold"], [8, "Cancelled"]] , path: [:admin, resource]
+        end
+        row :product_status do |order|
+          best_in_place order, :product_status_id, :type => :select, :collection => 
+          [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
+        end
+      else
+        row :status do |resource|
+          best_in_place resource, :order_status_id, :type => :select, :collection => 
+          [[1, "New"], [2, "Approved"], [3, "Art"], [4, "Setup"], [5, "Printing"], 
+          [6, "Complete"], [7, "Hold"], [8, "Cancelled"]] , path: [:admin, resource]
+        end
+        row :product_status do |order|
+          best_in_place order, :product_status_id, :type => :select, :collection => 
+          [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
+        end
       end
-      row :product_status do |order|
-      best_in_place order, :product_status_id, :type => :select, :collection => 
-      [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
-    end
     end
   end
-  # sidebar :customer_information, only: :show do
-  #   attributes_table_for resource do
-  #     if order.ship 
-  #       row :customer_id 
-  #     end
-  #   end
-  # end
+
+  sidebar :Shipping_information, only: [:show] do
+    attributes_table_for resource do
+      row :customer_id 
+      if order.ship 
+        row :ship
+      end
+    end
+  end
 end

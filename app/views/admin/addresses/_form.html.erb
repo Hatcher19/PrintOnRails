@@ -1,7 +1,7 @@
 <%=
 form.has_many :addresses, :wrapper_html=> { :class => 'panel' } do |address|  
   address.input :address_type, :collection => Address::ADD
-  address.input :address_name, label: "Address Name", hint: "Examples: Franchise A, Franchise B" 
+  address.input :address_name, label: "Attn"
   address.input :street 
   address.input :city 
   address.input :state
