@@ -11,7 +11,6 @@
 				f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select
 				f.input :end_date, label: "Due date", as: :datepicker
 				f.input :product_status_id, as: :select, :collection => ProductStatus.all, label: "Product Status"
-				f.input :product_status_id, as: :select, :collection => ProductStatus.all, label: "Product Status"
 				f.inputs "Line Items" do 
 					render :partial => "admin/line_items/form", :locals => { :form => f }
 				end

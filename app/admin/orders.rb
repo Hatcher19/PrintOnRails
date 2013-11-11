@@ -48,7 +48,9 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
       [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
     end
     column("Due", :end_date, :format => :short, :sortable => :end_date)
-    column 'Edit' do |order| link_to(image_tag('edit.png'), edit_admin_order_path(order)) end
+      if can? :create, Order
+        column 'Edit' do |order| link_to(image_tag('edit.png'), edit_admin_order_path(order)) end
+      end
   end
   
   form :partial => "form"
