@@ -6,8 +6,50 @@
 // styles here:
 
 a.button {
-	margin-left: 10px;
+	margin-left: 10px 10px 10px 10px;
 }
-.field-row {
+.field-row{
 	margin: 5px;
+}
+li#order_name_input{
+	width:60%;
+	float: left;
+}
+li#order_end_date_input {
+	width:60%;
+	float: left;
+}
+li#order_customer_id_input{
+	width: 30%;
+	float: left;
+	margin-left: 20px;
+}
+li#order_order_category_id_input{
+	width: 30%;
+	float: left;
+	margin-left: 20px;
+}
+li#order_ship_input{
+	width: 60%;
+	float: left;
+}
+li#order_order_type_id_input{
+	width: 30%;
+	float: left;
+	margin-left: 20px;
+}
+li#order_product_status_id_input{
+	width: 30%;
+	float: left;
+	margin-left: 20px;
+}
+fieldset.inputs{
+	margin-top: 10px;
+
+}
+h3 {
+display: none;
+}
+.hidden{
+	list-style-type: none;
 }
