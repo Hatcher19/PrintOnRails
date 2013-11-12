@@ -4,7 +4,7 @@ form.has_many :addresses, :wrapper_html=> { :class => 'panel' } do |address|
   address.input :address_name, label: "Attn"
   address.input :street 
   address.input :city 
-  address.input :state
+  address.input :state, :collection => Address::STATE, :member_label => :upcase
   address.input :zip
   address.input :same_as_billing, label: "Shipping same as billing?"
 end 

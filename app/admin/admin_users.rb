@@ -27,7 +27,7 @@ ActiveAdmin.register AdminUser do
 
   form :partial => "form"
 
-  show do
+  show :title => :name do
     panel "Order History" do
       table_for(admin_user.orders) do
         column("ID", :sortable => :id) {|order| link_to "##{order.id}", admin_order_path(order) }
