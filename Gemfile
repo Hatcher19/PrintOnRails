@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'jquery-rails'
-gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'activeadmin', :git => 'git://github.com/macfanatic/active_admin.git', branch: 'stable_batch_actions' # Active admin
 gem 'meta_search', '>= 1.1.0.pre'
 gem "haml", "~> 4.0.2"
@@ -18,6 +17,8 @@ gem 'taps' #pushes db from local to production
 gem 'paper_trail' #auditing
 gem 'inherited_resources' 
 gem 'formtastic'
+gem 'devise'
+gem 'bcrypt-ruby', '3.1.1.rc1', :require => 'bcrypt'
 gem 'best_in_place', github: 'bernat/best_in_place'  #in place editing, esp. for order index
 group :production do
 	gem 'pg'

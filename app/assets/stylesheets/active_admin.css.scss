@@ -47,7 +47,10 @@ fieldset.inputs{
 	margin-top: 10px;
 
 }
-h3 {
+.line_items h3 {
+display: none;
+}
+.artworks h3 {
 display: none;
 }
 .hidden{
