@@ -1,14 +1,18 @@
 ActiveAdmin::Dashboards.build do
-	section "Recently updated Orders", :priority => 1 do
-	  table_for Version.order('id desc').limit(20) do # Use PaperTrail::Version if this throws an error
-	    column "Item" do |v| link_to Order.find(v.item), [:admin, v.item] end # Uncomment to display as link
-	    column "Modified at" do |v| v.created_at.to_s :long end
-	    column "User" do |v| link_to AdminUser.find(v.whodunnit).email, admin_admin_user_path(AdminUser.find(v.whodunnit)) end
-	  end
-	end
-	section "New Orders", :priority => 2 do
+	section "New Orders", :priority => 1 do
 		table_for Order.limit(20) do
 			column "Id" do |order| link_to order.id, admin_order_path(order) end
+			column "Name" do |order| link_to order.name, admin_order_path(order) end
+			column "Created At" do |order| order.created_at end
+			column "User" do |order| order.admin_user.email end
+		end
+	end
+	section "Recently updated" do
+		table_for Order.limit(20) do
+			column "Id" do |order| order.id end
+			column "name" do |order| order.name end
+			column "Name" do |order| order.updated_at end
+			column "User" do |order| order.admin_user.email end
 		end
 	end
 end

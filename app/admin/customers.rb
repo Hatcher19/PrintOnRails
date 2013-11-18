@@ -48,24 +48,24 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
 	  
 	form :partial => "form"
 
-  show :title => :name do
+  show :title => :company do
     panel "Order History" do
       table_for(customer.orders) do
-        column("ID", :sortable => :id) {|order| link_to "##{order.id}", admin_order_path(order) }
+        column("ID", :sortable => :id) {|order| link_to "# #{order.id}", admin_order_path(order) }
         column("Order Name", :sortable => :name) {|order| link_to "#{order.name}", admin_order_path(order) }
         column("Due Date", :sortable => :end_date) {|order| "#{order.end_date}" }
       end
     end
     active_admin_comments
   end
-  sidebar "Customer Details", :only => :show do
+  sidebar "Customer Information", :only => :show do
     attributes_table_for customer do
-      row :name
       row :company
-      row :email
+      row :name
+      row :email do mail_to "#{customer.email}" end
       row :phone
-      row :admin_user
-      row :created_at
+      row("User") {|customer| link_to "#{customer.admin_user.email}", admin_admin_user_path(customer)}
+      row('customer since') {|customer| customer.created_at }
     end
   end
   sidebar "Addresses", :only => :show do

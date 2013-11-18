@@ -1,11 +1,12 @@
 <%=
 	semantic_form_for [:admin, @customer], :builder => ActiveAdmin::FormBuilder do |f| 
 		  f.inputs "Customer Information" do 
-		  	f.input :account_id, :as => :hidden, :value => current_admin_user.account
-		  	f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
+		  	f.input :company
 		    f.input :name 
 		    f.input :email
 		    f.input :phone, hint: "7 or 10 digits"
+		    f.input :account_id, :as => :hidden, :value => current_admin_user.account
+		  	f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 			end 
 			f.inputs "Address" do 
 				render :partial => "admin/addresses/form", :locals => { :form => f }

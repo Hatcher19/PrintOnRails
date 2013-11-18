@@ -27,7 +27,7 @@ ActiveAdmin.register AdminUser do
 
   form :partial => "form"
 
-  show :title => :name do
+  show :title => :email do
     panel "Order History" do
       table_for(admin_user.orders) do
         column("ID", :sortable => :id) {|order| link_to "##{order.id}", admin_order_path(order) }
@@ -50,10 +50,7 @@ ActiveAdmin.register AdminUser do
   sidebar :login_stats, only: :show do
     attributes_table_for resource do
       row :sign_in_count
-      row :current_sign_in_ip
-      row :last_sign_in_ip
       row :created_at 
-      row :updated_at 
     end   
   end
 end

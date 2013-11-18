@@ -1,5 +1,5 @@
 class Customer < ActiveRecord::Base
-  attr_accessible :name, :email, :phone, :addresses_attributes, :admin_user_id, :account_id
+  attr_accessible :name, :email, :phone, :addresses_attributes, :admin_user_id, :account_id, :company
   
   has_many :addresses
   has_many :orders, :dependent => :nullify
