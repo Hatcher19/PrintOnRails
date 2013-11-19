@@ -69,9 +69,13 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
       row('customer since') {|customer| customer.created_at }
     end
   end
-  sidebar "Addresses", :only => :show do
-    resource.addresses.each do |a|
-     text_node(render :partial => "admin/addresses/show", :locals => { :address => a })
+  sidebar "Shipping Information", :only => :show do
+    attributes_table_for customer do
+      row :street
+      row :unit
+      row :city
+      row :state
+      row :zip
     end
   end
 end

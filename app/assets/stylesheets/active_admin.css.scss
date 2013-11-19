@@ -56,3 +56,38 @@ display: none;
 .hidden{
 	list-style-type: none;
 }
+li#customer_street_input {
+	width: 50%;
+	float: left;
+}
+li#customer_unit_input {
+	width: 30%;
+	float: left;
+}
+input#customer_unit {
+	width: 60px;
+}
+li#customer_city_input {
+	width: 40%;
+	float: left;
+}
+li#customer_state_input {
+	width: 15%;
+	float: left;
+}
+li#customer_zip_input {
+	width: 30%;
+	float: left;
+}
+input#customer_zip {
+	width: 60px;
+}
+#customer_street_input label.label {
+	width: 75px;
+}
+#customer_city_input label.label {
+	width: 75px;
+}
+#customer_state_input label.label {
+	width: 75px;
+}

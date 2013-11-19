@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131111211027) do
+ActiveRecord::Schema.define(:version => 20131118032953) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -130,6 +130,11 @@ ActiveRecord::Schema.define(:version => 20131111211027) do
     t.string   "company"
     t.integer  "admin_user_id"
     t.integer  "account_id"
+    t.string   "street"
+    t.string   "unit"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
   end
 
   add_index "customers", ["account_id"], :name => "index_customers_on_account_id"
