@@ -33,6 +33,7 @@ ActiveAdmin.register AdminUser do
         column("ID", :sortable => :id) {|order| link_to "##{order.id}", admin_order_path(order) }
         column("Order Name", :sortable => :name) {|order| "#{order.name}" }
         column("Due Date", :sortable => :end_date) {|order| "#{order.end_date}" }
+        column("Status") {|order| "#{order.order_status.name}" }
       end
     end
   end

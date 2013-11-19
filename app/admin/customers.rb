@@ -54,6 +54,7 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
         column("ID", :sortable => :id) {|order| link_to "# #{order.id}", admin_order_path(order) }
         column("Order Name", :sortable => :name) {|order| link_to "#{order.name}", admin_order_path(order) }
         column("Due Date", :sortable => :end_date) {|order| "#{order.end_date}" }
+        column("Status") {|order| "#{order.order_status.name}" }
       end
     end
     active_admin_comments
@@ -63,7 +64,7 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
       row :company
       row :name
       row :email do mail_to "#{customer.email}" end
-      row("phone") {|customer| link_to "tel:#{customer.phone}"}
+      row :phone
       row("User") {|customer| link_to "#{customer.admin_user.email}", admin_admin_user_path(customer)}
       row('customer since') {|customer| customer.created_at }
     end

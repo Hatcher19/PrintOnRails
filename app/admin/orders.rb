@@ -70,7 +70,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
         row :name
         row("Category"){|order| order.order_category.name }
         row("Type"){|order| order.order_type.name }
-        row :admin_user
+        row("Sold by"){|order| order.admin_user}
       end
     end
     resource.line_items.each do |a|
@@ -106,7 +106,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     end
   end
 
-  sidebar :Shipping_information, only: [:show] do
+  sidebar :customer_information, only: [:show] do
     attributes_table_for resource do
       row :customer_id 
       # if order.ship 
