@@ -11,6 +11,15 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   scope :hold
   scope :complete do |orders| orders.where(:order_status_id => 6 ) end
 
+  csv do
+    column :id
+    column :name
+    column("Category"){|order| order.order_category.name }
+    column("Status"){|order| order.order_status.name }
+    column("product"){|order| order.product_status.name }
+    column :end_date
+  end
+
   controller do
     def user_account
       if current_user.role == "broker"
@@ -59,8 +68,8 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     panel 'Order Information' do
       attributes_table_for order do
         row :name
-        row :order_category_id
-        row :order_type_id
+        row("Category"){|order| order.order_category.name }
+        row("Type"){|order| order.order_type.name }
         row :admin_user
       end
     end
@@ -100,9 +109,10 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   sidebar :Shipping_information, only: [:show] do
     attributes_table_for resource do
       row :customer_id 
-      if order.ship 
-        row :ship
-      end
+      # if order.ship 
+      #   row :ship
+      # end
+      row :ship
     end
   end
 end
