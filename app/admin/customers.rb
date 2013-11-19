@@ -65,7 +65,7 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
       row :name
       row :email do mail_to "#{customer.email}" end
       row :phone
-      row("User") {|customer| link_to "#{customer.admin_user.email}", admin_admin_user_path(customer)}
+      row("Sales Rep"){|customer| customer.admin_user}
       row('customer since') {|customer| customer.created_at }
     end
   end
