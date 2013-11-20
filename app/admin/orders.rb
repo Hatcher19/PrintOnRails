@@ -68,6 +68,8 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     panel 'Order Information' do
       attributes_table_for order do
         row :name
+        row :end_date
+        row :created_at
         row("Category"){|order| order.order_category.name }
         row("Type"){|order| order.order_type.name }
         row("Sold by"){|order| order.admin_user}
@@ -106,13 +108,22 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     end
   end
 
-  sidebar :customer_information, only: [:show] do
+  sidebar :customer_information, only: :show do
     attributes_table_for resource do
       row :customer_id 
       # if order.ship 
       #   row :ship
       # end
       row :ship
+    end
+    if order.ship
+      attributes_table_for(order.customer) do
+        row("street"){|customer| customer.street}
+        row("Unit"){|customer| customer.unit}
+        row("city"){|customer| customer.city}
+        row("state"){|customer| customer.state}
+        row("zip"){|customer| customer.zip}
+      end
     end
   end
 end
