@@ -24,6 +24,7 @@ class Ability
         cannot :destroy, :all
       when user.broker?
         can :manage, [Order, Customer], :user_id => user.id
+        cannot :update, Order
         cannot :destroy, :all
       when user.nil?
         can :create, [Account, AdminUser]

@@ -15,6 +15,11 @@
 		    f.input :account_id, :as => :hidden, :value => current_admin_user.account
 		  	f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 			end 
+			if current_admin_user.role == "broker"
+		  		f.input :outside, :as => :hidden, :value => true
+		  	else
+		  		f.input :outside, :as => :hidden, :value => false
+		  	end
 			  f.buttons 
 		end
 %>

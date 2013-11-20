@@ -2,7 +2,7 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
   controller.authorize_resource
   scope_to :user_account
   menu :label => "Customers", :if => proc{ can?(:create, Customer) }
-  scope(:all) { |customers| customers }
+  scope(:all, :if => proc{ can?(:update, Order) }) do |customers| customers.where(:outside => false ) end
   scope(:mine, default: true) { |customers| customers.where(:admin_user_id => current_admin_user.id ) }
 
   controller do
@@ -14,7 +14,6 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
       end
     end
   end
-
 
   filter :name, label: "by Name"
   filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.last, u.id] } }
