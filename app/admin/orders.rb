@@ -9,7 +9,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   scope(:due_today) { |orders| orders.where(:end_date => Date.today ) }
   scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
   scope :hold
-  scope :complete do |orders| orders.where(:order_status_id => 6 ) end
+  scope :complete do |orders| orders.where(:order_status_id => 4 ) end
 
   csv do
     column :id
@@ -47,19 +47,23 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     column "ID", :sortable => :id do |order| link_to order.id, admin_order_path(order) end
     column "Name", :sortable => :name do |order| link_to order.name, admin_order_path(order) end
     column("Category", :order_category, :sortable => :order_category_id)
-    column :status, :sortable => :order_status_id do |resource|
+    column("status", :sortable => :order_status_id) do |resource|
       best_in_place resource, :order_status_id, :type => :select, :collection => 
-      [[1, "New"], [2, "Approved"], [3, "Art"], [4, "Setup"], [5, "Printing"], 
-      [6, "Complete"], [7, "Hold"], [8, "Cancelled"]] , path: [:admin, resource]
+      [[1, "New"], [2, "Approved"], [3, "Print in Progress"], [4, "Complete"], [5, "Hold"], [6, "Cancelled"]], 
+      path: [:admin, resource]
+    end
+    column :art, :sortable => :art_status_id do |resource|
+      best_in_place resource, :art_status_id, :type => :select, :collection => 
+      [[1, "In Progress"], [2, "Complete"]], path: [:admin, resource]
     end
     column :product, :sortable => :product_status_id do |resource|
       best_in_place resource, :product_status_id, :type => :select, :collection => 
-      [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
+      [[1, "Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
     end
     column("Due", :end_date, :format => :short, :sortable => :end_date)
-      if can? :create, Order
-        column 'Edit' do |order| link_to(image_tag('edit.png'), edit_admin_order_path(order)) end
-      end
+    if can? :update, Order
+      column 'Edit' do |order| link_to(image_tag('edit.png'), edit_admin_order_path(order)) end
+    end
   end
   
   form :partial => "form"
@@ -68,10 +72,10 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     panel 'Order Information' do
       attributes_table_for order do
         row :name
-        row :end_date
+        row("Due Date"){|order| order.end_date}
         row :created_at
-        row("Category"){|order| order.order_category.name }
-        row("Type"){|order| order.order_type.name }
+        row("Category"){|order| order.order_category.name.humanize }
+        row("Type"){|order| order.order_type.name.humanize }
         row("Sold by"){|order| order.admin_user}
       end
     end
@@ -84,17 +88,18 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	  active_admin_comments
 	end
   sidebar :status, only: [:show, :edit] do
-    attributes_table_for resource do
       if current_admin_user.role == "broker"
-        row :status do |resource|
-          best_in_place resource, :order_status_id, :type => :select, :collection => 
-          [[7, "Hold"], [8, "Cancelled"]] , path: [:admin, resource]
+        attributes_table_for(order.order_status) do
+          row("Status"){|order_status| order_status.name.humanize}
         end
-        row :product_status do |order|
-          best_in_place order, :product_status_id, :type => :select, :collection => 
-          [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
+        attributes_table_for(order.product_status) do
+          row("Product"){|product_status| product_status.name.humanize}
+        end
+        attributes_table_for(order.art_status) do
+          row("Artwork"){|art_status| art_status.name.humanize}
         end
       else
+        attributes_table_for resource do
         row :status do |resource|
           best_in_place resource, :order_status_id, :type => :select, :collection => 
           [[1, "New"], [2, "Approved"], [3, "Art"], [4, "Setup"], [5, "Printing"], 
@@ -104,6 +109,10 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
           best_in_place order, :product_status_id, :type => :select, :collection => 
           [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
         end
+        row :art do |order|
+          best_in_place order, :art_status_id, :type => :select, :collection => 
+          [[1, "In Progress"], [2, "Complete"]], path: [:admin, order]
+        end
       end
     end
   end
@@ -111,9 +120,6 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   sidebar :customer_information, only: :show do
     attributes_table_for resource do
       row :customer_id 
-      # if order.ship 
-      #   row :ship
-      # end
       row :ship
     end
     if order.ship
