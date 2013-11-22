@@ -3,6 +3,7 @@ ActiveAdmin.register ProductStatus do
   menu :label => "Product Status", :parent => "Settings", :if => proc{ can?(:destroy, Account) }, :priority => 6
 
   index do
+    column :id
   	column :name
   	column :active
   	default_actions

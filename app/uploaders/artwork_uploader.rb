@@ -1,7 +1,4 @@
-# encoding: utf-8
-
 class ArtworkUploader < CarrierWave::Uploader::Base
-
   include CarrierWave::RMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
@@ -21,7 +18,6 @@ class ArtworkUploader < CarrierWave::Uploader::Base
   version :artwork do
     process :resize_to_limit => [100, 100]
   end
-
 
   def extension_white_list
     %w(jpg jpeg gif png ai eps psd pdf)

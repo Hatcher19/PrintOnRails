@@ -25,7 +25,7 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :line_items, :allow_destroy => true
   accepts_nested_attributes_for :artworks, :allow_destroy => true
   scope :active, includes(:order_status).where("order_statuses.active = ?", true)
-  scope :hold, includes(:order_status).where("order_statuses.id = ?", 5)
+  scope :hold, includes(:order_status).where("order_statuses.id = ?", 4)
 
   def default_values
     if new_record?

@@ -9,7 +9,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   scope(:due_today) { |orders| orders.where(:end_date => Date.today ) }
   scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
   scope :hold
-  scope :complete do |orders| orders.where(:order_status_id => 4 ) end
+  scope :complete do |orders| orders.where(:order_status_id => 3 ) end
 
   csv do
     column :id
@@ -49,7 +49,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     column("Category", :order_category, :sortable => :order_category_id)
     column("status", :sortable => :order_status_id) do |resource|
       best_in_place resource, :order_status_id, :type => :select, :collection => 
-      [[1, "New"], [2, "Approved"], [3, "Print in Progress"], [4, "Complete"], [5, "Hold"], [6, "Cancelled"]], 
+      [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]], 
       path: [:admin, resource]
     end
     column :art, :sortable => :art_status_id do |resource|
@@ -58,7 +58,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     end
     column :product, :sortable => :product_status_id do |resource|
       best_in_place resource, :product_status_id, :type => :select, :collection => 
-      [[1, "Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
+      [[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
     end
     column("Due", :end_date, :format => :short, :sortable => :end_date)
     if can? :update, Order
@@ -102,12 +102,11 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
         attributes_table_for resource do
         row :status do |resource|
           best_in_place resource, :order_status_id, :type => :select, :collection => 
-          [[1, "New"], [2, "Approved"], [3, "Art"], [4, "Setup"], [5, "Printing"], 
-          [6, "Complete"], [7, "Hold"], [8, "Cancelled"]] , path: [:admin, resource]
+          [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]] , path: [:admin, resource]
         end
         row :product_status do |order|
           best_in_place order, :product_status_id, :type => :select, :collection => 
-          [[1, "Please Order!"], [2, "Ordered"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
+          [[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
         end
         row :art do |order|
           best_in_place order, :art_status_id, :type => :select, :collection => 
