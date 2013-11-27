@@ -9,7 +9,7 @@ ActiveAdmin::Dashboards.build do
 		end
 	end
 	section "Recently updated" do
-		table_for Order.where(:account_id => current_admin_user.account_id, 'updated_at > ?' created_at) do
+		table_for Order.where(:account_id => current_admin_user.account_id) do
 			column "Id" do |order| order.id end
 			column "name" do |order| order.name end
 			column "Name" do |order| order.updated_at end

@@ -13,7 +13,7 @@
             <tr>
               <td><%= image_tag artwork.file_url(:artwork) if artwork.file? %></td>
             	<td><%= link_to @order.name, artwork.file_url.to_s, download: [@order.name,'-',@order.id]%></td>
-            	<td><%= artwork.location %></td>
+            	<td><%= artwork.print_location.name.humanize %></td>
             	<td><%= artwork.color %></td>
             </tr>
         </tbody>

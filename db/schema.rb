@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131121001341) do
+ActiveRecord::Schema.define(:version => 20131127031101) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -117,15 +117,17 @@ ActiveRecord::Schema.define(:version => 20131121001341) do
 
   create_table "artworks", :force => true do |t|
     t.integer  "order_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "location"
     t.string   "file"
     t.string   "color"
+    t.integer  "print_location_id"
   end
 
   add_index "artworks", ["file"], :name => "index_artworks_on_file"
   add_index "artworks", ["order_id"], :name => "index_artworks_on_order_id"
+  add_index "artworks", ["print_location_id"], :name => "index_artworks_on_print_location_id"
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -237,7 +239,10 @@ ActiveRecord::Schema.define(:version => 20131121001341) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "artwork_id"
   end
+
+  add_index "print_locations", ["artwork_id"], :name => "index_print_locations_on_artwork_id"
 
   create_table "product_statuses", :force => true do |t|
     t.string   "name"
