@@ -65,7 +65,9 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
       row :email do mail_to "#{customer.email}" end
       row :phone
       row("Sales Rep"){|customer| customer.admin_user}
-      row('customer since') {|customer| customer.created_at }
+      row("Customer Since") do |obj|
+        obj.created_at.localtime.strftime("%b %d, %Y")
+      end
     end
   end
   sidebar "Shipping Information", :only => :show do

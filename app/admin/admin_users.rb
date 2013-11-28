@@ -32,7 +32,9 @@ ActiveAdmin.register AdminUser do
       table_for(admin_user.orders) do
         column("ID", :sortable => :id) {|order| link_to "##{order.id}", admin_order_path(order) }
         column("Order Name", :sortable => :name) {|order| "#{order.name}" }
-        column("Due Date", :sortable => :end_date) {|order| "#{order.end_date}" }
+        column("Due Date") do |obj|
+          obj.end_date.strftime("%m/%d/%y")
+        end
         column("Status") {|order| "#{order.order_status.name}" }
       end
     end
@@ -51,7 +53,9 @@ ActiveAdmin.register AdminUser do
   sidebar :login_stats, only: :show do
     attributes_table_for resource do
       row :sign_in_count
-      row :created_at 
+      row :created_at do |obj|
+        obj.created_at.strftime("%b %d, %Y")
+      end
     end   
   end
 end

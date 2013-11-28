@@ -60,7 +60,9 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
       best_in_place resource, :product_status_id, :type => :select, :collection => 
       [[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
     end
-    column("Due", :end_date, :format => :short, :sortable => :end_date)
+    column("Due Date") do |obj| 
+      obj.end_date.strftime("%m/%d/%y") 
+    end
     if can? :update, Order
       column 'Edit' do |order| link_to(image_tag('edit.png'), edit_admin_order_path(order)) end
     end
@@ -72,8 +74,12 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     panel 'Order Information' do
       attributes_table_for order do
         row :name
-        row("Due Date"){|order| order.end_date}
-        row :created_at
+        row("Due Date") do |obj| 
+          obj.end_date.strftime("%b %d, %Y") 
+        end
+        row :created_at do |obj|
+          obj.created_at.localtime.strftime("%b %d, %Y %I:%M %P")
+        end
         row("Category"){|order| order.order_category.name.humanize }
         row("Type"){|order| order.order_type.name.humanize }
         row("Sold by"){|order| order.admin_user}
