@@ -6,20 +6,20 @@
       <div class="account-form">
         <center><h1>Free Beta trial!</h1></center>
         <div>
-          <center><%= f.text_field :company, :placeholder => 'Company Name' %></center>
+          <center><%= f.text_field :company, :placeholder => 'Company Name*' %></center>
         </div>
         <div>
-          <center><%= text_field_tag :first, nil, :placeholder => 'First Name' %></center>
-          <center><%= text_field_tag :last, nil, :placeholder => 'Last Name' %></center>
+          <center><%= text_field_tag :first, nil, :placeholder => 'First Name*' %></center>
+          <center><%= text_field_tag :last, nil, :placeholder => 'Last Name*' %></center>
         </div>
         <div>
-          <center><%= text_field_tag :email, nil, :placeholder => 'Email' %></center>
+          <center><%= text_field_tag :email, nil, :placeholder => 'Email*' %></center>
         </div>
         <div>
-          <center><%= password_field_tag :password, nil, :placeholder => 'Password' %></center>
+          <center><%= password_field_tag :password, nil, :placeholder => 'Password*' %></center>
         </div>
         <div>
-          <center><%= password_field_tag :password_confirmation, nil, :placeholder => 'Password Confirmation' %></center>
+          <center><%= password_field_tag :password_confirmation, nil, :placeholder => 'Password Confirmation*' %></center>
         </div>
           <%= hidden_field_tag :role, 'account_admin' %>
         <div>
