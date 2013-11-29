@@ -27,6 +27,14 @@ class Order < ActiveRecord::Base
   scope :active, includes(:order_status).where("order_statuses.active = ?", true)
   scope :hold, includes(:order_status).where("order_statuses.id = ?", 4)
 
+  validates :name, :presence => true
+  validates :end_date, :presence => true
+  validates :customer_id, :presence => true
+  validates :order_category_id, :presence => true
+  validates :order_type_id, :presence => true
+  validates :ship, :inclusion => {:in => [true, false]}
+  validates :product_status_id, :presence => true
+
   def default_values
     if new_record?
       self.start_date ||= Date.today

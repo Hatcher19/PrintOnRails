@@ -73,14 +73,14 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   show :title => :id do
     panel 'Order Information' do
       attributes_table_for order do
-        row :name
+        row("Name"){|order| order.name.titleize }
         row("Due Date") do |obj| 
           obj.end_date.strftime("%b %d, %Y") 
         end
         row :created_at do |obj|
           obj.created_at.localtime.strftime("%b %d, %Y %I:%M %P")
         end
-        row("Category"){|order| order.order_category.name.humanize }
+        row("Category"){|order| order.order_category.name.titleize }
         row("Type"){|order| order.order_type.name.humanize }
         row("Sold by"){|order| order.admin_user}
       end
