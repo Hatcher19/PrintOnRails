@@ -126,6 +126,8 @@ ActiveAdmin.setup do |config|
   # To load a javascript file:
   #   config.register_javascript 'my_javascript.js'
 
+  config.view_factory.utility_navigation = PrintOnRails::UtilityNavigation
+
 
   config.load_paths = [File.expand_path('app/admin', Rails.root), File.expand_path('app/admin_unit', Rails.root)]
 end

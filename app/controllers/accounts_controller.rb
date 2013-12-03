@@ -20,4 +20,9 @@ class AccountsController < InheritedResources::Base
 
     redirect_to admin_dashboard_path(@account)
   end
+
+   def show  
+      @account = Account.find(params[:id])
+      @admin_user = AdminUser.find(params[:id])  
+    end 
 end

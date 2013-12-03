@@ -7,6 +7,7 @@ class Ability
         can :manage, :all
       when user.account_admin?
         can :manage, :all
+        can :manage, Account, :user_id => user.id
         cannot :destroy, :all
       when user.admin?
         can :manage, :all

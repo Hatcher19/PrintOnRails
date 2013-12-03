@@ -3,6 +3,7 @@ PrintOnRails::Application.routes.draw do
   get "pages/home"
   get "pages/role"
   resources :accounts
+  get "accounts/show"
 
   ActiveAdmin.routes(self)
 

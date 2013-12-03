@@ -1,0 +1,25 @@
+<%= render 'layouts/nav' %>
+<br><br>
+<div>
+	<h5>Welcome <%= @admin_user.first %>
+	<%= @admin_user.last %>! </h5>
+</div>
+<div>
+	<h3><span><%= @account.company %><span> Account Information</h3>
+</div>
+<div class="hero-unit">
+	<ul> 
+		<h5>Company</h5><li><%= @account.company %></li>
+		<h5>Name</h5><li><%= @admin_user.first %> <%= @admin_user.last %></li>
+		<h5>Email</h5><li><%= @admin_user.email %></li>
+	</ul>
+</div>
+<div>
+	<h3>Billing</h3>
+</div>
+<div class="hero-unit">
+	<br><br>
+
+	<br><br>
+</div>
+<%= render 'layouts/footer' %>
