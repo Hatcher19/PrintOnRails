@@ -41,4 +41,14 @@ class Order < ActiveRecord::Base
       self.number ||= (Order.maximum(:number) + 1 rescue 1)
     end
   end
+
+  def self.changeset_string(changeset)
+    attribute = changeset.keys[0]
+    new_value = changeset[attribute][1]
+    "#{attribute.to_s} has been changed to #{new_value.to_s}"
+  end
+
+  def to_s
+    display_name
+  end
 end

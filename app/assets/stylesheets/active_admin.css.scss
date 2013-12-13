@@ -5,9 +5,66 @@
 // To customize the Active Admin interfaces, add your
 // styles here:
 
+#wrapper {
+	background-color: #f4f4f4;
+}
+#header {
+	background: #6a7176;
+	border-bottom: none;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	text-shadow: none;
+}
+#title_bar {
+	background: orange;
+	border-bottom: none;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	text-shadow: none;
+	border: none;
+}
+#title_bar .action_items a:not(.disabled):hover {
+	background: green;
+	}
+.breadcrum a {
+	color: #000;
+}
+body.logged_in .flash.flash_notice {
+	background: red;
+	color: white;
+	}
+body.logged_in .flash {
+	text-shadow: none;
+	}
+.panel {
+	background: white;
+	border: none;
+	border-bottom: none;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+.panel h3 {
+	background: orange;
+	text-shadow: none;
+	border: none;
+	border-bottom: none;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
 a.button {
 	margin-left: 10px 10px 10px 10px;
 }
+.fieldset.buttons {
+	background: green;
+	text-shadow: none;
+	box-shadow: none;
+	outline: none;
+	border-radius: 0px;
+	}
 .field-row{
 	margin: 5px;
 }
@@ -90,4 +147,108 @@ input#customer_zip {
 }
 #customer_state_input label.label {
 	width: 75px;
+}
+.order-name {
+	float: left;
+}
+.order-name h2 {
+	margin-bottom: 5px;
+}
+.order-type {
+	float: left;
+	margin-left: 5px;
+}
+.order-type h4 {
+	margin-bottom: 0px;
+	margin-top: 5px;
+	color: #aaa;
+}
+.order-id-user {
+	text-align: left;
+	width: 400px;
+}
+.id-user {
+	float: left;
+}
+.id h3 {
+	color: #aaa;
+}
+.admin-user h6 {
+	color: #aaa;
+}
+.admin-user {
+	margin-left: 5px;
+	float: left;
+}
+.block {
+	background-color: #fff;
+	width: 151px;
+	float: left;
+	height: 60px;
+	margin-right: 0px;
+	text-align: center;
+	border-style:solid;
+	border-color:#ddd;
+	border-width: 1px;
+}
+.blocks {
+	margin-bottom: 120px;
+}
+.block-middle h3 {
+	margin-bottom: 0px;
+	margin-top: 15px;
+	color: orange;
+}
+.block-bottom h4 {
+	margin-bottom: 0px;
+	margin-top: 0px;	
+	color: #bbb;
+}
+.customer-icon {
+	float: left;
+}
+.customer-icon img {
+	width: 25px;
+}
+.customer-attribute h3 {
+	margin-left: 40px;
+	background: none;
+}
+.customer-attribute-one h3 {
+	margin-left: 40px;
+	background: none;
+}
+.customer-street-show h4 {
+	margin-bottom: 5px;
+	margin-left: 40px;
+}
+.customer-unit-show h4 {
+	margin-left: 40px;
+}
+.city-state-zip h4 {
+	margin-left: 40px; 
+}
+.text-edit-icon {
+	float: left;
+	margin-right: 5px;
+	margin-left: 30px;
+}
+.order-edit-icon img{
+	float: left;
+	margin-top: 15px;
+	margin-right: 5px;
+}
+#title_bar .action_items a {
+	color: white;
+	background: #777;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	text-shadow: none;
+	box-shadow: none;
+	border: none;
+}
+form fieldset legend span {
+	background: orange;
+	text-shadow: none;
 }

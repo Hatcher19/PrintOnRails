@@ -9,10 +9,10 @@ ActiveAdmin::Dashboards.build do
 	        end
 			column "User" do |order| order.admin_user.email end
 			column("status", :sortable => :order_status_id) do |resource|
-	      best_in_place resource, :order_status_id, :type => :select, :collection => 
-	      [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]], 
-	      path: [:admin, resource]
-	    end
+		      best_in_place resource, :order_status_id, :type => :select, :collection => 
+		      [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]], 
+		      path: [:admin, resource]
+		    end
 		end
 	end
 	section "Recently Completed", :if => proc{ can?(:update, Order) }, priority: 1 do

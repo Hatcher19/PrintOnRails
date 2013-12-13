@@ -46,7 +46,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   index do 
     column "ID", :sortable => :id do |order| link_to order.id, admin_order_path(order) end
     column "Name", :sortable => :name do |order| link_to order.name, admin_order_path(order) end
-    column("Category", :order_category, :sortable => :order_category_id)
+    column "Category", :sortable => :order_category_id do |order| order.order_category.name.titleize end
     column("status", :sortable => :order_status_id) do |resource|
       best_in_place resource, :order_status_id, :type => :select, :collection => 
       [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]], 
@@ -70,71 +70,185 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   
   form :partial => "form"
 
-  show :title => :id do
-    panel 'Order Information' do
-      attributes_table_for order do
-        row("Name"){|order| order.name.titleize }
-        row("Due Date") do |obj| 
-          obj.end_date.strftime("%b %d, %Y") 
-        end
-        row :created_at do |obj|
-          obj.created_at.localtime.strftime("%b %d, %Y %I:%M %P")
-        end
-        row("Category"){|order| order.order_category.name.titleize }
-        row("Type"){|order| order.order_type.name.humanize }
-        row("Sold by"){|order| order.admin_user}
+  show :title => "" do
+    div :class => "order-name-type" do
+      div :class => "order-name" do
+        h2 order.name
+      end
+      div :class => "order-type" do
+        h4 "(#{order.order_type.name.titleize})"
       end
     end
-    resource.line_items.each do |a|
-      text_node(render :partial => "admin/line_items/show", :locals => { :line_item => a })
-    end 
-    resource.artworks.each do |a|
-        text_node(render :partial => "admin/artworks/show", :locals => { :artwork => a })
+    br
+    div :class => "order-id-user" do
+      div :class => "id-user" do
+        h3 "##{order.id}"
+      end
+      div :class => "admin-user" do
+        h6 link_to order.admin_user.email, admin_admin_user_path
+      end
+    end
+    br
+    div :class => "blocks" do
+      div :class => "block" do
+        div :class => "block-middle" do
+          h3 order.order_category.name.titleize
+        end
+        div :class => "block-bottom" do
+          h4 "Category"
+        end
+      end
+      div :class => "block" do
+        div :class => "block-middle" do
+          h3 order.created_at.localtime.strftime("%m/%d/%y")
+        end
+        div :class => "block-bottom" do
+          h4 "Start Date"
+        end
+      end
+      div :class => "block" do
+        div :class => "block-middle" do
+          h3 order.end_date.strftime("%m/%d/%y")
+        end
+        div :class => "block-bottom" do
+          h4 "End Date"
+        end
+      end
+      div :class => "block" do
+        div :class => "block-middle" do
+          if current_admin_user.role == "broker"
+            h3 order.order_status.name.titleize
+          else
+            div :class => "#" do
+              div :class => "text-edit-icon" do
+                h3 best_in_place resource, :order_status_id, :type => :select, :collection => [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]] , path: [:admin, resource]
+              end
+              div :class => "order-edit-icon" do
+                image_tag 'pencil.png'
+              end
+            end
+          end
+        end
+        br
+        div :class => "block-bottom" do
+          h4 "Status"
+        end
+      end
+      div :class => "block" do
+        div :class => "block-middle" do
+          if current_admin_user.role == "broker"
+            h3 order.product_status.name.titleize
+          else
+            div :class => "#" do
+              div :class => "text-edit-icon" do
+                h3 best_in_place order, :product_status_id, :type => :select, :collection => [[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
+              end
+              div :class => "order-edit-icon" do
+                image_tag 'pencil.png'
+              end
+            end
+          end
+        end
+        div :class => "block-bottom" do
+          h4 "Product"
+        end
+      end
+      div :class => "block" do
+        div :class => "block-middle" do
+          if current_admin_user.role == "broker"
+            h3 order.art_status.name.titleize
+          else
+            div :class => "#" do
+              div :class => "text-edit-icon" do
+                h3 best_in_place order, :art_status_id, :type => :select, :collection => [[1, "In Progress"], [2, "Complete"]], path: [:admin, order]
+              end
+              div :class => "order-edit-icon" do
+                image_tag 'pencil.png'
+              end
+            end
+          end
+        end
+        div :class => "block-bottom" do
+          h4 "Artwork"
+        end
+      end
+    end
+    panel "Line Item" do
+      table_for order.line_items do
+        column :quantity 
+        column :style 
+        column :color 
+        column :s 
+        column :m 
+        column :l 
+        column :xl 
+        column :xxl 
+        column :xxxl 
+        column :xxxxl 
+      end
+    end
+    panel "Artwork" do
+      table_for order.artworks do
+        column "" do |artwork| image_tag artwork.file_url(:artwork) if artwork.file? end
+        column "Download" do |artwork| link_to order.name, artwork.file_url.to_s, download: [order.name,'-',order.id,'-',artwork.print_location.name] end
+        column "Location" do |artwork| artwork.print_location.name.titleize end
+        column "Color" do |artwork| artwork.color end
+      end
     end
 	  active_admin_comments
-	end
-  sidebar :status, only: [:show, :edit] do
-      if current_admin_user.role == "broker"
-        attributes_table_for(order.order_status) do
-          row("Status"){|order_status| order_status.name.humanize}
-        end
-        attributes_table_for(order.product_status) do
-          row("Product"){|product_status| product_status.name.humanize}
-        end
-        attributes_table_for(order.art_status) do
-          row("Artwork"){|art_status| art_status.name.humanize}
-        end
-      else
-        attributes_table_for resource do
-        row :status do |resource|
-          best_in_place resource, :order_status_id, :type => :select, :collection => 
-          [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]] , path: [:admin, resource]
-        end
-        row :product_status do |order|
-          best_in_place order, :product_status_id, :type => :select, :collection => 
-          [[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
-        end
-        row :art do |order|
-          best_in_place order, :art_status_id, :type => :select, :collection => 
-          [[1, "In Progress"], [2, "Complete"]], path: [:admin, order]
-        end
+    panel "History" do
+      table_for assigns[:order].versions do
+        column "User" do |v| link_to AdminUser.find(v.whodunnit).email, admin_admin_user_path(AdminUser.find(v.whodunnit)) end
+        column "Event" do |order| order.event end
+        column "Attribute" do |order| Order.changeset_string(order.changeset) end
+        column "Date/ Time" do |order| order.created_at.localtime.strftime("%m/%d/%y-%I:%M %P") end
       end
     end
   end
 
-  sidebar :customer_information, only: :show do
-    attributes_table_for resource do
-      row :customer_id 
-      row :ship
-    end
-    if order.ship
-      attributes_table_for(order.customer) do
-        row("street"){|customer| customer.street}
-        row("Unit"){|customer| customer.unit}
-        row("city"){|customer| customer.city}
-        row("state"){|customer| customer.state}
-        row("zip"){|customer| customer.zip}
+  sidebar :customer_info, :class => "customer", only: :show do
+    div :class => "customer-row-one" do
+      div :class => "customer-icon" do
+          image_tag 'building.png'
+        end
+      div :class => "customer-attribute" do
+        h3 link_to "#{order.customer.company}", admin_customer_path 
       end
     end
+    div :class => "customer-row-one" do
+      div :class => "customer-icon" do
+          image_tag 'customer.png'
+        end
+      div :class => "customer-attribute" do
+        h3 order.customer.name
+      end
+    end
+    div :class => "customer-row-one" do
+      div :class => "customer-icon" do
+          image_tag 'shipping.png'
+        end
+      div :class => "customer-attribute-one" do
+        h3 order.ship ? (image_tag "check.png") : (image_tag "x.png")
+      end
+    end
+    if order.ship
+      div :class => "customer-icon" do
+          image_tag 'address.png'
+        end
+      div :class => "customer-street-show" do
+        h4 order.customer.street.titleize
+      end
+      div :class => "customer-unit-show" do
+        h4 order.customer.unit
+      end
+      div :class => "city-state-zip" do
+        h4 "#{order.customer.city.titleize}, #{order.customer.state.titleize} #{order.customer.zip}"
+      end
+    end
+  end
+
+  member_action :history do
+    @order = Order.find(params[:id])
+    @versions = @order.versions
   end
 end
