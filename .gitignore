@@ -16,3 +16,5 @@ doc/
 public/uploads
 # Ignore application configuration
 /config/application.yml
+/config/initializers/stripe.rb
+/db/seeds.rb
