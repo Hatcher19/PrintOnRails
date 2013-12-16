@@ -228,15 +228,22 @@ input#customer_zip {
 .city-state-zip h4 {
 	margin-left: 40px; 
 }
-.text-edit-icon {
-	float: left;
-	margin-right: 5px;
-	margin-left: 30px;
+.top-panel {
+	margin-bottom: 100px;
+	width: 90%;
 }
-.order-edit-icon img{
+.top {
 	float: left;
-	margin-top: 15px;
-	margin-right: 5px;
+	color: black;
+	width: 15%;
+	margin-right: 1%;
+}
+.top h3 {
+	color: #f4f4f4;
+	text-align: center;
+}
+.top h4 {
+	text-align: center;
 }
 #title_bar .action_items a {
 	color: white;

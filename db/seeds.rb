@@ -6,7 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-  AdminUser.create!([{email: 'info@printonrails.com', password: 'password', password_confirmation: 'password', role:'super_admin', first: 'Daniel', last: 'Hatcher'}])
+  Account.create!([{company: 'printonrails'}])
+  AdminUser.create!([{email: 'info@printonrails.com', password: 'password', password_confirmation: 'password', role:'super_admin', first: 'Daniel', last: 'Hatcher', account_id: 1}])
   AdminUser.create!([{email: 'admin@printonrails.com', password: 'password', password_confirmation: 'password', role:'admin', first: 'admin', last: 'admin'}])
   AdminUser.create!([{email: 'office@printonrails.com', password: 'password', password_confirmation: 'password', role:'office', first: 'office', last: 'office'}])
   AdminUser.create!([{email: 'warehouse@printonrails.com', password: 'password', password_confirmation: 'password', role:'warehouse', first: 'warehouse', last: 'warehouse'}])

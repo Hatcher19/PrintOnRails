@@ -1,8 +1,9 @@
 ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
   controller.authorize_resource
+  actions :all, :except => [:destroy]
   
   menu :label => "Customers", :if => proc{ can?(:create, Customer) }
-  
+  # scope(:all, :if => proc{ can?(:update, Order) }) do |customers| customers.where(:outside => false ) end
   scope(:mine, default: true) {|customers| customers.where(:admin_user_id => current_admin_user.id ) }
 
   filter :name, label: "by Name"

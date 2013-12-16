@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131128160542) do
+ActiveRecord::Schema.define(:version => 20131205035310) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -19,11 +19,12 @@ ActiveRecord::Schema.define(:version => 20131128160542) do
   end
 
   create_table "accounts", :force => true do |t|
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.string   "company"
     t.integer  "admin_user_id"
     t.string   "subdomain"
+    t.string   "stripe_customer_token"
   end
 
   add_index "accounts", ["admin_user_id"], :name => "index_accounts_on_admin_user_id"
@@ -191,6 +192,16 @@ ActiveRecord::Schema.define(:version => 20131128160542) do
 
   add_index "order_categories", ["account_id"], :name => "index_order_categories_on_account_id"
 
+  create_table "order_comments", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "order_id"
+    t.integer  "version_id"
+  end
+
+  add_index "order_comments", ["order_id"], :name => "index_order_comments_on_order_id"
+  add_index "order_comments", ["version_id"], :name => "index_order_comments_on_version_id"
+
   create_table "order_priorities", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -259,13 +270,19 @@ ActiveRecord::Schema.define(:version => 20131128160542) do
     t.integer  "quantity"
   end
 
+  create_table "ticket_comments", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "versions", :force => true do |t|
-    t.string   "item_type",  :null => false
-    t.integer  "item_id",    :null => false
-    t.string   "event",      :null => false
+    t.string   "item_type",      :null => false
+    t.integer  "item_id",        :null => false
+    t.string   "event",          :null => false
     t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"
+    t.text     "object_changes"
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"

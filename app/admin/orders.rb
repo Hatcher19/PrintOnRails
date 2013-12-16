@@ -2,6 +2,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   controller.authorize_resource
   scope_to :user_account
   menu :label => "Orders"
+  actions :all, :except => [:destroy]
   
   scope(:active, default: true)
   scope :new do |orders| orders.where(:order_status_id => 1 ) end
@@ -48,17 +49,29 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     column "Name", :sortable => :name do |order| link_to order.name, admin_order_path(order) end
     column "Category", :sortable => :order_category_id do |order| order.order_category.name.titleize end
     column("status", :sortable => :order_status_id) do |resource|
-      best_in_place resource, :order_status_id, :type => :select, :collection => 
-      [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]], 
-      path: [:admin, resource]
+      if current_admin_user.role == "broker"
+        resource.order_status.name.titleize
+      else
+        best_in_place resource, :order_status_id, :type => :select, :collection => 
+        [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]], 
+        path: [:admin, resource]
+      end
     end
     column :art, :sortable => :art_status_id do |resource|
-      best_in_place resource, :art_status_id, :type => :select, :collection => 
-      [[1, "In Progress"], [2, "Complete"]], path: [:admin, resource]
+      if current_admin_user.role == "broker"
+        resource.art_status.name.titleize
+      else
+        best_in_place resource, :art_status_id, :type => :select, :collection => 
+        [[1, "In Progress"], [2, "Complete"]], path: [:admin, resource]
+      end
     end
     column :product, :sortable => :product_status_id do |resource|
-      best_in_place resource, :product_status_id, :type => :select, :collection => 
-      [[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
+      if current_admin_user.role == "broker"
+        resource.product_status.name.titleize
+      else
+        best_in_place resource, :product_status_id, :type => :select, :collection => 
+        [[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
+      end
     end
     column("Due Date") do |obj| 
       obj.end_date.strftime("%m/%d/%y") 
@@ -89,107 +102,78 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
       end
     end
     br
-    div :class => "blocks" do
-      div :class => "block" do
-        div :class => "block-middle" do
-          h3 order.order_category.name.titleize
-        end
-        div :class => "block-bottom" do
-          h4 "Category"
+    div :class => "top-panel" do
+      div :class => "top" do
+        panel "Category" do
+          h4 order.order_category.name.titleize
         end
       end
-      div :class => "block" do
-        div :class => "block-middle" do
-          h3 order.created_at.localtime.strftime("%m/%d/%y")
-        end
-        div :class => "block-bottom" do
-          h4 "Start Date"
+      div :class => "top" do
+        panel "Start Date" do
+          h4 order.created_at.localtime.strftime("%m/%d/%y")
         end
       end
-      div :class => "block" do
-        div :class => "block-middle" do
-          h3 order.end_date.strftime("%m/%d/%y")
-        end
-        div :class => "block-bottom" do
-          h4 "End Date"
+      div :class => "top" do
+        panel "Due Date" do
+          h4 order.end_date.strftime("%m/%d/%y")
         end
       end
-      div :class => "block" do
-        div :class => "block-middle" do
+      div :class => "top" do
+        panel "Order Status" do
           if current_admin_user.role == "broker"
-            h3 order.order_status.name.titleize
+            h4 order.order_status.name.titleize
           else
             div :class => "#" do
-              div :class => "text-edit-icon" do
-                h3 best_in_place resource, :order_status_id, :type => :select, :collection => [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]] , path: [:admin, resource]
-              end
-              div :class => "order-edit-icon" do
-                image_tag 'pencil.png'
+              div :class => "#" do
+                h4 best_in_place resource, :order_status_id, :type => :select, :collection => [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]] , path: [:admin, resource]
               end
             end
           end
         end
-        br
-        div :class => "block-bottom" do
-          h4 "Status"
-        end
       end
-      div :class => "block" do
-        div :class => "block-middle" do
+      div :class => "top" do
+        panel "Product Status" do
           if current_admin_user.role == "broker"
-            h3 order.product_status.name.titleize
+            h4 order.product_status.name.titleize
           else
             div :class => "#" do
               div :class => "text-edit-icon" do
-                h3 best_in_place order, :product_status_id, :type => :select, :collection => [[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
-              end
-              div :class => "order-edit-icon" do
-                image_tag 'pencil.png'
+                h4 best_in_place order, :product_status_id, :type => :select, :collection => [[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
               end
             end
           end
         end
-        div :class => "block-bottom" do
-          h4 "Product"
-        end
       end
-      div :class => "block" do
-        div :class => "block-middle" do
+      div :class => "top" do
+        panel "Art Status" do
           if current_admin_user.role == "broker"
-            h3 order.art_status.name.titleize
+            h4 order.art_status.name.titleize
           else
-            div :class => "#" do
-              div :class => "text-edit-icon" do
-                h3 best_in_place order, :art_status_id, :type => :select, :collection => [[1, "In Progress"], [2, "Complete"]], path: [:admin, order]
-              end
-              div :class => "order-edit-icon" do
-                image_tag 'pencil.png'
-              end
+            div :class => "" do
+              h4 best_in_place order, :art_status_id, :type => :select, :collection => [[1, "In Progress"], [2, "Complete"]], path: [:admin, order]
             end
           end
-        end
-        div :class => "block-bottom" do
-          h4 "Artwork"
         end
       end
     end
+    br
     panel "Line Item" do
       table_for order.line_items do
-        column :quantity 
+        column("Qty") {|resource| quantity = resource.s + resource.m + resource.l + resource.xl + resource.xxl + resource.xxxl + resource.xxxxl } 
         column :style 
         column :color 
         column :s 
         column :m 
         column :l 
         column :xl 
-        column :xxl 
-        column :xxxl 
-        column :xxxxl 
+        column("2XL") do |line_item| line_item.xxl end 
+        column("3XL") do |line_item| line_item.xxxl end
+        column("4XL") do |line_item| line_item.xxxxl end
       end
     end
     panel "Artwork" do
       table_for order.artworks do
-        column "" do |artwork| image_tag artwork.file_url(:artwork) if artwork.file? end
+        column "Thumbnail" do |artwork| image_tag artwork.file_url(:artwork) if artwork.file? end
         column "Download" do |artwork| link_to order.name, artwork.file_url.to_s, download: [order.name,'-',order.id,'-',artwork.print_location.name] end
         column "Location" do |artwork| artwork.print_location.name.titleize end
         column "Color" do |artwork| artwork.color end
@@ -239,16 +223,15 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
         h4 order.customer.street.titleize
       end
       div :class => "customer-unit-show" do
-        h4 order.customer.unit
+        h4 "Apt ##{order.customer.unit}"
       end
       div :class => "city-state-zip" do
-        h4 "#{order.customer.city.titleize}, #{order.customer.state.titleize} #{order.customer.zip}"
+        h4 "#{order.customer.city.titleize}, #{order.customer.state.capitalize} #{order.customer.zip}"
       end
     end
   end
-
-  member_action :history do
-    @order = Order.find(params[:id])
-    @versions = @order.versions
-  end
+  # This is for the box label to work. Still working on the views right now.
+  # member_action :box_label do
+  #   @order = Order.find(params[:id])
+  # end
 end
