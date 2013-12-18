@@ -259,3 +259,36 @@ form fieldset legend span {
 	background: orange;
 	text-shadow: none;
 }
+a.button, a:link.button, a:visited.button, input[type=submit] {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	background: #777;
+	text-shadow: none;
+	border: none;
+	border-color: none;
+	border-top-color: none;
+	border-right-color: none;
+	border-bottom-color: none;
+	border-left-color: none;
+	color: #efefef;
+	margin-left: 20px;
+}
+.field-row {
+	float: left;
+	width: 75px;
+}
+.field-row.string {
+	padding: 2px;
+	margin: 2px;
+}
+.field-row.number {
+	padding: 2px;
+	margin: 2px;
+	margin-right: 50px;
+}
+.art-row {
+	float: left;
+	width: 100px;
+	margin-right: 100px;
+}

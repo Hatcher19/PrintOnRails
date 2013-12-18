@@ -2,12 +2,12 @@
 	semantic_form_for [:admin, resource], :builder => ActiveAdmin::FormBuilder do |f| 
 		f.inputs "Order Information" do
 			f.input :name, label: "Order Name"
-			f.input :customer_id, as: :select, :collection => Customer.where(:admin_user_id => current_admin_user.id), :hint => (link_to "New Customer", new_admin_customer_path)
+			f.input :customer, member_label: Proc.new{ |r| r.company.titleize }, :hint => (link_to "New Customer", new_admin_customer_path)
 			f.input :end_date, label: "Due date", as: :datepicker
-			f.input :order_category_id, as: :select, :collection => OrderCategory.all, label: "Category"
+			f.input :order_category, member_label: Proc.new{ |r| r.name.titleize }, label: "Category"
 			f.input :ship, as: :radio
-			f.input :order_type_id, as: :select, :collection => OrderType.all, label: "Type", as: :select
-			f.input :product_status_id, as: :select, :collection => ProductStatus.all, label: "Product Status"
+			f.input :order_type, member_label: Proc.new{ |r| r.name.titleize }, label: "Type"
+			f.input :product_status, member_label: Proc.new{ |r| r.name.titleize }, label: "Product Status"
 		end
 		f.inputs "Line Items" do 
 				render :partial => "admin/line_items/form", :locals => { :form => f }
