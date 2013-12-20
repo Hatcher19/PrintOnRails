@@ -292,3 +292,10 @@ a.button, a:link.button, a:visited.button, input[type=submit] {
 	width: 100px;
 	margin-right: 100px;
 }
+table.dashboard .dashboard_section h3 {
+	background: orange;
+	text-shadow: none;
+}
+table.dashboard .dashboard_section {
+	background: white;
+}
