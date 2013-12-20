@@ -1,7 +1,6 @@
 ActiveAdmin::Dashboards.build do
-
 	section "New Orders", :if => proc{ can?(:update, Order) }, priority: 1 do
-		table_for Order.where(:account_id => current_admin_user.account_id, :order_status_id => 1).limit(20) do
+		table_for Order.where(:account_id => current_admin_user.account_id, :order_status_id => 1).order("created_at desc").limit(5) do
 			column "Id" do |order| link_to order.id, admin_order_path(order) end
 			column "Name" do |order| link_to order.name, admin_order_path(order) end
 			column "Created At" do |obj|
@@ -15,24 +14,8 @@ ActiveAdmin::Dashboards.build do
 		    end
 		end
 	end
-	section "Recently Completed", :if => proc{ can?(:update, Order) }, priority: 1 do
-		table_for Order.where(:account_id => current_admin_user.account_id, :order_status_id => 3).limit(20) do
-			column "Id" do |order| link_to order.id, admin_order_path(order) end
-			column "Name" do |order| link_to order.name, admin_order_path(order) end
-			column "User" do |order| order.admin_user.email end
-			column "Status" do |order| order.order_status.name end
-		end
-	end
-	# section "Recently updated", :if => proc{ can?(:update, Order) }, priority: 2 do
-	# 	table_for Order.where(:account_id => current_admin_user.account_id).limit(20) do
-	# 		column "Id" do |order| link_to order.id, admin_order_path(order) end
-	# 		column "Name" do |order| link_to order.name, admin_order_path(order) end
-	# 		column "Updated At" do |order| order.updated_at end
-	# 		column "User" do |order| order.admin_user.email end
-	# 	end
-	# end
 	section "My Orders", priority: 3 do
-		table_for Order.where(:admin_user_id => current_admin_user.id).limit(20) do
+		table_for Order.where(:admin_user_id => current_admin_user.id).limit(5) do
 			column "Id" do |order| link_to order.id, admin_order_path(order) end
 			column "Name" do |order| link_to order.name, admin_order_path(order) end
 			column "Due Date" do |obj|
@@ -42,3 +25,22 @@ ActiveAdmin::Dashboards.build do
 		end
 	end
 end
+
+
+
+	# section "Recently Completed", :if => proc{ can?(:update, Order) }, priority: 2 do
+	# 	table_for Order.where(:account_id => current_admin_user.account_id, :order_status_id => 3).limit(5) do
+	# 		column "Id" do |order| link_to order.id, admin_order_path(order) end
+	# 		column "Name" do |order| link_to order.name, admin_order_path(order) end
+	# 		column "User" do |order| order.admin_user.email end
+	# 		column "Status" do |order| order.order_status.name end
+	# 	end
+	# end
+	# section "Recently updated", :if => proc{ can?(:update, Order) }, priority: 2 do
+	# 	table_for Order.where(:account_id => current_admin_user.account_id).limit(5) do
+	# 		column "Id" do |order| link_to order.id, admin_order_path(order) end
+	# 		column "Name" do |order| link_to order.name, admin_order_path(order) end
+	# 		column "Updated At" do |order| order.updated_at end
+	# 		column "User" do |order| order.admin_user.email end
+	# 	end
+	# end
