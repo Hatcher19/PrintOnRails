@@ -7,10 +7,9 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
   scope(:mine, default: true) {|customers| customers.where(:admin_user_id => current_admin_user.id ) }
 
   filter :name, label: "by Name"
-  filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.last, u.id] } }
+  filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.last, u.id] } }, :if => proc {can? :read, :all}
   filter :company, label: "by Company"
   filter :email, label: "by Email"
-  filter :phone, label: "by Phone Number"
 
   index do
     selectable_column

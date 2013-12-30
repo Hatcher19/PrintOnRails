@@ -2,7 +2,7 @@
 	semantic_form_for [:admin, resource], :builder => ActiveAdmin::FormBuilder do |f| 
 		f.inputs "Order Information" do
 			f.input :name, label: "Order Name"
-			f.input :customer, member_label: Proc.new{ |r| r.company.titleize }, :hint => (link_to "New Customer", new_admin_customer_path)
+			f.input :customer, :collection => Customer.where(:admin_user_id => current_admin_user.id), member_label: Proc.new{ |r| r.company.titleize }, :hint => (link_to "New Customer", new_admin_customer_path)
 			f.input :end_date, label: "Due date", as: :datepicker
 			f.input :order_category, member_label: Proc.new{ |r| r.name.titleize }, label: "Category"
 			f.input :ship, as: :radio

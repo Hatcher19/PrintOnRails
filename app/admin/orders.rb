@@ -35,12 +35,12 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
   # filter :account, :collection => proc { Account.all.map{|u| [u.company]}}, :if => proc { can? :destroy, Order }
   filter :name, label: "Order Name"
   filter :id, label: "Order ID#"
-  filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.all.map{|u| [u.last] } }
+  filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.all.map{|u| [u.last] } }, :if => proc {can? :read, :all}
   filter :order_category, label: "Category"
   filter :order_type, label: "Type"
   filter :order_status, label: "Status"
-  filter :product_status, label: "Product Status"
-  filter :customer, label: "Customer"
+  filter :product_status, member_label: Proc.new{ |r| r.name.titleize }, label: "Product Status"
+  filter :customer, label: "Customer", :collection => proc{ Customer.where(:admin_user_id => current_admin_user.id) }, member_label: Proc.new{ |r| r.company.titleize }
   filter :start_date, label: "Start Date"
   filter :end_date, label: "Due Date"
 
@@ -89,7 +89,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
         h2 order.name
       end
       div :class => "order-type" do
-        h4 "(#{order.order_type.name.titleize})"
+        h4 " #{order.order_type.name.titleize}"
       end
     end
     br
@@ -183,8 +183,8 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
     panel "History" do
       table_for assigns[:order].versions do
         column "User" do |v| link_to AdminUser.find(v.whodunnit).email, admin_admin_user_path(AdminUser.find(v.whodunnit)) end
-        column "Event" do |order| order.event end
-        column "Attribute" do |order| Order.changeset_string(order.changeset) end
+        column "Action" do |order| order.event end
+        column "Order Attribute" do |order| Order.changeset_string(order.changeset) end
         column "Date/ Time" do |order| order.created_at.localtime.strftime("%m/%d/%y-%I:%M %P") end
       end
     end

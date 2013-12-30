@@ -1,6 +1,5 @@
 %p(id="utility_nav" class="header-item")
-	- if can? :update, @order
-		= link_to(display_name(current_active_admin_user), edit_admin_admin_user_path(current_active_admin_user))
+	= link_to(display_name(current_active_admin_user), edit_admin_admin_user_path(current_active_admin_user))
 	- if can? :manage, @account
 		= link_to 'Account', account_path(current_admin_user.account)
 	= link_to(I18n.t('active_admin.logout'), destroy_admin_user_session_path)
