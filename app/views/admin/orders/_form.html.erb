@@ -18,7 +18,7 @@
 		end
 		if f.object.new_record?
 			f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
-			f.input :account_id, :as => :hidden, :value => current_admin_user.account
+			f.input :account_id, :as => :hidden, :value => current_admin_user.account_id
 			f.input :order_status_id, :as => :hidden, :value => 1
 			f.input :art_status_id, :as => :hidden, :value => 1
 		end
