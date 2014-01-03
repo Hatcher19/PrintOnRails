@@ -1,6 +1,7 @@
-class PrintLocation < ActiveRecord::Base
+class Location < ActiveRecord::Base
   attr_accessible :name
   
   has_many :artworks
   validates :name, :presence => true
 end
+

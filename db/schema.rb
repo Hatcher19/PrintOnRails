@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131205035310) do
+ActiveRecord::Schema.define(:version => 20140103005111) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -19,12 +19,10 @@ ActiveRecord::Schema.define(:version => 20131205035310) do
   end
 
   create_table "accounts", :force => true do |t|
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "company"
     t.integer  "admin_user_id"
-    t.string   "subdomain"
-    t.string   "stripe_customer_token"
   end
 
   add_index "accounts", ["admin_user_id"], :name => "index_accounts_on_admin_user_id"
@@ -43,39 +41,6 @@ ActiveRecord::Schema.define(:version => 20131205035310) do
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
-
-  create_table "activities", :force => true do |t|
-    t.integer  "trackable_id"
-    t.string   "trackable_type"
-    t.integer  "owner_id"
-    t.string   "owner_type"
-    t.string   "key"
-    t.text     "parameters"
-    t.integer  "recipient_id"
-    t.string   "recipient_type"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "activities", ["owner_id", "owner_type"], :name => "index_activities_on_owner_id_and_owner_type"
-  add_index "activities", ["recipient_id", "recipient_type"], :name => "index_activities_on_recipient_id_and_recipient_type"
-  add_index "activities", ["trackable_id", "trackable_type"], :name => "index_activities_on_trackable_id_and_trackable_type"
-
-  create_table "addresses", :force => true do |t|
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.integer  "customer_id"
-    t.string   "zip"
-    t.string   "address_name"
-    t.boolean  "same_as_billing"
-    t.string   "address_type"
-  end
-
-  add_index "addresses", ["address_type"], :name => "index_addresses_on_address_type"
-  add_index "addresses", ["customer_id"], :name => "index_addresses_on_customer_id"
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -107,28 +72,18 @@ ActiveRecord::Schema.define(:version => 20131205035310) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "arts", :force => true do |t|
-    t.string   "artwork"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "order_id"
-  end
-
-  add_index "arts", ["order_id"], :name => "index_arts_on_order_id"
-
   create_table "artworks", :force => true do |t|
     t.integer  "order_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "location"
     t.string   "file"
     t.string   "color"
-    t.integer  "print_location_id"
+    t.integer  "location_id"
   end
 
   add_index "artworks", ["file"], :name => "index_artworks_on_file"
   add_index "artworks", ["order_id"], :name => "index_artworks_on_order_id"
-  add_index "artworks", ["print_location_id"], :name => "index_artworks_on_print_location_id"
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -173,12 +128,8 @@ ActiveRecord::Schema.define(:version => 20131205035310) do
     t.string   "size"
   end
 
-  create_table "only_admins", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "only_admins_authorizations", :force => true do |t|
+  create_table "locations", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -191,16 +142,6 @@ ActiveRecord::Schema.define(:version => 20131205035310) do
   end
 
   add_index "order_categories", ["account_id"], :name => "index_order_categories_on_account_id"
-
-  create_table "order_comments", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "order_id"
-    t.integer  "version_id"
-  end
-
-  add_index "order_comments", ["order_id"], :name => "index_order_comments_on_order_id"
-  add_index "order_comments", ["version_id"], :name => "index_order_comments_on_version_id"
 
   create_table "order_priorities", :force => true do |t|
     t.string   "name"
@@ -246,33 +187,11 @@ ActiveRecord::Schema.define(:version => 20131205035310) do
   add_index "orders", ["order_category_id"], :name => "index_orders_on_order_category_id"
   add_index "orders", ["product_status_id"], :name => "index_orders_on_product_status_id"
 
-  create_table "print_locations", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "artwork_id"
-  end
-
-  add_index "print_locations", ["artwork_id"], :name => "index_print_locations_on_artwork_id"
-
   create_table "product_statuses", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.boolean  "active"
-  end
-
-  create_table "sizes", :force => true do |t|
-    t.string   "size"
-    t.integer  "line_item_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.integer  "quantity"
-  end
-
-  create_table "ticket_comments", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "versions", :force => true do |t|

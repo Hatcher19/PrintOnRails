@@ -1,4 +1,4 @@
-ActiveAdmin.register PrintLocation do
+ActiveAdmin.register Location do
   controller.authorize_resource
   menu :label => "Print Location", :parent => "Settings", :if => proc{ can?(:destroy, Account) }, :priority => 6
   index do
