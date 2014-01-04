@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140103005111) do
+ActiveRecord::Schema.define(:version => 20140104135050) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -116,16 +116,12 @@ ActiveRecord::Schema.define(:version => 20140103005111) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "order_id"
-    t.integer  "yxs"
-    t.integer  "ys"
-    t.integer  "ym"
-    t.integer  "yl"
-    t.integer  "yxl"
     t.integer  "xs"
     t.integer  "xxl"
     t.integer  "xxxl"
     t.integer  "xxxxl"
-    t.string   "size"
+    t.integer  "vxl"
+    t.integer  "vixl"
   end
 
   create_table "locations", :force => true do |t|

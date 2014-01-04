@@ -157,7 +157,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 			end
 		end
 		br
-		panel "Line Item" do
+		panel "Product" do
 			table_for order.line_items do
 				column("Qty") {|resource| quantity = resource.xs + resource.s + resource.m + resource.l + resource.xl + resource.xxl + resource.xxxl + resource.xxxxl + resource.vxl + resource.vixl } 
 				column :style 
