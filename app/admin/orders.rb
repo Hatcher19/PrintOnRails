@@ -159,16 +159,19 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 		br
 		panel "Line Item" do
 			table_for order.line_items do
-				column("Qty") {|resource| quantity = resource.s + resource.m + resource.l + resource.xl + resource.xxl + resource.xxxl + resource.xxxxl } 
+				column("Qty") {|resource| quantity = resource.xs + resource.s + resource.m + resource.l + resource.xl + resource.xxl + resource.xxxl + resource.xxxxl + resource.vxl + resource.vixl } 
 				column :style 
 				column :color 
-				column :s 
-				column :m 
-				column :l 
-				column :xl 
+				column("Xs") do |line_item| line_item.xs end 
+				column("S") do |line_item| line_item.s end  
+				column("M") do |line_item| line_item.m end 
+				column("L") do |line_item| line_item.l end 
+				column("XL") do |line_item| line_item.xl end 
 				column("2XL") do |line_item| line_item.xxl end 
 				column("3XL") do |line_item| line_item.xxxl end
 				column("4XL") do |line_item| line_item.xxxxl end
+				column("5XL") do |line_item| line_item.vxl end
+				column("6XL") do |line_item| line_item.vixl end
 			end
 		end
 		panel "Artwork" do

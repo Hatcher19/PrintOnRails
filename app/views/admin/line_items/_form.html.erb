@@ -3,25 +3,31 @@ if resource.new_record?
 	form.has_many :line_items do |line_item|  
 	  line_item.input :style, :wrapper_html => { :class => 'field-row' }
 	  line_item.input :color, :wrapper_html => { :class => 'field-row' }
-	  line_item.input :s, label: "S", :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
-	  line_item.input :m, label: "M", :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
-	  line_item.input :l, label: "L", :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
-	  line_item.input :xl, label: "XL", :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
-	  line_item.input :xxl, label: "2XL", :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
-	  line_item.input :xxxl, label: "3XL", :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
-	  line_item.input :xxxxl, label: "4XL", :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
+	  line_item.input :xs, label: "XS", as: :string, :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
+	  line_item.input :s, label: "S", as: :string, :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
+	  line_item.input :m, label: "M", as: :string, :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
+	  line_item.input :l, label: "L", as: :string, :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
+	  line_item.input :xl, label: "XL", as: :string, :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
+	  line_item.input :xxl, label: "2XL", as: :string, :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
+	  line_item.input :xxxl, label: "3XL", as: :string, :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
+	  line_item.input :xxxxl, label: "4XL", as: :string, :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
+	  line_item.input :vxl, label: "5XL", as: :string, :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
+	  line_item.input :vixl, label: "6XL", as: :string, :wrapper_html => { :class => 'field-row' }, :input_html => { :value => 0 }
 	end 
 else
 	form.has_many :line_items do |line_item|  
 	  line_item.input :style, :wrapper_html => { :class => 'field-row' }
 	  line_item.input :color, :wrapper_html => { :class => 'field-row' }
-	  line_item.input :s, label: "S", :wrapper_html => { :class => 'field-row' }
-	  line_item.input :m, label: "M", :wrapper_html => { :class => 'field-row' }
-	  line_item.input :l, label: "L", :wrapper_html => { :class => 'field-row' }
-	  line_item.input :xl, label: "XL", :wrapper_html => { :class => 'field-row' }
-	  line_item.input :xxl, label: "2XL", :wrapper_html => { :class => 'field-row' }
-	  line_item.input :xxxl, label: "3XL", :wrapper_html => { :class => 'field-row' }
-	  line_item.input :xxxxl, label: "4XL", :wrapper_html => { :class => 'field-row' }
+	  line_item.input :xs, label: "XS", as: :string, :wrapper_html => { :class => 'field-row' }
+	  line_item.input :s, label: "S", as: :string, :wrapper_html => { :class => 'field-row' }
+	  line_item.input :m, label: "M", as: :string, :wrapper_html => { :class => 'field-row' }
+	  line_item.input :l, label: "L", as: :string, :wrapper_html => { :class => 'field-row' }
+	  line_item.input :xl, label: "XL", as: :string, :wrapper_html => { :class => 'field-row' }
+	  line_item.input :xxl, label: "2XL", as: :string, :wrapper_html => { :class => 'field-row' }
+	  line_item.input :xxxl, label: "3XL", as: :string, :wrapper_html => { :class => 'field-row' }
+	  line_item.input :xxxxl, label: "4XL", as: :string, :wrapper_html => { :class => 'field-row' }
+	  line_item.input :vxl, label: "5XL", as: :string, :wrapper_html => { :class => 'field-row' }
+	  line_item.input :vixl, label: "6XL", as: :string, :wrapper_html => { :class => 'field-row' }
 	end 
 end
 %>

@@ -1,5 +1,5 @@
 class LineItem < ActiveRecord::Base
-  attr_accessible :color, :l, :m, :quantity, :s, :style, :xl, :order_id, 
-  :yxs, :ys, :ym, :yl, :yxl, :xs, :xxl, :xxxl, :xxxxl, :size
+  attr_accessible :quantity, :style, :order_id, 
+  :xs, :s, :m, :l, :xl, :xxl, :xxxl, :xxxxl, :vxl, :vixl
   belongs_to :order
 end
