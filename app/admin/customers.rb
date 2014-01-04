@@ -3,11 +3,11 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
   actions :all, :except => [:destroy]
   
   menu :label => "Customers", :if => proc{ can?(:create, Customer) }
-  # scope(:all, :if => proc{ can?(:update, Order) }) do |customers| customers.where(:outside => false ) end
+  scope(:all, :if => proc{ can?(:read, :all) }) do |customers| customers.where(:account_id => current_admin_user.account_id ) end
   scope(:mine, default: true) {|customers| customers.where(:admin_user_id => current_admin_user.id ) }
 
   filter :name, label: "by Name"
-  filter :admin_user, :collection => proc { AdminUser.all.map{|u| [u.last, u.id] } }, :if => proc {can? :read, :all}
+  filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.where(:account_id => current_admin_user.account_id) }, member_label: Proc.new{ |r| "#{r.first} #{r.last}" }, :if => proc {can? :read, :all}
   filter :company, label: "by Company"
   filter :email, label: "by Email"
 

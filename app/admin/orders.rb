@@ -7,7 +7,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	scope(:active, default: true)
 	scope :new do |orders| orders.where(:order_status_id => 1 ) end
 	scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
-	scope(:due_today) { |orders| orders.where(:end_date => Date.today ) }
+	scope(:due_today) { |orders| orders.where(:end_date => Date.today.strftime ) }
 	scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
 	scope :hold
 	scope :complete do |orders| orders.where(:order_status_id => 3 ) end
@@ -35,12 +35,12 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	# filter :account, :collection => proc { Account.all.map{|u| [u.company]}}, :if => proc { can? :destroy, Order }
 	filter :name, label: "Order Name"
 	filter :id, label: "Order ID#"
-	filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.all.map{|u| [u.last] } }, :if => proc {can? :read, :all}
+	filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.where(:account_id => current_admin_user.account_id) }, member_label: Proc.new{ |r| "#{r.first} #{r.last}" }, :if => proc {can? :read, :all}
 	filter :order_category, label: "Category"
 	filter :order_type, label: "Type"
 	filter :order_status, label: "Status"
 	filter :product_status, member_label: Proc.new{ |r| r.name.titleize }, label: "Product Status"
-	filter :customer, label: "Customer", :collection => proc{ Customer.where(:admin_user_id => current_admin_user.id) }, member_label: Proc.new{ |r| r.company.titleize }
+	filter :customer, label: "Customer", :collection => proc{ Customer.where(:account_id => current_admin_user.account_id) }, member_label: Proc.new{ |r| r.company.titleize }
 	filter :start_date, label: "Start Date"
 	filter :end_date, label: "Due Date"
 

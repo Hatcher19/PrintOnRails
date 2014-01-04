@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140104135050) do
+ActiveRecord::Schema.define(:version => 20140104165827) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(:version => 20140104135050) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.boolean  "outside"
   end
 
   add_index "customers", ["account_id"], :name => "index_customers_on_account_id"

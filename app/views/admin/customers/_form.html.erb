@@ -15,14 +15,12 @@
 		    f.input :account_id, :as => :hidden, :value => current_admin_user.account
 		  	f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 			end 
-			if current_admin_user.role == "broker"
-		  		f.input :outside, :as => :hidden, :value => true
-		  	else
-		  		f.input :outside, :as => :hidden, :value => false
-		  	end
 		  	if f.object.new_record?
-				f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
-				f.input :account_id, :as => :hidden, :value => current_admin_user.account.id
+		  		f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
+		  		if current_admin_user.role == "broker" 
+				else
+					f.input :account_id, :as => :hidden, :value => current_admin_user.account.id
+				end
 			end
 			  f.buttons 
 		end
