@@ -40,7 +40,7 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
   show :title => :company do
     panel "Order History" do
       table_for(customer.orders) do
-        column("ID", :sortable => :id) {|order| link_to "# #{order.id}", admin_order_path(order) }
+        column("ID", :sortable => :guid) {|order| link_to "# #{order.guid}", admin_order_path(order) }
         column("Order Name", :sortable => :name) {|order| link_to "#{order.name}", admin_order_path(order) }
         column("Due Date", :sortable => :end_date) {|order| "#{order.end_date}" }
         column("Status") {|order| "#{order.order_status.name}" }

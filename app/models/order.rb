@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   attr_accessible :end_date, :name, :customer_id, :order_category_id, 
   :order_type_id, :order_status_id, :order_priority_id, 
   :line_items_attributes, :admin_user_id, :ship, :artworks_attributes, 
-  :product_status_id, :account_id, :art_status_id
+  :product_status_id, :account_id, :art_status_id, :guid
 
   has_many :artworks
   has_many :line_items
@@ -35,10 +35,11 @@ class Order < ActiveRecord::Base
   validates :ship, :inclusion => {:in => [true, false]}
   validates :product_status_id, :presence => true
 
+  before_create :generate_guid
+
   def default_values
     if new_record?
       self.start_date ||= Date.today
-      self.number ||= (Order.maximum(:number) + 1 rescue 1)
     end
   end
 
@@ -50,5 +51,9 @@ class Order < ActiveRecord::Base
 
   def to_s
     display_name
+  end
+  def generate_guid
+    self.guid = account.orders.count + 1
+
   end
 end

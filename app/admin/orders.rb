@@ -34,7 +34,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	# needs work
 	# filter :account, :collection => proc { Account.all.map{|u| [u.company]}}, :if => proc { can? :destroy, Order }
 	filter :name, label: "Order Name"
-	filter :id, label: "Order ID#"
+	filter :guid, label: "Order ID#"
 	filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.where(:account_id => current_admin_user.account_id) }, member_label: Proc.new{ |r| "#{r.first} #{r.last}" }, :if => proc {can? :read, :all}
 	filter :order_category, label: "Category"
 	filter :order_type, label: "Type"
@@ -45,7 +45,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	filter :end_date, label: "Due Date"
 
 	index do 
-		column "ID", :sortable => :id do |order| link_to order.id, admin_order_path(order) end
+		column "#", :sortable => :guid do |order| link_to "#{order.guid}", admin_order_path(order) end
 		column "Name", :sortable => :name do |order| link_to order.name, admin_order_path(order) end
 		column "Category", :sortable => :order_category_id do |order| order.order_category.name.titleize end
 		column("status", :sortable => :order_status_id) do |resource|
@@ -95,7 +95,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 		br
 		div :class => "order-id-user" do
 			div :class => "id-user" do
-				h3 "##{order.id}"
+				h3 "##{order.guid}"
 			end
 			div :class => "admin-user" do
 				h6 link_to order.admin_user.email, admin_admin_user_path

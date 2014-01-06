@@ -17,12 +17,10 @@ ActiveAdmin.register AdminUser do
 
 
   index do
-    column :first
-    column :last
+    column :name do |admin_user| link_to "#{admin_user.first} #{admin_user.last}", admin_admin_user_path(admin_user) end
     column :phone_number
     column :email, :sortable => :email do |admin_user| link_to admin_user.email, "mailto:#{admin_user.email}" end
-    column :role do |admin_user| admin_user.role end
-    default_actions
+    column :role do |admin_user| admin_user.role.titleize end
   end
 
   form :partial => "form"
@@ -30,7 +28,7 @@ ActiveAdmin.register AdminUser do
   show :title => :email do
     panel "Order History" do
       table_for(admin_user.orders) do
-        column("ID", :sortable => :id) {|order| link_to "##{order.id}", admin_order_path(order) }
+        column("ID", :sortable => :guid) {|order| link_to "##{order.guid}", admin_order_path(order) }
         column("Order Name", :sortable => :name) {|order| "#{order.name}" }
         column("Due Date") do |obj|
           obj.end_date.strftime("%m/%d/%y")
