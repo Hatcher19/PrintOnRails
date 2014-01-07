@@ -233,6 +233,10 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 			end
 		end
 	end
+	sidebar "Help/ Feedback" do
+		h4 "For all questions and/or feedback please email us."
+		h1 mail_to "info@printonrails.com", raw(image_tag("email_us.png"))
+	end
 	# This is for the box label to work. Still working on the views right now.
 	# member_action :box_label do
 	#   @order = Order.find(params[:id])

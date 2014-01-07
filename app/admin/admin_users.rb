@@ -56,4 +56,8 @@ ActiveAdmin.register AdminUser do
       end
     end   
   end
+  sidebar "Help/ Feedback" do
+    h4 "For all questions and/or feedback please email us."
+    h1 mail_to "info@printonrails.com", raw(image_tag("email_us.png"))
+  end
 end
