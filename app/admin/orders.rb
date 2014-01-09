@@ -34,7 +34,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	# needs work
 	# filter :account, :collection => proc { Account.all.map{|u| [u.company]}}, :if => proc { can? :destroy, Order }
 	filter :name, label: "Order Name"
-	filter :guid, label: "Order ID#"
+	filter :guid, label: "Order #"
 	filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.where(:account_id => current_admin_user.account_id) }, member_label: Proc.new{ |r| "#{r.first} #{r.last}" }, :if => proc {can? :read, :all}
 	filter :order_category, label: "Category"
 	filter :order_type, label: "Type"
@@ -159,7 +159,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 		br
 		panel "Product" do
 			table_for order.line_items do
-				column("Qty") {|resource| quantity = resource.xs + resource.s + resource.m + resource.l + resource.xl + resource.xxl + resource.xxxl + resource.xxxxl + resource.vxl + resource.vixl } 
+				column("Qty") {|resource| quantity = resource.xs.to_i + resource.s.to_i + resource.m.to_i + resource.l.to_i + resource.xl.to_i + resource.xxl.to_i + resource.xxxl.to_i + resource.xxxxl.to_i + resource.vxl.to_i + resource.vixl.to_i } 
 				column :style 
 				column :color 
 				column("Xs") do |line_item| line_item.xs end 
@@ -225,8 +225,10 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 			div :class => "customer-street-show" do
 				h4 order.customer.street.titleize
 			end
-			div :class => "customer-unit-show" do
-				h4 "Apt ##{order.customer.unit}"
+			if order.customer.unit?
+				div :class => "customer-unit-show" do
+					h4 "Apt ##{order.customer.unit}"
+				end
 			end
 			div :class => "city-state-zip" do
 				h4 "#{order.customer.city.titleize}, #{order.customer.state.capitalize} #{order.customer.zip}"

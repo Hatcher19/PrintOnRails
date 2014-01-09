@@ -28,6 +28,7 @@ else
 	  line_item.input :xxxxl, label: "4XL", as: :string, :wrapper_html => { :class => 'field-row' }
 	  line_item.input :vxl, label: "5XL", as: :string, :wrapper_html => { :class => 'field-row' }
 	  line_item.input :vixl, label: "6XL", as: :string, :wrapper_html => { :class => 'field-row' }
+	  line_item.input :_destroy, :as=>:boolean, :required => false, label: "Remove", :wrapper_html => { :class => 'bool' }
 	end 
 end
 %>

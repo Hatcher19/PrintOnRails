@@ -38,6 +38,10 @@ class AdminUser < ActiveRecord::Base
     role? :account_admin
   end
 
+  def demo?
+    role? :demo
+  end
+
   def admin?
     role? :admin
   end

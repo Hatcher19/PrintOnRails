@@ -9,6 +9,10 @@ class Ability
         can :manage, :all
         can :manage, Account, :user_id => user.id
         cannot :destroy, :all
+      when user.demo?
+        can :manage, :all
+        can :manage, Account, :user_id => user.id
+        cannot :destroy, :all
       when user.admin?
         can :manage, :all
         cannot :manage, Account

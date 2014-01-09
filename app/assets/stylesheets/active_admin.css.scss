@@ -276,7 +276,8 @@ a.button, a:link.button, a:visited.button, input[type=submit] {
 }
 .field-row {
 	float: left;
-	width: 75px;
+	width: 50px;
+	margin-left: 100px;
 }
 .field-row.string {
 	padding: 2px;
@@ -298,4 +299,7 @@ table.dashboard .dashboard_section h3 {
 }
 table.dashboard .dashboard_section {
 	background: white;
+}
+.bool {
+	width: 100px;
 }
