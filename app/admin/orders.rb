@@ -4,7 +4,8 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	menu :label => "Orders"
 	actions :all, :except => [:destroy]
 	
-	scope(:active, default: true)
+	scope(:all, default: true)
+	scope(:active)
 	scope :new do |orders| orders.where(:order_status_id => 1 ) end
 	scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
 	scope(:due_today) { |orders| orders.where(:end_date => Date.today.strftime ) }
@@ -119,7 +120,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 				end
 			end
 			div :class => "top" do
-				panel "Order Status" do
+				panel "Status" do
 					if current_admin_user.role == "broker"
 						h4 order.order_status.name.titleize
 					else
@@ -132,7 +133,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 				end
 			end
 			div :class => "top" do
-				panel "Product Status" do
+				panel "Product" do
 					if current_admin_user.role == "broker"
 						h4 order.product_status.name.titleize
 					else
@@ -145,7 +146,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 				end
 			end
 			div :class => "top" do
-				panel "Art Status" do
+				panel "Art" do
 					if current_admin_user.role == "broker"
 						h4 order.art_status.name.titleize
 					else

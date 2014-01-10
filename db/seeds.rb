@@ -8,6 +8,9 @@
 
   Account.create!([{company: 'printonrails'}])
   AdminUser.create!([{email: 'info@printonrails.com', password: 'password', password_confirmation: 'password', role:'super_admin', first: 'Daniel', last: 'Hatcher', account_id: 1}])
+  Account.create!([{company: 'demo'}])
+  AdminUser.create!([{email: 'test@example.com', password: 'password', password_confirmation: 'password', role:'account_admin', first: 'test', last: 'test', account_id: 2}])
+  AdminUser.create!([{email: 'example@demo.com', password: 'password', password_confirmation: 'password', role:'demo', first: 'demo', last: 'demo', account_id: 2}])
   OrderCategory.create!([{name: 'screen_print'}])
   OrderCategory.create!([{name: 'embroidery'}])
   OrderStatus.create!([{name: 'new'}])

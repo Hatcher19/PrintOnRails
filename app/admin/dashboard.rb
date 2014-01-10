@@ -1,6 +1,6 @@
 ActiveAdmin::Dashboards.build do
 	section "New Orders", :if => proc{ can?(:update, AdminUser) }, priority: 1 do
-		table_for Order.where(:account_id => current_admin_user.account_id, :order_status_id => 1).order("created_at desc").limit(5) do
+		table_for Order.where(:account_id => current_admin_user.account_id, :order_status_id => 1).order("created_at desc").limit(10) do
 			column "Id" do |order| link_to order.guid, admin_order_path(order) end
 			column "Name" do |order| link_to order.name, admin_order_path(order) end
 			column "Created At" do |obj|
@@ -15,7 +15,7 @@ ActiveAdmin::Dashboards.build do
 		end
 	end
 	section "My Orders", :if => proc{ can?(:create, Order) } do
-		table_for Order.where(:admin_user_id => current_admin_user.id).order("created_at desc").limit(5) do
+		table_for Order.where(:admin_user_id => current_admin_user.id).order("created_at desc").limit(10) do
 			column "Id" do |order| link_to order.guid, admin_order_path(order) end
 			column "Name" do |order| link_to order.name, admin_order_path(order) end
 			column "Due Date" do |obj|
