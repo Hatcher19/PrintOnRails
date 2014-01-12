@@ -2,11 +2,10 @@
 <div class="span3">
   <div data-spy="affix">
     <div class="sidepanel">
-      <%= mail_to "info@printonrails.com", raw(image_tag("email.png"))%>
-      <%= link_to 'http://www.facebook.com' do %><%= image_tag('fb.png') %><% end %>
-      <%= link_to 'http://www.twitter.com' do %><%= image_tag('twitter.png') %><% end %>
-      <%= link_to '#' do %><%= image_tag('g+.png') %><% end %>
-      <%= link_to 'Sign Up', new_account_path, :class => 'btn btn-primary' %>
+      <div class="media"><%= mail_to "info@printonrails.com", raw(image_tag("email.png"))%><br></div>
+      <div class="media"><%= link_to 'https://www.facebook.com/printonrails' do %><%= image_tag('fb.png') %><% end %><br></div>
+      <div class="media"><%= link_to 'http://www.twitter.com' do %><%= image_tag('twitter.png') %><% end %><br></div>
+      <!-- <div class="media"><%= link_to '#' do %><%= image_tag('g+.png') %><% end %></div> -->
     </div>
   </div>
 </div>
