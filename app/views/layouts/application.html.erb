@@ -5,8 +5,11 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  	<meta name="google-site-verification" content="q3Yf4hO0tPJuxgx1CGFecaVHJnBwkObmXbnbsD67K3M" />
+  	<meta name="google-site-verification" content="mhRzrNtxLylY5V503Ak5rsKGvyxyyfXed1PM-vpZwQc" />
 </head>
 <body>
 	<%= yield %>
 </body>
+<% if Rails.env.production? %><%= render 'layouts/ga' %>
 </html>
