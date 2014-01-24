@@ -1,14 +1,14 @@
-<div class="navbar navbar-fixed-top">
+<div class="navigation">
 	<div class="row-fluid">
-    <div class="pull-left">
-      <%= link_to 'Print on Rails', root_path, :class => "nav-logo" %>
+        <div class="pull-left">
+          <%= link_to 'Print on Rails', root_path, :class => "nav-logo" %>
+        </div>
+        <div>
+        	
+        </div>
+        <div class="pull-right">
+        	<span class="sign_up"><%= link_to 'Sign Up', new_account_path %></span>
+        	<span class="login-nav"><%= link_to 'Login', admin_dashboard_path %></span>
+        </div>
     </div>
-    <div>
-    	
-    </div>
-    <div class="pull-right">
-    	<span class="sign_up"><%= link_to 'Sign Up', new_account_path %></span>
-    	<%= link_to 'Login', admin_dashboard_path %>
-    </div>
-  </div>
 </div>

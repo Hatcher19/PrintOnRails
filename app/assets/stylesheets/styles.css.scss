@@ -8,10 +8,11 @@ $navbarBackgroundHighlight: #ffffff;
 
 @import 'bootstrap';
 .navbar {
-  height: 40px;
-  background-color: #444;
-  font-family: 'Oxygen', sans-serif;
-  font-weight: 300;
+  height: 10%;
+  background-color:rgba(0,0,0,0.5);
+  line-height: normal;
+/*  font-family: 'Oxygen', sans-serif;
+  font-weight: 300; */
 }
 .btn.a, a:link, a:visited {
   color: #ffffff;
