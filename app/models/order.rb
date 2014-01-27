@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   include Rails.application.routes.url_helpers # neeeded for _path helpers to work in models
+  include ActivityHelper
       
   has_paper_trail
 
@@ -43,15 +44,6 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def self.changeset_string(changeset)
-    attribute = changeset.keys[0]
-    new_value = changeset[attribute][1]
-    "#{attribute.to_s} has been changed to #{new_value.to_s}"
-  end
-
-  def to_s
-    display_name
-  end
   def generate_guid
     self.guid = account.orders.count + 1
 

@@ -188,7 +188,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 			table_for assigns[:order].versions do
 				column "User" do |v| link_to AdminUser.find(v.whodunnit).email, admin_admin_user_path(AdminUser.find(v.whodunnit)) end
 				column "Action" do |order| order.event end
-				column "Order Attribute" do |order| Order.changeset_string(order.changeset) end
+				column "Order Attribute" do |order| ActivityHelper.changeset_string(order.changeset) end
 				column "Date/ Time" do |order| order.created_at.localtime.strftime("%m/%d/%y-%I:%M %P") end
 			end
 		end
