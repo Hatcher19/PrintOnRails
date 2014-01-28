@@ -195,7 +195,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	end
 
 	sidebar :customer_info, :class => "customer", only: :show do
-		div :class => "customer-row-one" do
+		div :class => "#" do
 			div :class => "customer-icon" do
 					image_tag 'building.png'
 				end
@@ -203,15 +203,15 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 				h3 link_to "#{order.customer.company}", admin_customer_path 
 			end
 		end
-		div :class => "customer-row-one" do
+		div :class => "#" do
 			div :class => "customer-icon" do
-					image_tag 'customer.png'
+					image_tag 'customer-small.png'
 				end
 			div :class => "customer-attribute" do
 				h3 order.customer.name
 			end
 		end
-		div :class => "customer-row-one" do
+		div :class => "#" do
 			div :class => "customer-icon" do
 					image_tag 'shipping.png'
 				end
