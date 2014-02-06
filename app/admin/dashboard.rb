@@ -1,5 +1,37 @@
 ActiveAdmin::Dashboards.build do
-	section "New Orders", :if => proc{ can?(:update, AdminUser) }, priority: 1 do
+	  ###################################  
+	  # Welcome widgets
+	  ###################################
+	  
+	  section "Getting Started", priority: 1,  :id => 'green', priority: 1 do
+	    div :class => "welcome-red", :id => "red" do 'Welcome to Print On Rails!' end
+    	div  :id => "green" do 'Getting Started' end
+
+	    columns :class => "dashboard-columns", :id => "blue" do
+	    	column :class => "dashboard-column" do
+	    		span :class => "dashboard-span" do image_tag 'new_user.png' end
+    			span :class => "dashboard-span" do link_to "New User", new_admin_admin_user_path end
+	    	end
+	    end
+	    columns :class => "dashboard-columns" , :id => "red-background" do
+	    	column :class => "dashboard-column" do
+	    		span :class => "dashboard-span" do image_tag 'new_order.png' end
+    			span :class => "dashboard-span" do link_to "New Order", new_admin_order_path end
+	    	end
+	    end
+	    columns :class => "dashboard-columns" , :id => "purple-background" do
+	    	column :class => "dashboard-column" do
+	    		span :class => "dashboard-span" do image_tag 'new_customer.png' end
+    			span :class => "dashboard-span" do link_to "New Customer", new_admin_order_path end
+	    	end
+	    end
+	  end
+
+	  ###################################  
+	  # Account level 
+	  ###################################
+
+	section "New Orders", :if => proc{ can?(:update, AdminUser) } do
 		table_for Order.where(:account_id => current_admin_user.account_id, :order_status_id => 1).order("created_at desc").limit(10) do
 			column "Id" do |order| link_to order.guid, admin_order_path(order) end
 			column "Name" do |order| link_to order.name, admin_order_path(order) end
@@ -22,6 +54,7 @@ ActiveAdmin::Dashboards.build do
 	          obj.end_date.strftime("%m/%d/%y")
 	        end
 			column "Status" do |order| order.order_status.name end
+			column "Status" do |order| link_to new_admin_admin_user_path end
 		end
 	end
 end

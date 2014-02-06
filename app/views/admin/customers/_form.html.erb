@@ -12,11 +12,9 @@
 			  f.input :city 
 			  f.input :state, :collection => Address::STATE, :member_label => :upcase
 			  f.input :zip
-		    f.input :account_id, :as => :hidden, :value => current_admin_user.account
-		  	f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 			end 
 		  	if f.object.new_record?
-		  		f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
+			  	f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 		  		if current_admin_user.role == "broker" 
 				else
 					f.input :account_id, :as => :hidden, :value => current_admin_user.account.id
