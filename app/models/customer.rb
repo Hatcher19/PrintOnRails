@@ -11,4 +11,5 @@ class Customer < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :email, email_format: { message: "Doesn't look like an email address" }
+  validates :company, :presence => true
 end

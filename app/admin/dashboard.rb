@@ -22,7 +22,7 @@ ActiveAdmin::Dashboards.build do
 	    columns :class => "dashboard-columns" , :id => "purple-background" do
 	    	column :class => "dashboard-column" do
 	    		span :class => "dashboard-span" do image_tag 'new_customer.png' end
-    			span :class => "dashboard-span" do link_to "New Customer", new_admin_order_path end
+    			span :class => "dashboard-span" do link_to "New Customer", new_admin_customer_path end
 	    	end
 	    end
 	  end
