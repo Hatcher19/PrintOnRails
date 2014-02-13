@@ -33,7 +33,7 @@ ActiveAdmin::Dashboards.build do
 	  ###################################
 
 	section "New Orders", :if => proc{ can?(:update, AdminUser) } do
-		table_for Order.where(:account_id => current_admin_user.account_id, :status => 1).order("created_at desc").limit(10) do
+		table_for Order.where(:account_id => current_admin_user.account_id, :order_status => 1).order("created_at desc").limit(10) do
 			column "Id" do |order| link_to order.guid, admin_order_path(order) end
 			column "Name" do |order| link_to order.name, admin_order_path(order) end
 			column "Created At" do |obj|
@@ -58,11 +58,11 @@ ActiveAdmin::Dashboards.build do
 			column "Due Date" do |obj|
 	          obj.end_date.strftime("%m/%d/%y")
 	        end
-			column("status", :sortable => :status) do |order|
+			column("status", :sortable => :order_status) do |order|
 	          if current_admin_user.role == "broker"
-	            order.status.titleize
+	            order.order_status.titleize
 	          else
-	            best_in_place order, :status, :type => :select, :collection => 
+	            best_in_place order, :order_status, :type => :select, :collection => 
 	            [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]], 
 	            path: [:admin, order]
 	          end
