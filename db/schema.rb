@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140208211830) do
+ActiveRecord::Schema.define(:version => 20140213004112) do
 
   create_table "abilities", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(:version => 20140208211830) do
     t.string   "status"
     t.string   "art_status"
     t.string   "product_status"
+    t.string   "order_status"
   end
 
   add_index "orders", ["account_id"], :name => "index_orders_on_account_id"

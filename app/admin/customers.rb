@@ -45,9 +45,9 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
         column("Due Date", :sortable => :end_date) {|order| "#{order.end_date}" }
         column("status", :sortable => :status) do |order|
           if current_admin_user.role == "broker"
-            order.status.titleize
+            order.order_status.titleize
           else
-            best_in_place order, :status, :type => :select, :collection => 
+            best_in_place order, :order_status, :type => :select, :collection => 
             [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]], 
             path: [:admin, order]
           end

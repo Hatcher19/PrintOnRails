@@ -5,7 +5,7 @@
 				f.input :name, label: "Order Name"
 				f.input :customer, :collection => Customer.where(:admin_user_id => current_admin_user.id), member_label: Proc.new{ |r| r.company.titleize }, :hint => (link_to "New Customer", new_admin_customer_path)
 			else
-				f.input :status, label: "Status", :collection => [["approved", 2], ["complete", 3], ["hold, 4"], ["cancelled", 5]]
+				f.input :order_status, label: "Status", :collection => [["approved", 2], ["complete", 3], ["hold, 4"], ["cancelled", 5]]
 				f.input :customer, member_label: Proc.new{ |r| r.company.titleize }, :input_html => { :disabled => true, :class => "disabled" }
 			end
 			f.input :end_date, label: "Due date", as: :datepicker
@@ -24,7 +24,7 @@
 		if f.object.new_record?
 			f.input :admin_user_id, :as => :hidden, :value => current_admin_user.id
 			f.input :account_id, :as => :hidden, :value => current_admin_user.account_id
-			f.input :status, :as => :hidden, :value => 1
+			f.input :order_status, :as => :hidden, :value => 1
 			f.input :art_status, :as => :hidden, :value => 1
 		end
 		f.buttons 

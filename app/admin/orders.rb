@@ -37,7 +37,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.where(:account_id => current_admin_user.account_id) }, member_label: Proc.new{ |r| "#{r.first} #{r.last}" }, :if => proc {can? :read, :all}
 	filter :order_category, label: "Category"
 	filter :order_type, label: "Type"
-	filter :status, label: "Status", :as => :select, :collection => 
+	filter :order_status, label: "Status", :as => :select, :collection => 
 				[["new", 1], ["approved", 2], ["complete", 3], ["hold", 4], ["cancelled", 5]]
 	filter :art_status, label: "Art Status", :as => :select, :collection => 
 				[["pending", 1], ["approved", 2], ["rejected", 3]]
@@ -51,11 +51,11 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 		column "Name", :sortable => :name do |order| link_to order.name, admin_order_path(order) end
 		column "Category", :sortable => :order_category_id do |order| order.order_category.name.titleize end
 		
-		column("status", :sortable => :status) do |order|
+		column("status", :sortable => :order_status) do |order|
 			if current_admin_user.role == "broker"
-				order.status.titleize
+				order.order_status.titleize
 			else
-				best_in_place order, :status, :type => :select, :collection => 
+				best_in_place order, :order_status, :type => :select, :collection => 
 				[[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]], 
 				path: [:admin, order]
 			end
@@ -123,11 +123,11 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 			div :class => "top" do
 				panel "Status" do
 					if current_admin_user.role == "broker"
-						h4 order.status.titleize
+						h4 order.order_status.titleize
 					else
 						div :class => "#" do
 							div :class => "#" do
-								h4 best_in_place resource, :status, :type => :select, :collection => [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]] , path: [:admin, resource]
+								h4 best_in_place resource, :order_status, :type => :select, :collection => [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]] , path: [:admin, resource]
 							end
 						end
 					end
