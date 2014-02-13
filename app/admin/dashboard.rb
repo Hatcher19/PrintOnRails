@@ -40,11 +40,11 @@ ActiveAdmin::Dashboards.build do
 	          obj.created_at.localtime.strftime("%m/%d/%y %I:%M %P")
 	        end
 			column "User" do |order| order.admin_user.email end
-			column("status", :sortable => :status) do |order|
+			column("status", :sortable => :order_status) do |order|
 	          if current_admin_user.role == "broker"
-	            order.status.titleize
+	            order.order_status.titleize
 	          else
-	            best_in_place order, :status, :type => :select, :collection => 
+	            best_in_place order, :order_status, :type => :select, :collection => 
 	            [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]], 
 	            path: [:admin, order]
 	          end

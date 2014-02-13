@@ -37,8 +37,8 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.where(:account_id => current_admin_user.account_id) }, member_label: Proc.new{ |r| "#{r.first} #{r.last}" }, :if => proc {can? :read, :all}
 	filter :order_category, label: "Category"
 	filter :order_type, label: "Type"
-	filter :order_status, label: "Status", :as => :select, :collection => 
-				[["new", 1], ["approved", 2], ["complete", 3], ["hold", 4], ["cancelled", 5]]
+	# filter :order_status, label: "Status", :as => :select, :collection => 
+	# 			[["new", 1], ["approved", 2], ["complete", 3], ["hold", 4], ["cancelled", 5]]
 	filter :art_status, label: "Art Status", :as => :select, :collection => 
 				[["pending", 1], ["approved", 2], ["rejected", 3]]
 	filter :product_status, label: "Product Status", :as => :select, :collection => [["purchase", 1], ["ordered", 2], ["partial receipt", 3], ["received", 4]]
