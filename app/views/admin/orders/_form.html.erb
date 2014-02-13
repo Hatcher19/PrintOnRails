@@ -12,7 +12,7 @@
 			f.input :order_category, member_label: Proc.new{ |r| r.name.titleize }, label: "Category"
 			f.input :ship, as: :radio
 			f.input :order_type, member_label: Proc.new{ |r| r.name.titleize }, label: "Type"
-			f.input :product_status, :collection => [["purchase", 1], ["ordered", 2], ["partial receipt", 3], ["received", 4]]
+			f.input :product_status, :collection => [["purchase"], ["ordered"], ["partial receipt"], ["received"]]
 		end
 		f.inputs "Line Items" do 
 				render :partial => "admin/line_items/form", :locals => { :form => f }
