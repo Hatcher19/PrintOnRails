@@ -219,6 +219,7 @@ input#customer_zip {
 .customer-attribute h3 {
 	margin-left: 40px;
 	background: none;
+	color: #6a7176;
 }
 .customer-attribute-one h3 {
 	margin-left: 40px;
@@ -311,11 +312,13 @@ table.dashboard .dashboard_section {
 .bool {
 	width: 100px;
 }
-table.dashboard td {
-	border-bottom: none;
-	float: left;
-	}
+
 #red {
+	color: red;
+	font-size: 26px;
+	font-weight: bold;
+}
+#red-brand {
 	color: red;
 	font-size: 30px;
 	font-weight: bold;
@@ -409,4 +412,10 @@ font-size: 14px;
 #purple-background a {
 	color: white;
 	text-decoration: none;
+}
+#order_status_input {
+width: 60%;
+}
+#order_customer_input {
+width: 60%;
 }

@@ -4,23 +4,23 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 	menu :label => "Orders"
 	actions :all, :except => [:destroy]
 	
-	scope(:all, default: true)
-	scope(:active)
-	scope :new do |orders| orders.where(:order_status_id => 1 ) end
-	scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
-	scope(:due_today) { |orders| orders.where(:end_date => Date.today.strftime ) }
-	scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
-	scope :hold
-	scope :complete do |orders| orders.where(:order_status_id => 3 ) end
+	# scope(:all, default: true)
+	# # scope(:active)
+	# scope :new do |orders| orders.where(:status => 1 ) end
+	# scope(:mine) { |orders| orders.where(:admin_user_id => current_admin_user.id ) }
+	# scope(:due_today) { |orders| orders.where(:end_date => Date.today.strftime ) }
+	# scope(:late) { |orders| orders.where('end_date < ?', Date.today) }
+	# scope :hold
+	# scope :complete do |orders| orders.where(:status => 3 ) end
 
-	csv do
-		column :id
-		column :name
-		column("Category"){|order| order.order_category.name }
-		column("Status"){|order| order.order_status.name }
-		column("product"){|order| order.product_status.name }
-		column :end_date
-	end
+	# csv do
+	# 	column :id
+	# 	column :name
+	# 	column("Category"){|order| order.order_category.name }
+	# 	column("Status"){|order| order.status }
+	# 	column("product"){|order| order.product_status.name }
+	# 	column :end_date
+	# end
 
 	controller do
 		def user_account
@@ -32,15 +32,16 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 		end
 	end
 
-	# needs work
-	# filter :account, :collection => proc { Account.all.map{|u| [u.company]}}, :if => proc { can? :destroy, Order }
 	filter :name, label: "Order Name"
 	filter :guid, label: "Order #"
 	filter :admin_user, label: 'Sold By', :collection => proc { AdminUser.where(:account_id => current_admin_user.account_id) }, member_label: Proc.new{ |r| "#{r.first} #{r.last}" }, :if => proc {can? :read, :all}
 	filter :order_category, label: "Category"
 	filter :order_type, label: "Type"
-	filter :order_status, label: "Status"
-	filter :product_status, member_label: Proc.new{ |r| r.name.titleize }, label: "Product Status"
+	filter :status, label: "Status", :as => :select, :collection => 
+				[["new", 1], ["approved", 2], ["complete", 3], ["hold", 4], ["cancelled", 5]]
+	filter :art_status, label: "Art Status", :as => :select, :collection => 
+				[["pending", 1], ["approved", 2], ["rejected", 3]]
+	filter :product_status, label: "Product Status", :as => :select, :collection => [["purchase", 1], ["ordered", 2], ["partial receipt", 3], ["received", 4]]
 	filter :customer, label: "Customer", :collection => proc{ Customer.where(:account_id => current_admin_user.account_id) }, member_label: Proc.new{ |r| r.company.titleize }
 	filter :start_date, label: "Start Date"
 	filter :end_date, label: "Due Date"
@@ -49,29 +50,29 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 		column "#", :sortable => :guid do |order| link_to "#{order.guid}", admin_order_path(order) end
 		column "Name", :sortable => :name do |order| link_to order.name, admin_order_path(order) end
 		column "Category", :sortable => :order_category_id do |order| order.order_category.name.titleize end
-		column("status", :sortable => :order_status_id) do |resource|
+		
+		column("status", :sortable => :status) do |order|
 			if current_admin_user.role == "broker"
-				resource.order_status.name.titleize
+				order.status.titleize
 			else
-				best_in_place resource, :order_status_id, :type => :select, :collection => 
-				[[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]], 
-				path: [:admin, resource]
+				best_in_place order, :status, :type => :select, :collection => 
+				[[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]], 
+				path: [:admin, order]
 			end
 		end
-		column :art, :sortable => :art_status_id do |resource|
+		column :art, :sortable => :art_status do |order|
 			if current_admin_user.role == "broker"
-				resource.art_status.name.titleize
+				order.art_status.titleize
 			else
-				best_in_place resource, :art_status_id, :type => :select, :collection => 
-				[[1, "In Progress"], [2, "Complete"]], path: [:admin, resource]
+				best_in_place order, :art_status, :type => :select, :collection => 
+				[[1, "pending"], [2, "approved"], [3, "rejected"]], path: [:admin, order]
 			end
 		end
-		column :product, :sortable => :product_status_id do |resource|
+		column :product, :sortable => :product_status do |order|
 			if current_admin_user.role == "broker"
-				resource.product_status.name.titleize
+				order.product_status.titleize
 			else
-				best_in_place resource, :product_status_id, :type => :select, :collection => 
-				[[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, resource]
+				best_in_place order, :product_status, :type => :select, :collection => [[1, "purchase"], [2, "ordered"], [3, "partial receipt"], [4, "received"]], path: [:admin, order]
 			end
 		end
 		column("Due Date") do |obj| 
@@ -122,11 +123,11 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 			div :class => "top" do
 				panel "Status" do
 					if current_admin_user.role == "broker"
-						h4 order.order_status.name.titleize
+						h4 order.status.titleize
 					else
 						div :class => "#" do
 							div :class => "#" do
-								h4 best_in_place resource, :order_status_id, :type => :select, :collection => [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]] , path: [:admin, resource]
+								h4 best_in_place resource, :status, :type => :select, :collection => [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]] , path: [:admin, resource]
 							end
 						end
 					end
@@ -139,7 +140,7 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 					else
 						div :class => "#" do
 							div :class => "text-edit-icon" do
-								h4 best_in_place order, :product_status_id, :type => :select, :collection => [[1, "Buy Product"], [2, "Purchased"], [3, "Partial"], [4, "Arrived"]], path: [:admin, order]
+								h4 best_in_place order, :product_status, :type => :select, :collection => [[1, "purchase"], [2, "ordered"], [3, "partial receipt"], [4, "received"]], path: [:admin, order]
 							end
 						end
 					end
@@ -148,10 +149,11 @@ ActiveAdmin.register Order, :sort_order => "end_date_asc" do
 			div :class => "top" do
 				panel "Art" do
 					if current_admin_user.role == "broker"
-						h4 order.art_status.name.titleize
+						h4 order.art_status.titleize
 					else
 						div :class => "" do
-							h4 best_in_place order, :art_status_id, :type => :select, :collection => [[1, "In Progress"], [2, "Complete"]], path: [:admin, order]
+							h4 best_in_place order, :art_status, :type => :select, 
+							:collection => [[1, "pending"], [2, "approved"], [3, "rejected"]], path: [:admin, order]
 						end
 					end
 				end

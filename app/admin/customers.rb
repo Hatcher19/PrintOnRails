@@ -43,7 +43,15 @@ ActiveAdmin.register Customer, :sort_order => "created_at_asc" do
         column("ID", :sortable => :guid) {|order| link_to "# #{order.guid}", admin_order_path(order) }
         column("Order Name", :sortable => :name) {|order| link_to "#{order.name}", admin_order_path(order) }
         column("Due Date", :sortable => :end_date) {|order| "#{order.end_date}" }
-        column("Status") {|order| "#{order.order_status.name}" }
+        column("status", :sortable => :status) do |order|
+          if current_admin_user.role == "broker"
+            order.status.titleize
+          else
+            best_in_place order, :status, :type => :select, :collection => 
+            [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]], 
+            path: [:admin, order]
+          end
+        end
       end
     end
     active_admin_comments

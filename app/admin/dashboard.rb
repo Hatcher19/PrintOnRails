@@ -4,7 +4,8 @@ ActiveAdmin::Dashboards.build do
 	  ###################################
 	  
 	  section "Getting Started", priority: 1,  :id => 'green', priority: 1 do
-	    div :class => "welcome-red", :id => "red" do 'Welcome to Print On Rails!' end
+	    div :class => "welcome-red", :id => "red" do 'Welcome to' end
+    	div :class => "welcome-red", :id => "red-brand" do 'Print On Rails!' end
     	div  :id => "green" do 'Getting Started' end
 
 	    columns :class => "dashboard-columns", :id => "blue" do
@@ -32,29 +33,40 @@ ActiveAdmin::Dashboards.build do
 	  ###################################
 
 	section "New Orders", :if => proc{ can?(:update, AdminUser) } do
-		table_for Order.where(:account_id => current_admin_user.account_id, :order_status_id => 1).order("created_at desc").limit(10) do
+		table_for Order.where(:account_id => current_admin_user.account_id, :status => 1).order("created_at desc").limit(10) do
 			column "Id" do |order| link_to order.guid, admin_order_path(order) end
 			column "Name" do |order| link_to order.name, admin_order_path(order) end
 			column "Created At" do |obj|
 	          obj.created_at.localtime.strftime("%m/%d/%y %I:%M %P")
 	        end
 			column "User" do |order| order.admin_user.email end
-			column("status", :sortable => :order_status_id) do |resource|
-		      best_in_place resource, :order_status_id, :type => :select, :collection => 
-		      [[1, "New"], [2, "Approved"], [3, "Complete"], [4, "Hold"], [5, "Cancelled"]], 
-		      path: [:admin, resource]
-		    end
+			column("status", :sortable => :status) do |order|
+	          if current_admin_user.role == "broker"
+	            order.status.titleize
+	          else
+	            best_in_place order, :status, :type => :select, :collection => 
+	            [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]], 
+	            path: [:admin, order]
+	          end
+	        end
 		end
 	end
 	section "My Orders", :if => proc{ can?(:create, Order) } do
 		table_for Order.where(:admin_user_id => current_admin_user.id).order("created_at desc").limit(10) do
-			column "Id" do |order| link_to order.guid, admin_order_path(order) end
+			column "Id", :class => "dashboard" do |order| link_to order.guid, admin_order_path(order) end
 			column "Name" do |order| link_to order.name, admin_order_path(order) end
 			column "Due Date" do |obj|
 	          obj.end_date.strftime("%m/%d/%y")
 	        end
-			column "Status" do |order| order.order_status.name end
-			column "Status" do |order| link_to new_admin_admin_user_path end
+			column("status", :sortable => :status) do |order|
+	          if current_admin_user.role == "broker"
+	            order.status.titleize
+	          else
+	            best_in_place order, :status, :type => :select, :collection => 
+	            [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]], 
+	            path: [:admin, order]
+	          end
+	        end
 		end
 	end
 end
