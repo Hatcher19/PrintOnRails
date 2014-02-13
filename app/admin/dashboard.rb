@@ -32,25 +32,25 @@ ActiveAdmin::Dashboards.build do
 	  # Account level 
 	  ###################################
 
-	section "New Orders", :if => proc{ can?(:update, AdminUser) } do
-		table_for Order.where(:account_id => current_admin_user.account_id, :order_status => 1).order("created_at desc").limit(10) do
-			column "Id" do |order| link_to order.guid, admin_order_path(order) end
-			column "Name" do |order| link_to order.name, admin_order_path(order) end
-			column "Created At" do |obj|
-	          obj.created_at.localtime.strftime("%m/%d/%y %I:%M %P")
-	        end
-			column "User" do |order| order.admin_user.email end
-			column("status", :sortable => :order_status) do |order|
-	          if current_admin_user.role == "broker"
-	            order.order_status.titleize
-	          else
-	            best_in_place order, :order_status, :type => :select, :collection => 
-	            [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]], 
-	            path: [:admin, order]
-	          end
-	        end
-		end
-	end
+	# section "New Orders", :if => proc{ can?(:update, AdminUser) } do
+	# 	table_for Order.where(:account_id => current_admin_user.account_id, :order_status => 1).order("created_at desc").limit(10) do
+	# 		column "Id" do |order| link_to order.guid, admin_order_path(order) end
+	# 		column "Name" do |order| link_to order.name, admin_order_path(order) end
+	# 		column "Created At" do |obj|
+	#           obj.created_at.localtime.strftime("%m/%d/%y %I:%M %P")
+	#         end
+	# 		column "User" do |order| order.admin_user.email end
+	# 		column("status", :sortable => :order_status) do |order|
+	#           if current_admin_user.role == "broker"
+	#             order.order_status.titleize
+	#           else
+	#             best_in_place order, :order_status, :type => :select, :collection => 
+	#             [[1, "new"], [2, "approved"], [3, "complete"], [4, "hold"], [5, "cancelled"]], 
+	#             path: [:admin, order]
+	#           end
+	#         end
+	# 	end
+	# end
 	section "My Orders", :if => proc{ can?(:create, Order) } do
 		table_for Order.where(:admin_user_id => current_admin_user.id).order("created_at desc").limit(10) do
 			column "Id", :class => "dashboard" do |order| link_to order.guid, admin_order_path(order) end
