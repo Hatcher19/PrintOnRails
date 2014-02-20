@@ -3,10 +3,7 @@ ActiveAdmin::Dashboards.build do
 	  # Welcome widgets
 	  ###################################
 	  
-	  section "Getting Started", priority: 1,  :id => 'green', priority: 1 do
-	    div :class => "welcome-red", :id => "red" do 'Welcome to' end
-    	div :class => "welcome-red", :id => "red-brand" do 'Print On Rails!' end
-    	div  :id => "green" do 'Getting Started' end
+	  section "Getting Started", priority: 1 do
 
 	    columns :class => "dashboard-columns", :id => "blue" do
 	    	column :class => "dashboard-column" do
@@ -53,12 +50,17 @@ ActiveAdmin::Dashboards.build do
 	# end
 	section "My Orders", :if => proc{ can?(:create, Order) } do
 		table_for Order.where(:admin_user_id => current_admin_user.id).order("created_at desc").limit(10) do
+			column "" do end
+			column "" do end
 			column "Id", :class => "dashboard" do |order| link_to order.guid, admin_order_path(order) end
+			column "" do end
 			column "Name" do |order| link_to order.name, admin_order_path(order) end
+			column "" do end
 			column "Due Date" do |obj|
 	          obj.end_date.strftime("%m/%d/%y")
 	        end
-			column("status", :sortable => :order_status) do |order|
+	        column "" do end
+			column("Status", :sortable => :order_status) do |order|
 	          if current_admin_user.role == "broker"
 	            order.order_status.titleize
 	          else
@@ -67,6 +69,22 @@ ActiveAdmin::Dashboards.build do
 	            path: [:admin, order]
 	          end
 	        end
+	        column("Art Status", :sortable => :art_status) do |order|
+	          if current_admin_user.role == "broker"
+	            order.art_status.titleize
+	          else
+	            best_in_place order, :art_status, :type => :select, :collection => [[1, "pending"], [2, "approved"], [3, "rejected"]], path: [:admin, order]
+	          end
+	        end
+	        column("Product Status", :sortable => :product_status) do |order|
+	          if current_admin_user.role == "broker"
+	            order.product_status.titleize
+	          else
+	            best_in_place order, :art_status, :type => :select, :collection => [[1, "purchase"], [2, "ordered"], [3, "partial receipt"], [4, "received"]], path: [:admin, order]
+	          end
+	        end
+	        column "" do end
+        	column "" do end
 		end
 	end
 end

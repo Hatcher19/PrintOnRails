@@ -1,8 +1,8 @@
 module ActivityHelper
 	
   ORDER_STATUS = ["new", "approved", "complete", "hold", "cancelled"]
-  ART_STATUS = ['in_progress', 'complete']
-  PRODUCT_STATUS = ['purchased', 'purchased', 'partial','complete']
+  ART_STATUS = ['pending', 'approved', 'rejected']
+  PRODUCT_STATUS = ['purchased', 'purchased', 'partial','complete'] 
 
   def self.changeset_string(changeset)
     activity_type = changeset.keys[0]
@@ -14,12 +14,12 @@ module ActivityHelper
 
     case activity_type
     when "name"
-      "name"
-    when "order_status_id"
-      "Order Status"
-    when "art_status_id"
+      "Order"
+    when "order_status"
+      "Status"
+    when "art_status"
       "Art Status"
-    when "product_status_id"
+    when "product_status"
       "Product Status"
     else
       puts "No activity_type found"
@@ -31,16 +31,17 @@ module ActivityHelper
     index = index - 1
 
     case activity_type
-    when "order_status_id"
+    when "name"
+      "Created"
+    when "order_status"
       ORDER_STATUS[index]
-    when "art_status_id"
+    when "art_status"
       ART_STATUS[index]
-    when "product_status_id"
+    when "product_status"
       PRODUCT_STATUS[index]
     else
       puts "No activity_type found"
     end
     
   end
-
 end
