@@ -4,7 +4,7 @@
 en:
   date:
     formats:
-      long: "%m-%d-%Y"
+      long: "%m-%d-%y"
   time:
     formats:
       long: "%m-%d-%Y %H:%M:%S"

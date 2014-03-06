@@ -15,6 +15,10 @@ module ActivityHelper
     case activity_type
     when "name"
       "Order"
+    when "end_date"
+      "Due Date"
+    when "order_category_id"
+      "Category"
     when "order_status"
       "Status"
     when "art_status"

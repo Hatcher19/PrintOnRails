@@ -4,15 +4,12 @@
 			if f.object.new_record?
 				f.input :name, label: "Order Name"
 				f.input :customer, :collection => Customer.where(:admin_user_id => current_admin_user.id), member_label: Proc.new{ |r| r.company.titleize }, :hint => (link_to "New Customer", new_admin_customer_path)
-			else
-				f.input :order_status, label: "Status", :collection => [["approved", 2], ["complete", 3], ["hold, 4"], ["cancelled", 5]]
-				f.input :customer, member_label: Proc.new{ |r| r.company.titleize }, :input_html => { :disabled => true, :class => "disabled" }
+				f.input :product_status, :collection => [["purchase", 1], ["ordered", 2], ["partial receipt", 3], ["received", 4]]
 			end
 			f.input :end_date, label: "Due date", as: :datepicker
-			f.input :order_category, member_label: Proc.new{ |r| r.name.titleize }, label: "Category"
+			f.input :order_category, label: "Category", member_label: Proc.new{ |r| r.name.titleize }
 			f.input :ship, as: :radio
 			f.input :order_type, member_label: Proc.new{ |r| r.name.titleize }, label: "Type"
-			f.input :product_status, :collection => [["purchase", 1], ["ordered", 2], ["partial receipt", 3], ["received", 4]]
 		end
 		f.inputs "Line Items" do 
 				render :partial => "admin/line_items/form", :locals => { :form => f }
